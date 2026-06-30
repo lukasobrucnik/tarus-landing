@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import { siteConfig } from "@/data/content";
 import { CtaButton } from "@/components/CtaButton";
 import { Placeholder } from "@/components/ui/Placeholder";
@@ -11,7 +12,7 @@ const fadeUp = {
   show: { opacity: 1, y: 0 },
 };
 
-export function Hero() {
+export function Hero({ images = [] }: { images?: string[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -29,11 +30,22 @@ export function Hero() {
       aria-label="Úvod"
     >
       <motion.div className="absolute inset-0 z-0" style={{ scale, willChange: "transform" }}>
-        <Placeholder
-          alt="fotka realizace krovu/dřevostavby"
-          className="absolute inset-0 h-full w-full"
-          showTag={false}
-        />
+        {images[0] ? (
+          <Image
+            src={images[0]}
+            alt="TARUS — realizace dřevěné konstrukce"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
+          />
+        ) : (
+          <Placeholder
+            alt="fotka realizace krovu/dřevostavby"
+            className="absolute inset-0 h-full w-full"
+            showTag={false}
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
       </motion.div>
 

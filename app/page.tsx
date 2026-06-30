@@ -9,19 +9,28 @@ import { NaseCesta } from "@/components/sections/NaseCesta";
 import { Brands } from "@/components/sections/Brands";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { ContactModalProvider } from "@/components/ContactModal";
+import { getSectionImages } from "@/lib/getSectionImages";
 
 export default function Home() {
+  // Runs server-side: reads /public/images/{section}/ at build/request time.
+  // Folders need not exist — getSectionImages returns [] for missing dirs.
+  const heroImages = getSectionImages("hero");
+  const aboutImages = getSectionImages("about");
+  const realizaceImages = getSectionImages("realizace");
+  const brandImages = getSectionImages("brands");
+  const specializaceImages = getSectionImages("specializace");
+
   return (
     <ContactModalProvider>
       <Navbar />
       <main id="main">
-        <Hero />
+        <Hero images={heroImages} />
         <WhyTarus />
-        <Specializace />
-        <Realizace />
-        <OFirme />
+        <Specializace images={specializaceImages} />
+        <Realizace images={realizaceImages} />
+        <OFirme images={aboutImages} />
         <NaseCesta />
-        <Brands />
+        <Brands images={brandImages} />
         <FinalCta />
       </main>
       <Footer />

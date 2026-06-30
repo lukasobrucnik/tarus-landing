@@ -1,11 +1,12 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { specializations } from "@/data/content";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { cn } from "@/lib/utils";
 
-export function Specializace() {
+export function Specializace({ images = [] }: { images?: string[] }) {
   const [active, setActive] = React.useState(0);
 
   return (
@@ -86,11 +87,21 @@ export function Specializace() {
                   zIndex: i === active ? 10 : 0,
                 }}
               >
-                <Placeholder
-                  alt={spec.imageAlt}
-                  variant={spec.variant}
-                  className="h-full w-full"
-                />
+                {images[i] ? (
+                  <Image
+                    src={images[i]}
+                    alt={spec.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                ) : (
+                  <Placeholder
+                    alt={spec.imageAlt}
+                    variant={spec.variant}
+                    className="h-full w-full"
+                  />
+                )}
               </div>
             ))}
           </div>

@@ -3,10 +3,11 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { projects } from "@/data/content";
 import { Placeholder } from "@/components/ui/Placeholder";
 
-export function Realizace() {
+export function Realizace({ images = [] }: { images?: string[] }) {
   const [index, setIndex] = React.useState(0);
   const [direction, setDirection] = React.useState<1 | -1>(1);
 
@@ -64,7 +65,17 @@ export function Realizace() {
               className="relative w-full grid grid-cols-1 gap-6 md:absolute md:inset-0 lg:grid-cols-12"
             >
               <div className="relative h-[320px] overflow-hidden lg:col-span-7 lg:h-full">
-                <Placeholder alt={project.imageAlt} variant={project.variant} className="h-full w-full" />
+                {images[index] ? (
+                  <Image
+                    src={images[index]}
+                    alt={project.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 58vw"
+                  />
+                ) : (
+                  <Placeholder alt={project.imageAlt} variant={project.variant} className="h-full w-full" />
+                )}
               </div>
               <div className="flex flex-col justify-center bg-paper-dim p-8 lg:col-span-5 lg:h-full lg:p-12">
                 <span className="mb-4 block font-label-md text-brand-deep">
