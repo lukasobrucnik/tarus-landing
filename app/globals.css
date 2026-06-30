@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TARUS — design tokens (Tailwind v4 CSS-first config)
+   Generates utilities automatically: bg-ink, text-brand, font-display, …
+   ============================================================ */
+@theme {
+  --color-ink: #10171b;
+  /* Pure white replaces the warm cream AI-default bg */
+  --color-paper: oklch(100% 0 0);
+  --color-paper-dim: oklch(97% 0 0);
+  --color-brand: #00a7e7;
+  --color-brand-deep: #0581ad;
+  --color-timber: #6b5b45;
+  --color-slate: #495856;
+  /* Semantic error token — 4.8:1 on dark modal bg, distinct from brand */
+  --color-danger: #e34b4b;
+
+  /* Single-family strategy: Bricolage Grotesque for all text.
+     Weight contrast (800 display / 500 body) carries hierarchy. */
+  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+
+  --font-display-lg: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-headline-lg: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-headline-md: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-headline-sm: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-body-lg: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-body-md: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-label-md: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-caption: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-tarus: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --container-max: 1440px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Keyboard navigation: accessible focus ring on all interactive elements.
+   brand-deep (#0581ad) gives 4.1:1 on white — passes WCAG 1.4.11 (3:1).
+   :where() = zero specificity, so any component-level focus style wins. */
+:where(:focus-visible) {
+  outline: 2px solid var(--color-brand-deep);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================================
+   Photo placeholder system — no real photography supplied yet.
+   Clearly-marked illustrative stand-ins, never hot-linked/scraped
+   imagery. Swap for <Image> once client photography is ready
+   (see components/ui/Placeholder.tsx for the single swap point).
+   ============================================================ */
+.ph-base {
+  position: relative;
+  overflow: hidden;
+  background-color: #2b2620;
+  background-image:
+    repeating-linear-gradient(115deg, rgba(245, 242, 236, 0.05) 0px, rgba(245, 242, 236, 0.05) 2px, transparent 2px, transparent 14px),
+    linear-gradient(155deg, #4a3d2d 0%, #241d15 100%);
+}
+.ph-base::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Marquee (Značky) — constant speed, pause on hover/focus,
+   stops entirely under reduced motion.
+   ============================================================ */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee-scroll 32s linear infinite;
+}
+.marquee-viewport:hover .marquee-track,
+.marquee-viewport:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Utility: visually-hidden but accessible to assistive tech */
+.sr-only-focusable {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.sr-only-focusable:focus {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background: var(--color-brand);
+  color: var(--color-ink);
+  z-index: 100;
+  border-radius: 0.25rem;
+}
