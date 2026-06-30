@@ -1,4 +1,4 @@
-import { navLinks, siteConfig } from "@/data/content";
+import { company, navLinks, siteConfig } from "@/data/content";
 
 export function Footer() {
   return (
@@ -54,7 +54,7 @@ export function Footer() {
       </div>
 
       <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-3 border-t border-paper/10 px-5 py-6 text-xs uppercase tracking-widest text-paper/40 md:flex-row md:px-16">
-        <span>© {new Date().getFullYear()} TARUS. Všechna práva vyhrazena.</span>
+        <span>© {new Date().getFullYear()} {company.name}. Všechna práva vyhrazena.</span>
         <div className="flex gap-4">
           <a href="#" className="hover:text-brand">
             Ochrana soukromí

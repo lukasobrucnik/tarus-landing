@@ -2,26 +2,59 @@
 // TARUS — centralized site content.
 //
 // All copy lives here so components stay purely presentational and
-// content can be edited in one place. Where the Stitch design used
-// specific factual-sounding numbers (founding year, address, project
-// metrics), those are PLACEHOLDER values carried over from the design
-// concept — flagged in README.md. Replace with verified client data
-// before launch.
+// content can be edited in one place.
 // ============================================================
 
+// ── Legal entity: TARUS obchodní služby s.r.o. (Olomouc, primary)
+export const company = {
+  name: "TARUS obchodní služby s.r.o.",
+  ico: "09478035",
+  dic: "CZ09478035",
+  address: {
+    street: "Pavelkova 1210/10b",
+    city: "779 00 Olomouc",
+  },
+  phone: "+420 778 505 327",
+  phoneHref: "tel:+420778505327",
+  email: "obchod@tarus.cz",
+  emailSales: "prodejna@tarus.cz",
+};
+
+// ── Branches
+export const branches = [
+  {
+    id: "olomouc",
+    label: "Olomouc",
+    name: "TARUS obchodní služby s.r.o.",
+    address: "Pavelkova 1210/10b, 779 00 Olomouc",
+    phone: "+420 778 505 327",
+    phoneHref: "tel:+420778505327",
+    email: "prodejna@tarus.cz",
+  },
+  {
+    id: "krnov",
+    label: "Krnov",
+    name: "TARUS obchodní služby Krnov s.r.o.",
+    address: "nám. Minoritů 2194/9, 794 01 Krnov",
+    phone: "+420 736 631 321",
+    phoneHref: "tel:+420736631321",
+    email: null as string | null,
+    ico: "14041618",
+    dic: "CZ14041618",
+  },
+] as const;
+
+// ── siteConfig: drives Navbar, Footer, ContactModal, JSON-LD, Hero tel link
 export const siteConfig = {
   name: "TARUS",
   tagline: "Distributor pro dřevostavby & šikmé střechy",
   description:
     "TARUS je technický distributor materiálu pro dřevostavby, roubenky a šikmé střechy. Skladový sortiment, expedice do 24 hodin, technická podpora pro realizační firmy.",
   url: "https://www.tarus.cz",
-  phone: "+420 777 123 456", // PLACEHOLDER — z designu, ověřit
-  phoneHref: "tel:+420777123456",
-  email: "info@tarus.cz", // PLACEHOLDER — ověřit
-  address: {
-    street: "Průmyslová 1420/8", // PLACEHOLDER
-    city: "702 00 Ostrava", // PLACEHOLDER
-  },
+  phone: company.phone,
+  phoneHref: company.phoneHref,
+  email: company.email,
+  address: company.address,
 };
 
 export const navLinks = [
@@ -180,14 +213,19 @@ export const milestones: Milestone[] = [
 ];
 
 export const brands = [
-  "Rothoblaas",
-  "Steico",
-  "Pavatex",
-  "Simpson Strong-Tie",
-  "Dörken",
-  "Isocell",
-  "Ejot",
-  "Schiedel",
+  "TARUS",
+  "MILWAUKEE",
+  "TAJIMA TOOL",
+  "Pitzl Connectors",
+  "REISSER-Schraubentechnik",
+  "HECO-SCHRAUBEN",
+  "SIHGA",
+  "HIKOKI",
+  "ZERO barvy pro profesionály",
+  "BAUDER",
+  "ALPEN",
+  "Wera",
+  "ČERVA",
 ];
 
 export const aboutParagraphs = [

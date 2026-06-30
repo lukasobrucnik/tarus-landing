@@ -4,7 +4,7 @@ import * as React from "react";
 import { Dialog } from "@/components/ui/Dialog";
 import { Input, Textarea } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import { siteConfig } from "@/data/content";
+import { company, siteConfig } from "@/data/content";
 
 type ContactModalContextValue = {
   open: () => void;
@@ -181,6 +181,13 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
               </p>
             </form>
           </div>
+        </div>
+
+        {/* Company legal strip */}
+        <div className="mt-8 border-t border-white/10 pt-5 text-center text-xs text-paper/35">
+          {company.name} · IČO: {company.ico} · DIČ: {company.dic}
+          {" · "}
+          {company.address.street}, {company.address.city}
         </div>
       </Dialog>
     </ContactModalContext.Provider>
