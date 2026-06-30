@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Menu, X } from "lucide-react";
-import { navLinks } from "@/data/content";
+import { navLinks, siteConfig } from "@/data/content";
 import { CtaButton } from "@/components/CtaButton";
 import { cn } from "@/lib/utils";
 
@@ -47,6 +47,14 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
+          <a
+            href={siteConfig.shopUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-label-md text-label-md uppercase tracking-wider text-paper/50 transition-colors hover:text-paper/80"
+          >
+            E-shop <span aria-hidden="true">↗</span>
+          </a>
         </div>
 
         <div className="flex items-center gap-2">
@@ -90,6 +98,14 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
+          <a
+            href={siteConfig.shopUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-3 font-label-md text-sm uppercase tracking-wider text-paper/50 hover:text-paper/80"
+          >
+            E-shop <span aria-hidden="true">↗</span>
+          </a>
           <CtaButton className="mt-3 w-full justify-center" />
         </div>
       )}

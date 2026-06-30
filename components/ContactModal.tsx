@@ -6,6 +6,7 @@ import { Input, Textarea } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { company, siteConfig } from "@/data/content";
 
+
 type ContactModalContextValue = {
   open: () => void;
 };
@@ -183,8 +184,23 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
           </div>
         </div>
 
+        {/* Shop escape hatch — low visual weight, clearly secondary */}
+        <div className="mt-8 border-t border-white/10 pt-6 text-center">
+          <p className="mb-2 text-xs text-paper/40">
+            Potřebujete pouze objednat materiál?
+          </p>
+          <a
+            href={siteConfig.shopUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-paper/50 transition-colors hover:text-paper/80"
+          >
+            Přejít do e-shopu →
+          </a>
+        </div>
+
         {/* Company legal strip */}
-        <div className="mt-8 border-t border-white/10 pt-5 text-center text-xs text-paper/35">
+        <div className="mt-5 border-t border-white/10 pt-5 text-center text-xs text-paper/35">
           {company.name} · IČO: {company.ico} · DIČ: {company.dic}
           {" · "}
           {company.address.street}, {company.address.city}

@@ -29,6 +29,18 @@ export function Hero({ images = [] }: { images?: string[] }) {
       className="relative flex h-screen w-full flex-col justify-end overflow-hidden bg-ink"
       aria-label="Úvod"
     >
+      {/*
+        Top vignette — navbar readability on bright Hero images.
+        Lives OUTSIDE the parallax motion.div (z-0) so it does not scale or
+        shift with the image. Sits at z-[1] — above image, below text content.
+        ~30 % black fading to transparent over 160 px; imperceptible on dark
+        images, just enough contrast on bright ones.
+      */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[200px] bg-gradient-to-b from-black/50 to-transparent"
+        aria-hidden="true"
+      />
+
       <motion.div className="absolute inset-0 z-0" style={{ scale, willChange: "transform" }}>
         {images[0] ? (
           <Image
@@ -89,8 +101,19 @@ export function Hero({ images = [] }: { images?: string[] }) {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col items-start gap-4"
         >
-          <CtaButton />
-          {/* Secondary: instant tel: access + outcome hint for CTA above */}
+          {/* Primary + secondary CTA: row on desktop, column on mobile */}
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <CtaButton />
+            <a
+              href={siteConfig.shopUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[44px] items-center justify-center gap-1.5 border border-paper/25 px-8 py-4 font-label-md text-label-md uppercase tracking-wider text-paper/55 transition-all duration-200 hover:border-paper/50 hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-deep"
+            >
+              Přejít do e-shopu <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          {/* Tel: fallback — instant access, below button row */}
           <a
             href={siteConfig.phoneHref}
             className="group inline-flex items-baseline gap-1.5 text-sm text-paper/50 transition-colors hover:text-paper/80"

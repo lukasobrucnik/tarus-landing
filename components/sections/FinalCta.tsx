@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { CtaButton } from "@/components/CtaButton";
+import { siteConfig } from "@/data/content";
 
 export function FinalCta() {
   return (
@@ -31,7 +32,18 @@ export function FinalCta() {
           do 24 hodin, technická podpora od odborníků z terénu. Řekněte nám,
           co stavíte.
         </p>
-        <CtaButton className="!px-12 !py-5" />
+        {/* Primary + secondary CTA: row on desktop, column on mobile */}
+        <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+          <CtaButton className="!px-12 !py-5" />
+          <a
+            href={siteConfig.shopUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-[44px] items-center justify-center gap-1.5 border border-paper/25 px-10 py-5 font-label-md text-label-md uppercase tracking-wider text-paper/55 transition-all duration-200 hover:border-paper/50 hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-deep"
+          >
+            Přejít do e-shopu <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </motion.div>
     </section>
   );

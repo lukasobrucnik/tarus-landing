@@ -27,6 +27,14 @@ export function Footer() {
                 {link.label}
               </a>
             ))}
+          <a
+            href={siteConfig.shopUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-paper/60 transition-colors hover:text-brand"
+          >
+            E-shop ↗
+          </a>
         </div>
 
         <div className="flex flex-col gap-3">

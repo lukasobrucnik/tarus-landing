@@ -55,6 +55,7 @@ export const siteConfig = {
   phoneHref: company.phoneHref,
   email: company.email,
   address: company.address,
+  shopUrl: "https://eshop.tarus.cz/",
 };
 
 export const navLinks = [
