@@ -19,10 +19,11 @@ export default function Home() {
   const realizaceImages = getSectionImages("realizace");
   const brandImages = getSectionImages("brands");
   const specializaceImages = getSectionImages("specializace");
+  const logoSrc = getSectionImages("tarus")[0] ?? null;
 
   return (
     <ContactModalProvider>
-      <Navbar />
+      <Navbar logoSrc={logoSrc} />
       <main id="main">
         <Hero images={heroImages} />
         <WhyTarus />

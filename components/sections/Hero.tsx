@@ -37,7 +37,7 @@ export function Hero({ images = [] }: { images?: string[] }) {
         images, just enough contrast on bright ones.
       */}
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[200px] bg-gradient-to-b from-black/50 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[260px] bg-gradient-to-b from-black/70 to-transparent"
         aria-hidden="true"
       />
 
@@ -78,7 +78,7 @@ export function Hero({ images = [] }: { images?: string[] }) {
         <motion.h1
           variants={fadeUp}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-8 max-w-4xl font-display-lg text-[3rem] font-extrabold leading-[1.02] tracking-tight text-paper md:text-[5.5rem]"
+          className="mb-8 max-w-4xl font-display-lg text-[3rem] font-extrabold leading-[1.06] tracking-tight text-paper md:text-[5.5rem] md:leading-[1.02]"
           style={{ textWrap: "balance" }}
         >
           Stavíte rychle.{" "}
@@ -108,7 +108,7 @@ export function Hero({ images = [] }: { images?: string[] }) {
               href={siteConfig.shopUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-[44px] items-center justify-center gap-1.5 border border-paper/25 px-8 py-4 font-label-md text-label-md uppercase tracking-wider text-paper/55 transition-all duration-200 hover:border-paper/50 hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-deep"
+              className="inline-flex min-h-[44px] items-center justify-center gap-1.5 border border-paper/25 px-8 py-4 font-label-md text-label-md uppercase tracking-wider text-paper/55 transition-all duration-150 hover:border-paper/50 hover:bg-paper/5 hover:text-paper active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-deep"
             >
               Přejít do e-shopu <span aria-hidden="true">↗</span>
             </a>

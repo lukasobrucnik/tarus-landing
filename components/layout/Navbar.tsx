@@ -1,12 +1,13 @@
 "use client";
 
 import * as React from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navLinks, siteConfig } from "@/data/content";
 import { CtaButton } from "@/components/CtaButton";
 import { cn } from "@/lib/utils";
 
-export function Navbar() {
+export function Navbar({ logoSrc }: { logoSrc?: string | null }) {
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -31,10 +32,19 @@ export function Navbar() {
       <div className="mx-auto flex max-w-[1440px] items-center justify-between px-5 md:px-16">
         <a
           href="#hero"
-          className="font-display-lg text-xl font-bold text-paper"
           aria-label="TARUS — domů"
+          className="flex items-center"
         >
-          TARUS
+          {logoSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={logoSrc}
+              alt="TARUS"
+              className="h-6 w-auto object-contain -translate-y-0.5"
+            />
+          ) : (
+            <span className="font-display-lg text-xl font-bold text-paper">TARUS</span>
+          )}
         </a>
 
         <div className="hidden items-center gap-12 md:flex">
@@ -42,7 +52,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="font-label-md text-label-md uppercase tracking-wider text-paper/80 transition-colors hover:text-paper"
+              className="font-label-md text-label-md uppercase tracking-wider text-paper transition-colors hover:text-brand"
             >
               {link.label}
             </a>
@@ -83,32 +93,38 @@ export function Navbar() {
         </div>
       </div>
 
-      {mobileOpen && (
-        <div
-          id="mobile-menu"
-          className="flex flex-col gap-1 border-t border-slate/20 bg-ink px-5 py-4 md:hidden"
-        >
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="py-3 font-label-md text-sm uppercase tracking-wider text-paper/80 hover:text-paper"
-            >
-              {link.label}
-            </a>
-          ))}
-          <a
-            href={siteConfig.shopUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="py-3 font-label-md text-sm uppercase tracking-wider text-paper/50 hover:text-paper/80"
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            id="mobile-menu"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col gap-1 border-t border-slate/20 bg-ink px-5 py-4 md:hidden"
           >
-            E-shop <span aria-hidden="true">↗</span>
-          </a>
-          <CtaButton className="mt-3 w-full justify-center" />
-        </div>
-      )}
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="py-3 font-label-md text-sm uppercase tracking-wider text-paper transition-colors hover:text-brand"
+              >
+                {link.label}
+              </a>
+            ))}
+            <a
+              href={siteConfig.shopUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-3 font-label-md text-sm uppercase tracking-wider text-paper/50 hover:text-paper/80"
+            >
+              E-shop <span aria-hidden="true">↗</span>
+            </a>
+            <CtaButton className="mt-3 w-full justify-center" />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

@@ -26,8 +26,9 @@ export function Specializace({ images = [] }: { images?: string[] }) {
 
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-24">
           {/* Labels — also the interactive control: hover (desktop) or
-              click/tap/keyboard (everywhere) switches the active image. */}
-          <div className="flex flex-col gap-8 md:gap-10" role="tablist" aria-label="Specializace">
+              click/tap/keyboard (everywhere) switches the active image.
+              order-2/lg:order-1: on mobile the image leads (above), labels follow. */}
+          <div className="order-2 flex flex-col gap-8 md:gap-10 lg:order-1" role="tablist" aria-label="Specializace">
             {specializations.map((spec, i) => {
               const isActive = i === active;
               return (
@@ -72,8 +73,9 @@ export function Specializace({ images = [] }: { images?: string[] }) {
             })}
           </div>
 
-          {/* Image stack — clip-path mask reveal between variants */}
-          <div className="relative h-[340px] w-full md:h-[600px]">
+          {/* Image stack — clip-path mask reveal between variants.
+              order-1/lg:order-2: appears above labels on mobile, right column on desktop. */}
+          <div className="relative order-1 h-[260px] w-full lg:order-2 lg:h-[600px]">
             {specializations.map((spec, i) => (
               <div
                 key={spec.id}

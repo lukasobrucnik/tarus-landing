@@ -5,7 +5,7 @@ import { whyTarusCards } from "@/data/content";
 
 export function WhyTarus() {
   return (
-    <section id="proc-my" className="bg-paper px-5 py-24 md:px-16 md:py-32">
+    <section id="proc-my" className="overflow-x-hidden bg-paper px-5 py-24 md:px-16 md:py-32">
       <div className="mx-auto max-w-[1440px]">
         {/* Section header: asymmetric 2-col, H2 now visible and large */}
         <div className="mb-16 grid grid-cols-1 items-end gap-10 border-b border-slate/10 pb-16 md:mb-20 md:grid-cols-2">

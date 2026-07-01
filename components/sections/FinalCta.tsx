@@ -39,7 +39,7 @@ export function FinalCta() {
             href={siteConfig.shopUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] items-center justify-center gap-1.5 border border-paper/25 px-10 py-5 font-label-md text-label-md uppercase tracking-wider text-paper/55 transition-all duration-200 hover:border-paper/50 hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-deep"
+            className="inline-flex min-h-[44px] items-center justify-center gap-1.5 border border-paper/25 px-8 py-4 font-label-md text-label-md uppercase tracking-wider text-paper/50 transition-all duration-150 hover:border-paper/50 hover:bg-paper/5 hover:text-paper active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-deep"
           >
             Přejít do e-shopu <span aria-hidden="true">↗</span>
           </a>

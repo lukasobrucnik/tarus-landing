@@ -75,11 +75,11 @@ export function Dialog({ open, onClose, titleId, children, className }: DialogPr
           aria-labelledby={titleId}
         >
           <motion.div
-            className="absolute inset-0 bg-ink/85"
+            className="absolute inset-0 bg-ink/80 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.2 }}
             onClick={onClose}
             aria-hidden="true"
           />
@@ -93,10 +93,10 @@ export function Dialog({ open, onClose, titleId, children, className }: DialogPr
           */}
           <motion.div
             ref={panelRef}
-            initial={{ opacity: 0, scale: 0.97, y: 12 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.97, y: 12 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, scale: 0.97, y: 8 }}
+            transition={{ type: "spring", damping: 30, stiffness: 380, mass: 0.85 }}
             className={cn(
               "relative flex w-full max-w-4xl flex-col bg-[#161b1f] max-h-[90vh]",
               className

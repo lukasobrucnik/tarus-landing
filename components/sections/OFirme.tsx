@@ -17,7 +17,7 @@ export function OFirme({ images = [] }: { images?: string[] }) {
           className="md:pr-8"
         >
           <h2
-            className="mb-6 font-display-lg text-2xl font-bold leading-tight md:text-4xl"
+            className="mb-6 font-display-lg text-3xl font-extrabold leading-tight md:text-5xl"
             style={{ textWrap: "balance" }}
           >
             Odbornost postavená na reálných základech
