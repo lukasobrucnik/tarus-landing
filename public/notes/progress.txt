@@ -1,0 +1,11 @@
+Research konkurence, směr webu, shromaždování komponentů vhodných pro web. Příprava. hotovo-28/6/2026 3h
+Zakladní prvotní web, vyzuálně pěkný ale reélně ne moc funkční hotovo-1/7/2026 20h
+Call, příprava nových textů a vymýšlení jak udělat novou sekci s halou vizuálně hotovo 1/7/2026 2h
+
+ Next:
+Uprava textů, pridani sekce o hale, změna log v listě, vymena fotky na hero za video, výběr a zmena fontu. 
+Zprovoznění formuláře aby odesílál poptávky
+Zabezpečení: analýza možných hrozeb a jejich elimonování, aby neslo spamovat dotazník
+
+Analýza reklami na seznamu 
+Poslat napad s dronem u skladu

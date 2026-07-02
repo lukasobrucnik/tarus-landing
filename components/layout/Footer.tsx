@@ -1,11 +1,20 @@
 import { company, navLinks, siteConfig } from "@/data/content";
 
-export function Footer() {
+export function Footer({ logoSrc }: { logoSrc?: string | null }) {
   return (
     <footer id="kontakt" className="bg-ink text-paper">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-5 py-20 md:grid-cols-3 md:px-16">
         <div>
-          <h3 className="mb-4 font-display-lg text-xl font-bold">TARUS</h3>
+          {logoSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={logoSrc}
+              alt="TARUS"
+              className="mb-4 h-7 w-auto object-contain brightness-0 invert opacity-80"
+            />
+          ) : (
+            <h3 className="mb-4 font-display-lg text-xl font-bold">TARUS</h3>
+          )}
           <p className="max-w-xs font-body-md text-paper/60">
             Technický distributor pro dřevostavby a šikmé střechy. Váš
             partner od statiky po detail.

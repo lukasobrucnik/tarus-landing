@@ -81,8 +81,8 @@ export function Hero({ images = [] }: { images?: string[] }) {
           className="mb-8 max-w-4xl font-display-lg text-[3rem] font-extrabold leading-[1.06] tracking-tight text-paper md:text-[5.5rem] md:leading-[1.02]"
           style={{ textWrap: "balance" }}
         >
-          Stavíte rychle.{" "}
-          <span className="text-brand">My dodáváme ještě rychleji.</span>
+          Distributor materiálů pro{" "}
+          <span className="text-brand">dřevostavby, roubenky a šikmé střechy.</span>
         </motion.h1>
 
         <motion.p
@@ -91,9 +91,9 @@ export function Hero({ images = [] }: { images?: string[] }) {
           className="mb-10 max-w-xl font-body-lg text-base text-paper/70 md:text-lg"
           style={{ textWrap: "pretty" }}
         >
-          Jsme technickým partnerem pro realizační firmy. Zajišťujeme
-          kompletní materiálový servis od statiky po poslední šroub, s
-          garancí expedice do 24 hodin.
+          Jsme technickým partnerem realizačních firem. Dodáváme kompletní
+          materiál pro dřevostavby a střechy od konstrukčního kování až po
+          poslední vrut. Na stavbu vám zboží doručíme do 24 hodin.
         </motion.p>
 
         <motion.div

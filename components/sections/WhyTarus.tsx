@@ -3,24 +3,38 @@
 import { motion } from "framer-motion";
 import { whyTarusCards } from "@/data/content";
 
-export function WhyTarus() {
+export function WhyTarus({ wordmarkSrc }: { wordmarkSrc?: string | null }) {
   return (
     <section id="proc-my" className="overflow-x-hidden bg-paper px-5 py-24 md:px-16 md:py-32">
       <div className="mx-auto max-w-[1440px]">
         {/* Section header: asymmetric 2-col, H2 now visible and large */}
-        <div className="mb-16 grid grid-cols-1 items-end gap-10 border-b border-slate/10 pb-16 md:mb-20 md:grid-cols-2">
+        <div className="mb-16 grid grid-cols-1 items-start gap-10 border-b border-slate/10 pb-16 md:mb-20 md:grid-cols-2">
           <h2
-            className="font-display-lg text-6xl font-extrabold leading-none tracking-tight text-ink md:text-8xl"
+            className="font-display-lg text-4xl font-extrabold leading-tight tracking-tight text-ink md:text-6xl"
             style={{ textWrap: "balance" }}
           >
-            Proč<br />TARUS
+            Proč firmy objednávají právě u{" "}
+            {wordmarkSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={wordmarkSrc}
+                alt="TARUS"
+                className="inline-block h-[0.75em] w-auto object-contain align-middle"
+              />
+            ) : (
+              <span>TARUS</span>
+            )}
           </h2>
           <p
-            className="max-w-sm text-lg leading-relaxed text-slate md:text-xl"
+            className="text-base leading-relaxed text-slate md:text-lg"
             style={{ textWrap: "pretty" }}
           >
-            Neříkáme jen, že jsme rychlí a spolehliví. Garantujeme to —
-            a tisíce realizací nás potvrzují.
+            Jsme distributor materiálů, který staví na rychlosti, dostupnosti
+            a praxi. Materiál držíme skladem v centrálním skladu, dodáváme ho
+            jako jednu kompletní zásilku a doručujeme na stavbu do 24 hodin.
+            Nabízíme stabilní cenovou politiku, více než 20 značek v portfoliu
+            a technickou podporu od odborníků z terénu. Naše služby dlouhodobě
+            využívají stovky realizačních firem po celé ČR.
           </p>
         </div>
 

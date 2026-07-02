@@ -18,7 +18,7 @@ export function Specializace({ images = [] }: { images?: string[] }) {
         <div className="mb-16 flex items-end justify-between md:mb-24">
           <div>
             <h2 className="font-display-lg text-3xl font-extrabold md:text-5xl" style={{ textWrap: "balance" }}>
-              Zaměřujeme se na náročné konstrukce
+              Materiály pro profesionální použití
             </h2>
           </div>
           <div className="hidden h-1 w-32 bg-brand md:block" aria-hidden="true" />

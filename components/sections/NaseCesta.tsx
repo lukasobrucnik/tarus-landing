@@ -11,9 +11,9 @@ export function NaseCesta() {
           <h2 className="font-display-lg text-3xl font-extrabold md:text-5xl" style={{ textWrap: "balance" }}>Naše cesta</h2>
         </div>
 
-        <div className="relative grid grid-cols-1 gap-10 md:grid-cols-5 md:gap-8">
+        <div className="relative grid grid-cols-2 gap-10 sm:grid-cols-4 lg:grid-cols-7 md:gap-8">
           <div
-            className="absolute left-0 top-12 hidden h-px w-full bg-slate/20 md:block"
+            className="absolute left-0 top-12 hidden h-px w-full bg-slate/20 lg:block"
             aria-hidden="true"
           />
 
@@ -24,7 +24,7 @@ export function NaseCesta() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-10 flex flex-col items-center text-center md:items-start md:text-left"
+              className="relative z-10 flex flex-col items-center text-center sm:items-start sm:text-left"
             >
               <div
                 className={`mb-8 flex h-24 w-24 items-center justify-center border-4 border-paper-dim font-display-lg text-2xl font-bold shadow-lg ${

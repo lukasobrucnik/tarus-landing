@@ -61,7 +61,7 @@ export const siteConfig = {
 export const navLinks = [
   { label: "Specializace", href: "#specializace" },
   { label: "Proč my", href: "#proc-my" },
-  { label: "Realizace", href: "#realizace" },
+  { label: "Sklad", href: "#sklad" },
   { label: "Naše cesta", href: "#nase-cesta" },
   { label: "O nás", href: "#o-nas" },
   { label: "Kontakt", href: "#kontakt" },
@@ -69,24 +69,24 @@ export const navLinks = [
 
 export const whyTarusCards = [
   {
-    value: "24h",
-    title: "Garantovaná expedice",
-    text: "Materiál na stavbě v momentě, kdy ho potřebujete. Žádné prostoje v harmonogramu.",
-  },
-  {
-    value: "98 %",
+    value: "90 %",
     title: "Dostupnost skladem",
-    text: "Držíme nejširší sortiment pro moderní dřevostavby ve střední Evropě.",
+    text: "Udržujeme nejširší sortiment materiálů pro dřevostavby a šikmé střechy — vše, co potřebujete, máte k dispozici okamžitě.",
   },
   {
-    value: "15+",
-    title: "Let na trhu",
-    text: "Nerozumíme jen prodeji, rozumíme technologii a statice dřevěných konstrukcí.",
+    value: "24 h",
+    title: "Doručení na stavbu",
+    text: "Materiál doručíme přímo na stavbu v momentě, kdy ho potřebujete. Kompletní dodávka na jedné paletě, žádné prostoje.",
   },
   {
-    value: "40+",
+    value: "20+",
     title: "Zastupovaných značek",
-    text: "Od spojovacích prvků po izolace. Všechny certifikované materiály na jednom místě.",
+    text: "Více než 20 ověřených světových značek pod jednou střechou. Stabilní ceny bez nepříjemných překvapení.",
+  },
+  {
+    value: "6 let",
+    title: "Zkušeností",
+    text: "Technická podpora od lidí z praxe. Pomůžeme vám s technickými detaily i výběrem správného materiálového řešení.",
   },
 ] as const;
 
@@ -100,28 +100,36 @@ export type Specialization = {
 
 export const specializations: Specialization[] = [
   {
-    id: "drevostavby",
-    label: "Dřevostavby",
+    id: "tesarske-kovani",
+    label: "Tesařské kování",
     description:
-      "Komplexní řešení pro pasivní a nízkoenergetické domy s důrazem na přesnost a moderní materiály.",
-    imageAlt: "Realizace moderní dřevostavby — placeholder",
+      "Konstrukční a spojovací kování pro dřevěné skelety, krovy a dřevostavby. Certifikované prvky předních světových výrobců.",
+    imageAlt: "Tesařské kování — placeholder",
     variant: 1,
   },
   {
-    id: "roubenky",
-    label: "Roubenky",
+    id: "terasove-systemy",
+    label: "Terasové systémy",
     description:
-      "Materiály pro masivní dřevěné konstrukce a tradiční řemeslo v moderním pojetí.",
-    imageAlt: "Roubená konstrukce — placeholder",
+      "Kompletní systémy pro venkovní terasy — rošty, podkladové profily, spojovací materiál a povrchové úpravy pro maximální životnost.",
+    imageAlt: "Terasové systémy — placeholder",
     variant: 2,
   },
   {
-    id: "sikme-strechy",
-    label: "Šikmé střechy",
+    id: "fasadni-systemy",
+    label: "Fasádní systémy",
     description:
-      "Kompletní střešní systémy včetně doplňků a klempířských prvků pro maximální životnost.",
-    imageAlt: "Šikmá střecha, krov — placeholder",
+      "Materiály a kování pro provětrávanou i kontaktní fasádu. Kompletní sortiment od kotev po povrchové prvky.",
+    imageAlt: "Fasádní systémy — placeholder",
     variant: 3,
+  },
+  {
+    id: "nerez",
+    label: "Nerez",
+    description:
+      "Nerezové spojovací prvky a kování pro náročné exteriérové a průmyslové aplikace s nejvyšší odolností vůči korozi.",
+    imageAlt: "Nerezové kování — placeholder",
+    variant: 1,
   },
 ];
 
@@ -186,29 +194,39 @@ export type Milestone = {
 
 export const milestones: Milestone[] = [
   {
-    year: "2009", // PLACEHOLDER
-    title: "Založení TARUS",
-    text: "První sklad s plochou 150 m² a vizí přinést kvalitní spojovací materiál pro tesaře.",
-  },
-  {
-    year: "2013",
-    title: "Technická podpora",
-    text: "Rozšíření týmu o statiky a specialisty na obálku budovy pro komplexní servis.",
-  },
-  {
-    year: "2017",
-    title: "Vlastní logistika",
-    text: "Nákup prvních nákladních vozů s hydraulickou rukou pro přímý závoz na stavby.",
-  },
-  {
     year: "2021",
-    title: "Digitalizace",
-    text: "Spuštění B2B portálu pro okamžité objednávky a sledování skladů v reálném čase.",
+    title: "Založení společnosti",
+    text: "TARUS zahajuje činnost jako specializovaný distributor materiálů pro dřevostavby a šikmé střechy.",
   },
   {
-    year: "Dnes",
-    title: "Lídři trhu",
-    text: "Komplexní servis pro největší realizační firmy v ČR s garancí kvality a odbornosti.",
+    year: "2022",
+    title: "Světové značky",
+    text: "Navázání spolupráce s předními světovými výrobci tesařského kování, fasádních a terasových systémů.",
+  },
+  {
+    year: "2023",
+    title: "Pobočka Krnov",
+    text: "Otevření druhé pobočky pro zákazníky v Moravskoslezském kraji s vlastní prodejnou a skladem.",
+  },
+  {
+    year: "2024",
+    title: "Posílení týmu",
+    text: "Rozšíření obchodního týmu o zkušené specialisty pokrývající celou Českou republiku.",
+  },
+  {
+    year: "2025",
+    title: "Nový sklad",
+    text: "Spuštění nového centrálního skladu v Olomouci s rozšířenou kapacitou a expedicí do 24 hodin.",
+  },
+  {
+    year: "2026",
+    title: "Digitalizace",
+    text: "Nový B2B portál pro rychlé objednávání materiálu přímo z kanceláře nebo přímo ze stavby.",
+  },
+  {
+    year: "Již brzy",
+    title: "Jeden z lídrů trhu",
+    text: "Pracujeme na tom každý den. Díky vám.",
     highlighted: true,
   },
 ];

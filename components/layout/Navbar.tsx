@@ -40,7 +40,7 @@ export function Navbar({ logoSrc }: { logoSrc?: string | null }) {
             <img
               src={logoSrc}
               alt="TARUS"
-              className="h-6 w-auto object-contain -translate-y-0.5"
+              className="h-8 w-auto object-contain -translate-y-0.5"
             />
           ) : (
             <span className="font-display-lg text-xl font-bold text-paper">TARUS</span>
@@ -52,7 +52,7 @@ export function Navbar({ logoSrc }: { logoSrc?: string | null }) {
             <a
               key={link.href}
               href={link.href}
-              className="font-label-md text-label-md uppercase tracking-wider text-paper transition-colors hover:text-brand"
+              className="font-label-md text-label-md uppercase tracking-wider text-paper/80 transition-colors hover:text-paper"
             >
               {link.label}
             </a>
@@ -108,7 +108,7 @@ export function Navbar({ logoSrc }: { logoSrc?: string | null }) {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="py-3 font-label-md text-sm uppercase tracking-wider text-paper transition-colors hover:text-brand"
+                className="py-3 font-label-md text-sm uppercase tracking-wider text-paper/80 transition-colors hover:text-paper"
               >
                 {link.label}
               </a>
