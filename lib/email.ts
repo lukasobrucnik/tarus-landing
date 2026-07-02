@@ -4,7 +4,6 @@ export type ContactPayload = {
   ico: string;
   firma: string;
   kontaktOsoba: string;
-  telefon: string;
   email: string;
   dotaz: string;
 };
@@ -40,25 +39,24 @@ export async function sendContactEmail(data: ContactPayload): Promise<void> {
     auth: { user: SMTP_USER, pass: SMTP_PASS },
   });
 
-  const subject = `Poptávka z webu — ${data.firma} (IČO: ${data.ico})`;
+  const icoLabel = data.ico ? `Poptávka z webu — ${data.firma} (IČO: ${data.ico})` : `Poptávka z webu — ${data.firma}`;
+  const subject = icoLabel;
 
   const text = [
-    `IČO:              ${data.ico}`,
+    data.ico ? `IČO:              ${data.ico}` : null,
     `Firma:            ${data.firma}`,
     `Kontaktní osoba:  ${data.kontaktOsoba}`,
-    `Telefon:          ${data.telefon}`,
     `E-mail:           ${data.email}`,
     ``,
     `Dotaz:`,
     data.dotaz,
-  ].join("\n");
+  ].filter(Boolean).join("\n");
 
   const html = `
     <table cellpadding="6" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
-      <tr><td><strong>IČO</strong></td><td>${escapeHtml(data.ico)}</td></tr>
+      ${data.ico ? `<tr><td><strong>IČO</strong></td><td>${escapeHtml(data.ico)}</td></tr>` : ""}
       <tr><td><strong>Firma</strong></td><td>${escapeHtml(data.firma)}</td></tr>
       <tr><td><strong>Kontaktní osoba</strong></td><td>${escapeHtml(data.kontaktOsoba)}</td></tr>
-      <tr><td><strong>Telefon</strong></td><td>${escapeHtml(data.telefon)}</td></tr>
       <tr><td><strong>E-mail</strong></td><td>${escapeHtml(data.email)}</td></tr>
     </table>
     <hr style="margin:16px 0"/>

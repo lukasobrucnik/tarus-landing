@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendContactEmail, type ContactPayload } from "@/lib/email";
+import { sendContactEmail } from "@/lib/email";
+import type { ContactPayload } from "@/lib/email";
 
 export const runtime = "nodejs";
 
@@ -14,16 +15,15 @@ export async function POST(req: NextRequest) {
   const ico = body.ico?.trim() ?? "";
   const firma = body.firma?.trim() ?? "";
   const kontaktOsoba = body.kontaktOsoba?.trim() ?? "";
-  const telefon = body.telefon?.trim() ?? "";
   const email = body.email?.trim() ?? "";
   const dotaz = body.dotaz?.trim() ?? "";
 
-  if (!ico || !firma || !kontaktOsoba || !telefon || !email || !dotaz) {
+  if (!firma || !kontaktOsoba || !email || !dotaz) {
     return NextResponse.json({ error: "Chybí povinná pole." }, { status: 400 });
   }
 
   try {
-    await sendContactEmail({ ico, firma, kontaktOsoba, telefon, email, dotaz });
+    await sendContactEmail({ ico, firma, kontaktOsoba, email, dotaz });
     return NextResponse.json({ ok: true });
   } catch (err) {
     if (err instanceof Error && err.message === "SMTP_NOT_CONFIGURED") {
