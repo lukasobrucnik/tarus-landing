@@ -20,6 +20,12 @@ const FOCUSABLE_SELECTOR =
 export function Dialog({ open, onClose, titleId, children, className }: DialogProps) {
   const panelRef = React.useRef<HTMLDivElement>(null);
   const lastFocused = React.useRef<HTMLElement | null>(null);
+  // Keep a stable ref to onClose so the keydown handler always calls the
+  // latest version without adding onClose to the focus-trap effect's deps.
+  // Without this, a new onClose reference on every parent render re-triggers
+  // the effect and steals focus back to the first focusable element (the X).
+  const onCloseRef = React.useRef(onClose);
+  React.useEffect(() => { onCloseRef.current = onClose; }, [onClose]);
 
   React.useEffect(() => {
     if (!open) return;
@@ -33,7 +39,7 @@ export function Dialog({ open, onClose, titleId, children, className }: DialogPr
 
     function onKeydown(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        onClose();
+        onCloseRef.current();
         return;
       }
       if (e.key === "Tab" && panel) {
@@ -59,7 +65,7 @@ export function Dialog({ open, onClose, titleId, children, className }: DialogPr
       document.body.style.overflow = "";
       lastFocused.current?.focus();
     };
-  }, [open, onClose]);
+  }, [open]); // ← onClose intentionally excluded; handled via ref above
 
   if (typeof document === "undefined") return null;
 

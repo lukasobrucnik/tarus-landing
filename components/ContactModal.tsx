@@ -101,20 +101,22 @@ export function ContactModalProvider({
   const formRef = React.useRef<HTMLFormElement>(null);
   const titleId = "contact-modal-title";
 
-  function resetState() {
-    setFormStatus("idle");
-    setServerError(null);
-    setErrors({});
-    setIco("");
-    setFirma("");
-    setAresStatus("idle");
-    setAresName("");
-  }
-
-  function handleClose() {
+  // useCallback gives handleClose a stable reference across re-renders.
+  // Without this, every keystroke in a controlled field creates a new
+  // handleClose function → new onClose prop → Dialog's focus-trap effect
+  // re-fires → focus jumps to the X close button.
+  const handleClose = React.useCallback(() => {
     setIsOpen(false);
-    setTimeout(resetState, 350); // after Dialog exit animation
-  }
+    setTimeout(() => {
+      setFormStatus("idle");
+      setServerError(null);
+      setErrors({});
+      setIco("");
+      setFirma("");
+      setAresStatus("idle");
+      setAresName("");
+    }, 350);
+  }, []); // setState refs from useState are always stable
 
   // ── ARES lookup ─────────────────────────────────────────────────────────────
 
@@ -146,9 +148,11 @@ export function ContactModalProvider({
     const val = e.target.value.replace(/\D/g, "").slice(0, 8);
     setIco(val);
     if (aresStatus !== "idle") {
+      // Only clear the firma field if ARES had auto-filled it.
+      // If the user typed firma manually (notfound / unavailable), preserve it.
+      if (aresStatus === "found") setFirma("");
       setAresStatus("idle");
       setAresName("");
-      setFirma("");
     }
     if (errors.ico) setErrors((prev) => ({ ...prev, ico: undefined }));
   }
@@ -182,7 +186,8 @@ export function ContactModalProvider({
     const icoPadded = ico.padStart(8, "0");
 
     const newErrors: FieldErrors = {};
-    if (!validateIco(ico)) newErrors.ico = "Zadejte platné IČO.";
+    // IČO is advisory — never blocks submission. Firma is always required
+    // (filled either via ARES auto-complete or typed manually).
     if (!firma.trim()) newErrors.firma = "Zadejte název firmy.";
     if (!kontaktOsoba) newErrors.kontaktOsoba = "Zadejte kontaktní osobu.";
     if (!validatePhone(telefon)) newErrors.telefon = "Zadejte platné telefonní číslo (+420 nebo 9 číslic).";
