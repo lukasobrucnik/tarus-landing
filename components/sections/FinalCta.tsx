@@ -24,7 +24,7 @@ export function FinalCta() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 mx-auto max-w-3xl"
       >
-        <h2 className="mb-6 font-display-lg text-3xl font-bold md:text-5xl" style={{ textWrap: "balance" }}>
+        <h2 className="mb-6 font-display-lg text-3xl font-extrabold md:text-5xl" style={{ textWrap: "balance" }}>
           Potřebujete materiál na čas. My to zajistíme.
         </h2>
         <p className="mb-10 font-body-lg text-paper/60" style={{ textWrap: "pretty" }}>

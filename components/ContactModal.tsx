@@ -344,7 +344,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                 )}
                 {aresStatus === "found" && !firmaError && (
                   <p id="cf-firma-ares" className="mt-1.5 text-xs text-brand">
-                    ✓ {aresName} nalezena
+                    ✓ {aresName} — ověřeno v ARES
                   </p>
                 )}
                 {(aresStatus === "notfound" || aresStatus === "unavailable") && (
@@ -433,7 +433,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                   showCharCount ? "cf-dotaz-count" : "",
                 ].filter(Boolean).join(" ") || undefined}
               />
-              <div className="mt-1 flex min-h-[1.25rem] items-start justify-between gap-2">
+              <div className="mt-1 flex min-h-5 items-start justify-between gap-2">
                 <div>
                   {dotazError && <FieldError id="cf-dotaz-error" message={dotazError} />}
                 </div>
@@ -471,14 +471,14 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
               href={`mailto:${siteConfig.email}`}
               className="group flex flex-col gap-0.5 text-center sm:text-left"
             >
-              <span className="text-xs text-paper/40">E-mail · odpovídáme do 24 h</span>
+              <span className="text-xs text-paper/55">E-mail · odpovídáme do 24 h</span>
               <span className="break-all text-sm font-medium text-paper/60 transition-colors group-hover:text-paper/90">
                 {siteConfig.email}
               </span>
             </a>
             {/* E-shop */}
             <div className="flex flex-col gap-0.5 text-center sm:text-left">
-              <span className="text-xs text-paper/40">Pouze materiál?</span>
+              <span className="text-xs text-paper/55">Pouze materiál?</span>
               <a
                 href={siteConfig.shopUrl}
                 target="_blank"
@@ -492,7 +492,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
         </div>
 
         {/* Legal strip — phone lives here only */}
-        <div className="mt-5 border-t border-white/10 pt-5 text-center text-xs text-paper/35">
+        <div className="mt-5 border-t border-white/10 pt-5 text-center text-xs text-paper/50">
           {company.name} · IČO: {company.ico} · DIČ: {company.dic}
           {" · "}
           {company.address.street}, {company.address.city}

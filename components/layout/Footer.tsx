@@ -31,7 +31,7 @@ export function Footer({ logoSrc }: { logoSrc?: string | null }) {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-paper/60 transition-colors hover:text-brand"
+                className="text-paper/60 transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-deep"
               >
                 {link.label}
               </a>
@@ -40,7 +40,7 @@ export function Footer({ logoSrc }: { logoSrc?: string | null }) {
             href={siteConfig.shopUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-paper/60 transition-colors hover:text-brand"
+            className="text-paper/60 transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-deep"
           >
             E-shop ↗
           </a>
@@ -57,20 +57,20 @@ export function Footer({ logoSrc }: { logoSrc?: string | null }) {
           </p>
           <a
             href={`mailto:${siteConfig.email}`}
-            className="text-paper/60 transition-colors hover:text-brand"
+            className="text-paper/60 transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-deep"
           >
             {siteConfig.email}
           </a>
           <a
             href={siteConfig.phoneHref}
-            className="text-paper/60 transition-colors hover:text-brand"
+            className="text-paper/60 transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-deep"
           >
             {siteConfig.phone}
           </a>
         </div>
       </div>
 
-      <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-3 border-t border-paper/10 px-5 py-6 text-xs uppercase tracking-widest text-paper/40 md:flex-row md:px-16">
+      <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-3 border-t border-paper/10 px-5 py-6 text-xs uppercase tracking-widest text-paper/55 md:flex-row md:px-16">
         <span>© {new Date().getFullYear()} {company.name}. Všechna práva vyhrazena.</span>
         <div className="flex gap-4">
           <a href="#" className="hover:text-brand">

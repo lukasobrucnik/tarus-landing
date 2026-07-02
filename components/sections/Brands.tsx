@@ -5,7 +5,7 @@ export function Brands({ images = [] }: { images?: string[] }) {
   const items = images.length > 0 ? images : null;
 
   return (
-    <section className="overflow-hidden border-y border-slate/10 bg-paper py-0">
+    <section className="overflow-hidden border-y border-slate/10 bg-paper py-8 md:py-10">
       <div
         className="marquee-viewport overflow-hidden"
         role="region"

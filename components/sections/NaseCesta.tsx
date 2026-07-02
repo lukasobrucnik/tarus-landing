@@ -8,7 +8,9 @@ export function NaseCesta() {
     <section id="nase-cesta" className="overflow-hidden border-y border-slate/10 bg-paper-dim px-5 py-24 md:px-16 md:py-32">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-20 text-center">
-          <h2 className="font-display-lg text-3xl font-extrabold md:text-5xl" style={{ textWrap: "balance" }}>Naše cesta</h2>
+          <h2 className="font-display-lg text-3xl font-extrabold md:text-5xl" style={{ textWrap: "balance" }}>
+            Naše cesta
+          </h2>
         </div>
 
         <div className="relative grid grid-cols-2 gap-10 sm:grid-cols-4 lg:grid-cols-7 md:gap-8">
