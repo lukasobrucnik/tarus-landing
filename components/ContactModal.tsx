@@ -23,6 +23,10 @@ function validateEmail(email: string): boolean {
   return email.trim().length > 0 && email.includes("@");
 }
 
+function validatePhone(phone: string): boolean {
+  return /^\d{9,}$/.test(phone.replace(/[\s\-().+]/g, ""));
+}
+
 const DOTAZ_MIN = 3;
 const DOTAZ_MAX = 10_000;
 
@@ -61,6 +65,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
   const [firma, setFirma] = React.useState("");
   const [firmaLocked, setFirmaLocked] = React.useState(false);
   const [kontaktOsoba, setKontaktOsoba] = React.useState("");
+  const [telefon, setTelefon] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [dotaz, setDotaz] = React.useState("");
 
@@ -90,6 +95,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
       setFirma("");
       setFirmaLocked(false);
       setKontaktOsoba("");
+      setTelefon("");
       setEmail("");
       setDotaz("");
       setAresStatus("idle");
@@ -181,8 +187,13 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
     ? "Zadejte kontaktní osobu."
     : null;
 
-  const emailError = isTouched("email")
-    ? (!email.trim() ? "Zadejte e-mail." : !validateEmail(email) ? "Neplatná e-mailová adresa." : null)
+  // Format-only validation — neither field is required
+  const telefonError = isTouched("telefon") && telefon.trim() && !validatePhone(telefon)
+    ? "Neplatné telefonní číslo."
+    : null;
+
+  const emailError = isTouched("email") && email.trim() && !validateEmail(email)
+    ? "Neplatný e-mail."
     : null;
 
   const dotazLen = dotaz.trim().length;
@@ -200,12 +211,13 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
     e.preventDefault();
 
     // Touch everything to reveal all errors
-    setTouched(new Set(["ico", "firma", "kontaktOsoba", "email", "dotaz"]));
+    setTouched(new Set(["ico", "firma", "kontaktOsoba", "telefon", "email", "dotaz"]));
 
     const valid =
       firma.trim() &&
       kontaktOsoba.trim() &&
-      validateEmail(email) &&
+      (!telefon.trim() || validatePhone(telefon)) &&
+      (!email.trim() || validateEmail(email)) &&
       dotazLen >= DOTAZ_MIN &&
       dotazLen <= DOTAZ_MAX;
 
@@ -222,6 +234,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
           ico: ico ? ico.padStart(8, "0") : "",
           firma: firma.trim(),
           kontaktOsoba: kontaktOsoba.trim(),
+          telefon: telefon.trim(),
           email: email.trim(),
           dotaz: dotaz.trim(),
         }),
@@ -363,23 +376,42 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
               {kontaktOsobaError && <FieldError id="cf-kontaktOsoba-error" message={kontaktOsobaError} />}
             </div>
 
-            {/* E-mail */}
-            <div>
-              <label className="sr-only" htmlFor="cf-email">E-mail</label>
-              <Input
-                id="cf-email"
-                name="email"
-                type="email"
-                placeholder="E-mail"
-                className="border-white/15 bg-white/5 text-paper placeholder:text-paper/45"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onBlur={() => touch("email")}
-                disabled={isSubmitting}
-                aria-invalid={emailError ? "true" : undefined}
-                aria-describedby={emailError ? "cf-email-error" : undefined}
-              />
-              {emailError && <FieldError id="cf-email-error" message={emailError} />}
+            {/* Telefon + E-mail — stačí jedno */}
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div>
+                <label className="sr-only" htmlFor="cf-telefon">Telefon</label>
+                <Input
+                  id="cf-telefon"
+                  name="telefon"
+                  type="tel"
+                  placeholder="Telefon"
+                  className="border-white/15 bg-white/5 text-paper placeholder:text-paper/45"
+                  value={telefon}
+                  onChange={(e) => setTelefon(e.target.value)}
+                  onBlur={() => touch("telefon")}
+                  disabled={isSubmitting}
+                  aria-invalid={telefonError ? "true" : undefined}
+                  aria-describedby={telefonError ? "cf-telefon-error" : undefined}
+                />
+                {telefonError && <FieldError id="cf-telefon-error" message={telefonError} />}
+              </div>
+              <div>
+                <label className="sr-only" htmlFor="cf-email">E-mail</label>
+                <Input
+                  id="cf-email"
+                  name="email"
+                  type="email"
+                  placeholder="E-mail"
+                  className="border-white/15 bg-white/5 text-paper placeholder:text-paper/45"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onBlur={() => touch("email")}
+                  disabled={isSubmitting}
+                  aria-invalid={emailError ? "true" : undefined}
+                  aria-describedby={emailError ? "cf-email-error" : undefined}
+                />
+                {emailError && <FieldError id="cf-email-error" message={emailError} />}
+              </div>
             </div>
 
             {/* Dotaz */}
@@ -389,7 +421,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                 id="cf-dotaz"
                 name="dotaz"
                 rows={4}
-                placeholder="Váš dotaz nebo poptávka (min. 3 znaky)"
+                placeholder="Váš dotaz nebo poptávka"
                 className="border-white/15 bg-white/5 text-paper placeholder:text-paper/45"
                 value={dotaz}
                 onChange={(e) => setDotaz(e.target.value)}

@@ -4,6 +4,7 @@ export type ContactPayload = {
   ico: string;
   firma: string;
   kontaktOsoba: string;
+  telefon?: string;
   email: string;
   dotaz: string;
 };
@@ -46,6 +47,7 @@ export async function sendContactEmail(data: ContactPayload): Promise<void> {
     data.ico ? `IČO:              ${data.ico}` : null,
     `Firma:            ${data.firma}`,
     `Kontaktní osoba:  ${data.kontaktOsoba}`,
+    data.telefon ? `Telefon:          ${data.telefon}` : null,
     `E-mail:           ${data.email}`,
     ``,
     `Dotaz:`,
@@ -57,6 +59,7 @@ export async function sendContactEmail(data: ContactPayload): Promise<void> {
       ${data.ico ? `<tr><td><strong>IČO</strong></td><td>${escapeHtml(data.ico)}</td></tr>` : ""}
       <tr><td><strong>Firma</strong></td><td>${escapeHtml(data.firma)}</td></tr>
       <tr><td><strong>Kontaktní osoba</strong></td><td>${escapeHtml(data.kontaktOsoba)}</td></tr>
+      ${data.telefon ? `<tr><td><strong>Telefon</strong></td><td>${escapeHtml(data.telefon)}</td></tr>` : ""}
       <tr><td><strong>E-mail</strong></td><td>${escapeHtml(data.email)}</td></tr>
     </table>
     <hr style="margin:16px 0"/>
