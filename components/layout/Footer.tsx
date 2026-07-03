@@ -61,18 +61,15 @@ export function Footer({ logoSrc }: { logoSrc?: string | null }) {
           >
             {siteConfig.email}
           </a>
-          <a
-            href={siteConfig.phoneHref}
-            className="text-paper/60 transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-deep"
-          >
-            {siteConfig.phone}
-          </a>
         </div>
       </div>
 
       <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-3 border-t border-paper/10 px-5 py-6 text-xs uppercase tracking-widest text-paper/55 md:flex-row md:px-16">
         <span>© {new Date().getFullYear()} {company.name}. Všechna práva vyhrazena.</span>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
+          <a href={siteConfig.phoneHref} className="hover:text-brand">
+            {siteConfig.phone}
+          </a>
           <a href="#" className="hover:text-brand">
             Ochrana soukromí
           </a>

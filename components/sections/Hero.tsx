@@ -81,7 +81,7 @@ export function Hero({ images = [] }: { images?: string[] }) {
           className="mb-8 max-w-4xl font-display-lg text-[3rem] font-extrabold leading-[1.06] tracking-tight text-paper md:text-[5.5rem] md:leading-[1.02]"
           style={{ textWrap: "balance" }}
         >
-          Distributor materiálů pro{" "}
+          Český výrobce a distributor pro{" "}
           <span className="text-brand">dřevostavby, roubenky a šikmé střechy.</span>
         </motion.h1>
 

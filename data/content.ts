@@ -47,7 +47,7 @@ export const branches = [
 // ── siteConfig: drives Navbar, Footer, ContactModal, JSON-LD, Hero tel link
 export const siteConfig = {
   name: "TARUS",
-  tagline: "Distributor pro dřevostavby & šikmé střechy",
+  tagline: "Český výrobce & distributor pro dřevostavby",
   description:
     "TARUS je technický distributor materiálu pro dřevostavby, roubenky a šikmé střechy. Skladový sortiment, expedice do 24 hodin, technická podpora pro realizační firmy.",
   url: "https://www.tarus.cz",
