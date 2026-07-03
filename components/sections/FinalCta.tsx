@@ -6,8 +6,7 @@ import { siteConfig } from "@/data/content";
 
 export function FinalCta() {
   return (
-    <section className="relative overflow-hidden bg-ink px-5 py-24 text-center text-paper md:px-16 md:py-32">
-      <div className="absolute left-0 top-0 h-1 w-full bg-brand" aria-hidden="true" />
+    <section className="relative overflow-hidden bg-ink px-5 pt-24 pb-16 text-center text-paper md:px-16 md:pt-32 md:pb-20">
       <div
         className="pointer-events-none absolute inset-0 opacity-5"
         style={{
@@ -39,7 +38,7 @@ export function FinalCta() {
             href={siteConfig.shopUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] items-center justify-center gap-1.5 border border-paper/25 px-8 py-4 font-label-md text-label-md uppercase tracking-wider text-paper/50 transition-all duration-150 hover:border-paper/50 hover:bg-paper/5 hover:text-paper active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-deep"
+            className="inline-flex min-h-[44px] items-center justify-center gap-1.5 border border-paper/25 px-8 py-4 font-label-md text-label-md uppercase tracking-wider text-paper/80 transition-all duration-150 hover:border-paper/50 hover:bg-paper/5 hover:text-paper active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-deep"
           >
             Přejít do e-shopu <span aria-hidden="true">↗</span>
           </a>

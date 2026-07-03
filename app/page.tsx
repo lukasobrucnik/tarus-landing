@@ -16,6 +16,8 @@ export default function Home() {
   // Folders need not exist — getSectionImages returns [] for missing dirs.
   const heroImages = getSectionImages("hero");
   const aboutImages = getSectionImages("about");
+  // Note: folder is intentionally named "storadge" (matches public/images/storadge/ on disk).
+  // If renamed to "storage", update both the folder name and this string together.
   const skladImages = getSectionImages("storadge");
   const brandImages = getSectionImages("brands");
   const specializaceImages = getSectionImages("specializace");

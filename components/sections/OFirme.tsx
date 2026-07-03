@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { aboutParagraphs } from "@/data/content";
 import { Placeholder } from "@/components/ui/Placeholder";
+import { CtaButton } from "@/components/CtaButton";
 
 export function OFirme({ images = [] }: { images?: string[] }) {
   return (
@@ -26,6 +27,9 @@ export function OFirme({ images = [] }: { images?: string[] }) {
             {aboutParagraphs.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
+          </div>
+          <div className="mt-10">
+            <CtaButton variant="outline">Poptat spolupráci</CtaButton>
           </div>
         </motion.div>
 

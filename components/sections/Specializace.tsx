@@ -45,25 +45,27 @@ export function Specializace({ images = [] }: { images?: string[] }) {
                   <h3
                     className={cn(
                       "font-display-lg text-4xl font-extrabold transition-colors duration-300 md:text-6xl",
-                      isActive ? "text-brand" : "text-paper/40"
+                      isActive ? "text-brand" : "text-paper/60"
                     )}
                   >
                     {spec.label}
                   </h3>
-                  {/* Brand underline — signals active/interactive state on mobile */}
+                  {/* Underline: full brand on active, dim hint on inactive to signal tappability */}
                   <span
                     className={cn(
                       "mt-2 block h-0.5 origin-left transition-all duration-500 ease-out",
-                      isActive ? "w-10 bg-brand opacity-100" : "w-0 opacity-0"
+                      isActive ? "w-10 bg-brand opacity-100" : "w-6 bg-paper/20 opacity-100"
                     )}
                     aria-hidden="true"
                   />
+                  {/* Description: full on active, single truncated dim line on inactive —
+                      gives mobile users a preview that signals each item is interactive */}
                   <p
                     className={cn(
                       "mt-4 max-w-md font-body-lg text-paper/60 transition-all duration-500",
                       isActive
                         ? "max-h-20 opacity-60"
-                        : "max-h-0 overflow-hidden opacity-0"
+                        : "max-h-6 overflow-hidden opacity-[0.22] line-clamp-1"
                     )}
                   >
                     {spec.description}

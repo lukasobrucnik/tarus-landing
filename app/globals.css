@@ -27,8 +27,9 @@
   --font-headline-sm: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
   --font-body-lg: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
   --font-body-md: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
-  --font-label-md: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
-  --font-caption: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  /* Barlow for all UI labels — uniform Czech capitals, no optical-size quirks */
+  --font-label-md: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-caption: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
 
   --ease-tarus: cubic-bezier(0.22, 1, 0.36, 1);
 

@@ -65,15 +65,17 @@ export function Footer({ logoSrc }: { logoSrc?: string | null }) {
       </div>
 
       <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-3 border-t border-paper/10 px-5 py-6 text-xs uppercase tracking-widest text-paper/55 md:flex-row md:px-16">
-        <span>© {new Date().getFullYear()} {company.name}. Všechna práva vyhrazena.</span>
+        {/* company.name ends with "s.r.o." — strip trailing period to avoid double-period */}
+        <span>© {new Date().getFullYear()} {company.name.replace(/\.$/, '')}. Všechna práva vyhrazena.</span>
         <div className="flex flex-wrap justify-center gap-4">
-          <a href={siteConfig.phoneHref} className="hover:text-brand">
+          {/* min-h-[44px] on wrappers satisfies WCAG 2.5.5 touch target for these small links */}
+          <a href={siteConfig.phoneHref} className="inline-flex min-h-[44px] items-center hover:text-brand">
             {siteConfig.phone}
           </a>
-          <a href="#" className="hover:text-brand">
+          <a href="/privacy" className="inline-flex min-h-[44px] items-center hover:text-brand">
             Ochrana soukromí
           </a>
-          <a href="#" className="hover:text-brand">
+          <a href="/terms" className="inline-flex min-h-[44px] items-center hover:text-brand">
             Obchodní podmínky
           </a>
         </div>

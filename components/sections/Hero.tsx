@@ -1,11 +1,9 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import Image from "next/image";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useRef, useEffect } from "react";
 import { siteConfig } from "@/data/content";
 import { CtaButton } from "@/components/CtaButton";
-import { Placeholder } from "@/components/ui/Placeholder";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -13,14 +11,32 @@ const fadeUp = {
 };
 
 export function Hero({ images = [] }: { images?: string[] }) {
+  // images prop kept for API compatibility — video is now the background
+  void images;
+
   const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
-  // max 8% zoom — subtle, scroll-linked parallax (respects reduced-motion
-  // via Framer Motion's automatic prefers-reduced-motion handling)
+  // Subtle scroll-linked parallax — same as before
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+
+  // Pause the background video when the user prefers reduced motion
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (prefersReducedMotion) {
+      video.pause();
+    } else {
+      video.play().catch(() => {
+        // autoplay blocked (e.g. browser policy) — video stays paused, bg-ink shows
+      });
+    }
+  }, [prefersReducedMotion]);
 
   return (
     <section
@@ -30,37 +46,35 @@ export function Hero({ images = [] }: { images?: string[] }) {
       aria-label="Úvod"
     >
       {/*
-        Top vignette — navbar readability on bright Hero images.
-        Lives OUTSIDE the parallax motion.div (z-0) so it does not scale or
-        shift with the image. Sits at z-[1] — above image, below text content.
-        ~30 % black fading to transparent over 160 px; imperceptible on dark
-        images, just enough contrast on bright ones.
+        Top vignette — navbar readability over video.
+        Sits at z-[1], above the parallax div (z-0) but below text (z-10).
+        ~70% black fading to transparent over 260px.
       */}
       <div
         className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[260px] bg-gradient-to-b from-black/70 to-transparent"
         aria-hidden="true"
       />
 
+      {/* Parallax wrapper — same 8% scale on scroll as before */}
       <motion.div className="absolute inset-0 z-0" style={{ scale, willChange: "transform" }}>
-        {images[0] ? (
-          <Image
-            src={images[0]}
-            alt="TARUS — realizace dřevěné konstrukce"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-        ) : (
-          <Placeholder
-            alt="fotka realizace krovu/dřevostavby"
-            className="absolute inset-0 h-full w-full"
-            showTag={false}
-          />
-        )}
+        {/* Background video: autoplay, loop, muted (required for autoplay), playsInline (iOS) */}
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover"
+          aria-hidden="true"
+        >
+          <source src="/images/hero/tarus-hero.mp4" type="video/mp4" />
+        </video>
+
+        {/* Bottom gradient overlay — identical to the image version */}
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
       </motion.div>
 
+      {/* Text + CTAs */}
       <motion.div
         className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pb-24 md:px-16"
         initial="hidden"
@@ -79,7 +93,11 @@ export function Hero({ images = [] }: { images?: string[] }) {
           variants={fadeUp}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mb-8 max-w-4xl font-display-lg text-[3rem] font-extrabold leading-[1.06] tracking-tight text-paper md:text-[5.5rem] md:leading-[1.02]"
-          style={{ textWrap: "balance" }}
+          style={{
+            textWrap: "balance",
+            textShadow:
+              "0 0 2px rgba(0,0,0,0.95), 0 0 12px rgba(0,0,0,0.8), 0 4px 32px rgba(0,0,0,0.7), 0 8px 60px rgba(0,0,0,0.5)",
+          }}
         >
           Český výrobce a distributor pro{" "}
           <span className="text-brand">dřevostavby, roubenky a šikmé střechy.</span>
@@ -101,7 +119,6 @@ export function Hero({ images = [] }: { images?: string[] }) {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col items-start gap-4"
         >
-          {/* Primary + secondary CTA: row on desktop, column on mobile */}
           <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
             <CtaButton />
             <a
@@ -113,16 +130,6 @@ export function Hero({ images = [] }: { images?: string[] }) {
               Přejít do e-shopu <span aria-hidden="true">↗</span>
             </a>
           </div>
-          {/* Tel: fallback — instant access, below button row */}
-          <a
-            href={siteConfig.phoneHref}
-            className="group inline-flex items-baseline gap-1.5 text-sm text-paper/50 transition-colors hover:text-paper/80"
-          >
-            nebo zavolejte přímo:
-            <span className="font-medium text-paper/70 transition-colors group-hover:text-paper">
-              {siteConfig.phone}
-            </span>
-          </a>
         </motion.div>
       </motion.div>
     </section>

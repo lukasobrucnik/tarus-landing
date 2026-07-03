@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Barlow } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/data/content";
 import { getStructuredData } from "@/lib/structuredData";
@@ -13,6 +14,15 @@ const bricolage = localFont({
     { path: "./fonts/bricolage-700.woff2", weight: "700", style: "normal" },
     { path: "./fonts/bricolage-800.woff2", weight: "800", style: "normal" },
   ],
+  display: "swap",
+});
+
+// Barlow for UI labels (buttons, nav, footer headings):
+// — uniform cap heights, no optical-size quirks, full Czech latin-ext coverage
+const barlow = Barlow({
+  variable: "--font-barlow",
+  subsets: ["latin", "latin-ext"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
@@ -71,7 +81,7 @@ export default function RootLayout({
   const structuredData = getStructuredData();
 
   return (
-    <html lang="cs" className={bricolage.variable}>
+    <html lang="cs" className={`${bricolage.variable} ${barlow.variable}`}>
       <head>
         <script
           type="application/ld+json"

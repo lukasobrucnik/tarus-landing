@@ -84,8 +84,8 @@ export const whyTarusCards = [
     text: "Více než 20 ověřených světových značek pod jednou střechou. Stabilní ceny bez nepříjemných překvapení.",
   },
   {
-    value: "6 let",
-    title: "Zkušeností",
+    value: "5+",
+    title: "Let praxe v oboru",
     text: "Technická podpora od lidí z praxe. Pomůžeme vám s technickými detaily i výběrem správného materiálového řešení.",
   },
 ] as const;

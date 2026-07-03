@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { milestones } from "@/data/content";
 import { cn } from "@/lib/utils";
@@ -111,6 +111,7 @@ interface MilestoneItemProps {
 
 function MilestoneItem({ m, i, isLast, scrollYProgress }: MilestoneItemProps) {
   const delay = i * 0.055;
+  const prefersReducedMotion = useReducedMotion();
 
   // Scroll-synchronized dot: activates as the spine fill reaches this row
   const activationStart = (i / (N - 1)) * 0.86;
@@ -138,12 +139,13 @@ function MilestoneItem({ m, i, isLast, scrollYProgress }: MilestoneItemProps) {
   const dotInnerScale = useTransform(activation, [0, 0.55, 1], [0.55, 1.3, 1]);
 
   // Year label brightens as the spine passes it, then settles slightly brighter
+  // Base at 0.65 opacity → ~4.9:1 on white (passes WCAG AA for small text)
   const yearLabelColor = useTransform(
     activation,
     [0, 0.5, 1],
     m.highlighted
-      ? ["rgb(0,167,231)", "rgb(0,167,231)", "rgb(0,167,231)"]
-      : ["rgba(16,23,27,0.40)", "rgba(16,23,27,0.76)", "rgba(16,23,27,0.48)"]
+      ? ["rgb(5,129,173)", "rgb(5,129,173)", "rgb(5,129,173)"]
+      : ["rgba(16,23,27,0.65)", "rgba(16,23,27,0.85)", "rgba(16,23,27,0.70)"]
   );
 
   return (
@@ -194,7 +196,7 @@ function MilestoneItem({ m, i, isLast, scrollYProgress }: MilestoneItemProps) {
       {/* Year label + rule */}
       <div className="flex h-6 items-center gap-4">
         <motion.span
-          initial={{ opacity: 0 }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.3, delay, ease: EASE }}
@@ -202,7 +204,7 @@ function MilestoneItem({ m, i, isLast, scrollYProgress }: MilestoneItemProps) {
           style={m.highlighted ? undefined : { color: yearLabelColor }}
         >
           {m.highlighted ? (
-            <span className="text-brand">
+            <span className="text-brand-deep">
               {m.year}
               <motion.span
                 animate={{ opacity: [1, 0.15, 1] }}
@@ -236,7 +238,7 @@ function MilestoneItem({ m, i, isLast, scrollYProgress }: MilestoneItemProps) {
 
       {/* Content — y-spring wrapper, title clips in L→R, body clears from blur */}
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
+        initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
         transition={{ ...SPRING, delay: delay + 0.18 }}
@@ -246,9 +248,9 @@ function MilestoneItem({ m, i, isLast, scrollYProgress }: MilestoneItemProps) {
           isLast ? "pb-0" : "pb-9 md:pb-11"
         )}
       >
-        {/* Title: clip-path wipe from left — reveals like a stamp being pressed */}
+        {/* Title: clip-path wipe from left — skipped entirely under reduced motion */}
         <motion.div
-          initial={{ clipPath: "inset(0 100% 0 0)" }}
+          initial={prefersReducedMotion ? {} : { clipPath: "inset(0 100% 0 0)" }}
           whileInView={{ clipPath: "inset(0 0% 0 0)" }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.54, delay: delay + 0.27, ease: EASE_EXPO }}
@@ -264,9 +266,9 @@ function MilestoneItem({ m, i, isLast, scrollYProgress }: MilestoneItemProps) {
           </h3>
         </motion.div>
 
-        {/* Body: blur-to-clear — data materializing, consistent with technical brand */}
+        {/* Body: blur-to-clear — skipped under reduced motion */}
         <motion.p
-          initial={{ opacity: 0, filter: "blur(6px)" }}
+          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, filter: "blur(6px)" }}
           whileInView={{ opacity: 1, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.62, delay: delay + 0.38, ease: EASE }}

@@ -3,6 +3,9 @@ Zakladní prvotní web, vyzuálně pěkný ale reélně ne moc funkční hotovo-
 Call, příprava nových textů a vymýšlení jak udělat novou sekci s halou vizuálně hotovo 1/7/2026 2h
 Předělání textu, loga v listě změna, vylepšení formuláře (doplnění nazvu firmy podle ica), vytvoření nove sekce Sklad,vylepšení vizuálu timeline osy 2/7/2026 8h
 Vlození obrazku do sekce storadge, uprava tel. cilsa ve footeru, push na demo domenu stranek. 3/7/2026 1h 
+Uprava vizualu final CTA, vetsi a lepe citelne loga v liste, animovaná linka u timeline, vyber a vymena otresneho fondu za jiny 3/7/2026 2h
+Strih videa, vymena fotky za video a jeho lazení na hero 3/7/2026 2h
+
 
 
  Next:
@@ -11,4 +14,5 @@ Zprovoznění formuláře aby odesílál poptávky
 Zabezpečení: analýza možných hrozeb a jejich elimonování, aby neslo spamovat dotazník
 
 Analýza reklami na seznamu 
-Poslat napad s dronem u skladu
+Poslat napad s dronem= napad se mu libil, nekdy se pripomenou a udelat to. 
+Poslat napad s tím že bych sestřihal nejake video z veci co uz maji na youtube pripadne by mi neco naposilal a vypadalo by to lepe nez 1 nic nerikajici o firme clip

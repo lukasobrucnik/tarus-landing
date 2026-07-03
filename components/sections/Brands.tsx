@@ -31,7 +31,7 @@ export function Brands({ images = [] }: { images?: string[] }) {
                 <span
                   key={`${brand}-${i}`}
                   aria-hidden={i >= brands.length ? "true" : undefined}
-                  className="whitespace-nowrap text-2xl font-bold uppercase tracking-widest text-ink/50"
+                  className="whitespace-nowrap text-2xl font-bold uppercase tracking-widest text-ink/70"
                 >
                   {brand}
                 </span>

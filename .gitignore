@@ -4,3 +4,9 @@ dist
 build
 .env
 .env.local
+
+# Large binary assets — host on Vercel Blob or CDN instead
+*.mp4
+*.mov
+*.avi
+*.webm

@@ -7,7 +7,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 font-label-md text-label-md uppercase tracking-wider transition-all duration-150 disabled:opacity-40 disabled:pointer-events-none min-h-[44px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-label-md text-label-md uppercase tracking-wider transition-all duration-150 disabled:opacity-40 disabled:pointer-events-none min-h-[44px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
 
 const variants: Record<string, string> = {
   primary: "bg-brand text-ink px-8 py-4 hover:bg-brand-deep active:scale-[0.97]",
