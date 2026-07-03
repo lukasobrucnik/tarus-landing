@@ -16,7 +16,7 @@ export default function Home() {
   // Folders need not exist — getSectionImages returns [] for missing dirs.
   const heroImages = getSectionImages("hero");
   const aboutImages = getSectionImages("about");
-  const skladImages = getSectionImages("sklad");
+  const skladImages = getSectionImages("storadge");
   const brandImages = getSectionImages("brands");
   const specializaceImages = getSectionImages("specializace");
   const tarusImages = getSectionImages("tarus");

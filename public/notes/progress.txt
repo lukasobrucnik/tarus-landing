@@ -2,6 +2,7 @@ Research konkurence, směr webu, shromaždování komponentů vhodných pro web.
 Zakladní prvotní web, vyzuálně pěkný ale reélně ne moc funkční hotovo-1/7/2026 20h
 Call, příprava nových textů a vymýšlení jak udělat novou sekci s halou vizuálně hotovo 1/7/2026 2h
 Předělání textu, loga v listě změna, vylepšení formuláře (doplnění nazvu firmy podle ica), vytvoření nove sekce Sklad,vylepšení vizuálu timeline osy 2/7/2026 8h
+Vlození obrazku do sekce storadge, uprava tel. cilsa ve footeru, push na demo domenu stranek. 3/7/2026 1h 
 
 
  Next:

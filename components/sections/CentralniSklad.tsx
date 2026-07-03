@@ -30,7 +30,7 @@ export function CentralniSklad({ images = [] }: { images?: string[] }) {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="relative h-[300px] overflow-hidden sm:h-[380px] lg:h-[430px]"
+              className="relative aspect-video overflow-hidden"
             >
               {images[0] ? (
                 <Image
@@ -54,7 +54,7 @@ export function CentralniSklad({ images = [] }: { images?: string[] }) {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="relative h-[180px] overflow-hidden lg:h-[210px]"
+              className="relative aspect-video overflow-hidden"
             >
               {images[1] ? (
                 <Image
