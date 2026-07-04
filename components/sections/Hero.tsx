@@ -67,7 +67,7 @@ export function Hero({ images = [] }: { images?: string[] }) {
           className="absolute inset-0 h-full w-full object-cover"
           aria-hidden="true"
         >
-          <source src="/images/hero/tarus-hero.mp4" type="video/mp4" />
+          <source src="https://mg49vxtan6zvbcsp.public.blob.vercel-storage.com/tarus-hero.mp4" type="video/mp4" />
         </video>
 
         {/* Bottom gradient overlay — identical to the image version */}
