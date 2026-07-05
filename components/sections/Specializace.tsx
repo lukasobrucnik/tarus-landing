@@ -79,17 +79,23 @@ export function Specializace({ images = [] }: { images?: string[] }) {
                     </AnimatePresence>
                   </div>
                   {/* Desktop: full on active, single truncated dim line on inactive —
-                      signals each item is interactive on hover */}
-                  <p
-                    className={cn(
-                      "mt-4 hidden max-w-md font-body-lg text-paper/60 transition-all duration-500 lg:block",
-                      isActive
-                        ? "max-h-20 opacity-60"
-                        : "max-h-6 overflow-hidden opacity-[0.22] line-clamp-1"
-                    )}
-                  >
-                    {spec.description}
-                  </p>
+                      signals each item is interactive on hover.
+                      "hidden lg:block" lives on its own wrapper — tailwind-merge
+                      treats "hidden" and "line-clamp-1" as the same conflict
+                      group (both set `display`) and silently drops "hidden"
+                      if they're merged in the same cn() call. */}
+                  <div className="hidden lg:block">
+                    <p
+                      className={cn(
+                        "mt-4 max-w-md font-body-lg text-paper/60 transition-all duration-500",
+                        isActive
+                          ? "max-h-20 opacity-60"
+                          : "max-h-6 overflow-hidden opacity-[0.22] line-clamp-1"
+                      )}
+                    >
+                      {spec.description}
+                    </p>
+                  </div>
                 </button>
               );
             })}

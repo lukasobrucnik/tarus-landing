@@ -49,7 +49,7 @@ export const siteConfig = {
   name: "TARUS",
   tagline: "Český výrobce & distributor pro dřevostavby",
   description:
-    "TARUS je technický distributor materiálu pro dřevostavby, roubenky a šikmé střechy. Skladový sortiment, expedice do 24 hodin, technická podpora pro realizační firmy.",
+    "TARUS je technický distributor tesařského kování, terasových a fasádních systémů pro dřevostavby, roubenky a šikmé střechy. Skladem, expedice do 24 hodin, technická podpora realizačním firmám.",
   url: "https://www.tarus.cz",
   phone: company.phone,
   phoneHref: company.phoneHref,
@@ -104,7 +104,7 @@ export const specializations: Specialization[] = [
     label: "Tesařské kování",
     description:
       "Konstrukční a spojovací kování pro dřevěné skelety, krovy a dřevostavby. Certifikované prvky předních světových výrobců.",
-    imageAlt: "Tesařské kování — placeholder",
+    imageAlt: "Tesařské kování — konstrukční a spojovací prvky pro krovy a dřevostavby",
     variant: 1,
   },
   {
@@ -112,7 +112,7 @@ export const specializations: Specialization[] = [
     label: "Terasové systémy",
     description:
       "Kompletní systémy pro venkovní terasy — rošty, podkladové profily, spojovací materiál a povrchové úpravy pro maximální životnost.",
-    imageAlt: "Terasové systémy — placeholder",
+    imageAlt: "Terasový systém — rošty a spojovací materiál pro venkovní terasy",
     variant: 2,
   },
   {
@@ -120,7 +120,7 @@ export const specializations: Specialization[] = [
     label: "Fasádní systémy",
     description:
       "Materiály a kování pro provětrávanou i kontaktní fasádu. Kompletní sortiment od kotev po povrchové prvky.",
-    imageAlt: "Fasádní systémy — placeholder",
+    imageAlt: "Fasádní systém — kotvy a profily pro provětrávanou fasádu",
     variant: 3,
   },
   {
@@ -128,7 +128,7 @@ export const specializations: Specialization[] = [
     label: "Nerez",
     description:
       "Nerezové spojovací prvky a kování pro náročné exteriérové a průmyslové aplikace s nejvyšší odolností vůči korozi.",
-    imageAlt: "Nerezové kování — placeholder",
+    imageAlt: "Nerezové spojovací prvky pro exteriérové a průmyslové aplikace",
     variant: 1,
   },
 ];

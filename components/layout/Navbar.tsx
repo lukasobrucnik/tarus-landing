@@ -20,6 +20,19 @@ export function Navbar({ logoSrc }: { logoSrc?: string | null }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock background scroll while the mobile menu is open — without this,
+  // the menu panel (a fixed but content-sized box) can be shorter than the
+  // viewport, letting page content bleed through beneath it, and the page
+  // behind stays independently scrollable while the menu looks "open".
+  React.useEffect(() => {
+    if (!mobileOpen) return;
+    const original = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, [mobileOpen]);
+
   return (
     <nav
       className={cn(
@@ -29,7 +42,11 @@ export function Navbar({ logoSrc }: { logoSrc?: string | null }) {
           : "bg-transparent py-4"
       )}
     >
-      <div className="mx-auto flex max-w-[1440px] items-center justify-between px-5 md:px-16">
+      {/* relative z-50: the mobile menu below is `fixed z-40` — without an
+          explicit stacking context here, this un-positioned row would paint
+          underneath it despite nav's own z-50 (that only governs stacking
+          against elements outside nav, not this positioned child). */}
+      <div className="relative z-50 mx-auto flex max-w-[1440px] items-center justify-between px-5 md:px-16">
         <a
           href="#hero"
           aria-label="TARUS — domů"
@@ -94,7 +111,11 @@ export function Navbar({ logoSrc }: { logoSrc?: string | null }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col gap-1 border-t border-slate/20 bg-ink px-5 py-4 md:hidden"
+            // Fixed to the full viewport (not just content height) so page
+            // content behind it can never peek through underneath, and its
+            // own overflow-y-auto lets it scroll independently of the
+            // (now scroll-locked) page behind.
+            className="fixed inset-0 top-0 z-40 flex flex-col gap-1 overflow-y-auto border-t border-slate/20 bg-ink px-5 pb-8 pt-20 md:hidden"
           >
             {navLinks.map((link) => (
               <a

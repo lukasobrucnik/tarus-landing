@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 import type { MotionValue } from "framer-motion";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const EASE_EXPO = [0.16, 1, 0.3, 1] as const;
 const SPRING = { type: "spring" as const, damping: 32, stiffness: 380, mass: 0.85 };
 const N = milestones.length;
 
@@ -248,12 +247,17 @@ function MilestoneItem({ m, i, isLast, scrollYProgress }: MilestoneItemProps) {
           isLast ? "pb-0" : "pb-9 md:pb-11"
         )}
       >
-        {/* Title: clip-path wipe from left — skipped entirely under reduced motion */}
+        {/* Title reveal — skipped entirely under reduced motion.
+            Was a clip-path wipe, but framer-motion's whileInView never
+            resolved it (titles stayed permanently clipped to zero width
+            on every milestone, mobile and desktop alike) — root cause
+            unclear, but plain opacity/x is a known-reliable substitute
+            already used successfully elsewhere in this file. */}
         <motion.div
-          initial={prefersReducedMotion ? {} : { clipPath: "inset(0 100% 0 0)" }}
-          whileInView={{ clipPath: "inset(0 0% 0 0)" }}
+          initial={prefersReducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.54, delay: delay + 0.27, ease: EASE_EXPO }}
+          transition={{ duration: 0.5, delay: delay + 0.27, ease: EASE }}
           className="mb-2 md:mb-0"
         >
           <h3
