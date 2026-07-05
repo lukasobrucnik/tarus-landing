@@ -42,7 +42,7 @@ export function Hero({ images = [] }: { images?: string[] }) {
     <section
       id="hero"
       ref={ref}
-      className="relative flex h-screen w-full flex-col justify-end overflow-hidden bg-ink"
+      className="relative flex h-svh w-full flex-col justify-end overflow-hidden bg-ink"
       aria-label="Úvod"
     >
       {/*
@@ -96,7 +96,7 @@ export function Hero({ images = [] }: { images?: string[] }) {
           style={{
             textWrap: "balance",
             textShadow:
-              "0 0 2px rgba(0,0,0,0.95), 0 0 12px rgba(0,0,0,0.8), 0 4px 32px rgba(0,0,0,0.7), 0 8px 60px rgba(0,0,0,0.5)",
+              "0 1px 2px rgba(0,0,0,0.55), 0 8px 40px rgba(0,0,0,0.45)",
           }}
         >
           Český výrobce a distributor pro{" "}
@@ -117,19 +117,17 @@ export function Hero({ images = [] }: { images?: string[] }) {
         <motion.div
           variants={fadeUp}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col items-start gap-4"
+          className="flex flex-col items-start gap-3 sm:flex-row sm:items-center"
         >
-          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-            <CtaButton />
-            <a
-              href={siteConfig.shopUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-[44px] items-center justify-center gap-1.5 border border-paper/25 px-8 py-4 font-label-md text-label-md uppercase tracking-wider text-paper/55 transition-all duration-150 hover:border-paper/50 hover:bg-paper/5 hover:text-paper active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-deep"
-            >
-              Přejít do e-shopu <span aria-hidden="true">↗</span>
-            </a>
-          </div>
+          <CtaButton />
+          <a
+            href={siteConfig.shopUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-[44px] items-center justify-center gap-1.5 border border-paper/25 px-8 py-4 font-label-md text-label-md uppercase tracking-wider text-paper/80 transition-all duration-150 hover:border-paper/50 hover:bg-paper/5 hover:text-paper active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-deep"
+          >
+            Přejít do e-shopu <span aria-hidden="true">↗</span>
+          </a>
         </motion.div>
       </motion.div>
     </section>

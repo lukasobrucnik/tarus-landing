@@ -33,19 +33,25 @@ export function OFirme({ images = [] }: { images?: string[] }) {
           </div>
         </motion.div>
 
-        <div className="relative h-[420px] md:h-[600px]">
+        <motion.div
+          initial={{ opacity: 0, scale: 1.02 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="relative h-[420px] overflow-hidden md:h-[600px]"
+        >
           {images[0] ? (
             <Image
               src={images[0]}
               alt="Tým TARUS na stavbě"
               fill
-              className="object-cover"
+              className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           ) : (
             <Placeholder alt="tým TARUS na stavbě — placeholder" variant={2} className="h-full w-full" />
           )}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

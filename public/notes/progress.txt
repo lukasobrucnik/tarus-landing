@@ -4,12 +4,11 @@ Call, příprava nových textů a vymýšlení jak udělat novou sekci s halou v
 Předělání textu, loga v listě změna, vylepšení formuláře (doplnění nazvu firmy podle ica), vytvoření nove sekce Sklad,vylepšení vizuálu timeline osy 2/7/2026 8h
 Vlození obrazku do sekce storadge, uprava tel. cilsa ve footeru, push na demo domenu stranek. 3/7/2026 1h 
 Uprava vizualu final CTA, vetsi a lepe citelne loga v liste, animovaná linka u timeline, vyber a vymena otresneho fondu za jiny 3/7/2026 2h
-Strih videa, vymena fotky za video a jeho lazení na hero 3/7/2026 2h
-
+Strih videa, vymena fotky za video a jeho lazení na hero 3/7/2026 3h
+fix 
 
 
  Next:
-Uprava textů, pridani sekce o hale, změna log v listě, vymena fotky na hero za video, výběr a zmena fontu, změna tarus loga.
 Zprovoznění formuláře aby odesílál poptávky
 Zabezpečení: analýza možných hrozeb a jejich elimonování, aby neslo spamovat dotazník
 

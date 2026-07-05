@@ -15,6 +15,15 @@ export function FinalCta() {
         }}
         aria-hidden="true"
       />
+      {/* Soft brand glow behind the heading — depth without glassmorphism */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-[320px]"
+        style={{
+          background:
+            "radial-gradient(ellipse 55% 100% at 50% 0%, rgba(0,167,231,0.10) 0%, transparent 70%)",
+        }}
+        aria-hidden="true"
+      />
 
       <motion.div
         initial={{ opacity: 0, y: 16 }}

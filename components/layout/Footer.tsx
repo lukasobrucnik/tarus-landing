@@ -22,7 +22,7 @@ export function Footer({ logoSrc }: { logoSrc?: string | null }) {
         </div>
 
         <div className="flex flex-col gap-3">
-          <h4 className="mb-2 font-label-md uppercase tracking-wider text-paper/80">
+          <h4 className="mb-2 font-label-md text-label-md uppercase tracking-wider text-paper/80">
             Odkazy
           </h4>
           {navLinks
@@ -47,7 +47,7 @@ export function Footer({ logoSrc }: { logoSrc?: string | null }) {
         </div>
 
         <div className="flex flex-col gap-3">
-          <h4 className="mb-2 font-label-md uppercase tracking-wider text-paper/80">
+          <h4 className="mb-2 font-label-md text-label-md uppercase tracking-wider text-paper/80">
             Kontakt
           </h4>
           <p className="text-paper/60">

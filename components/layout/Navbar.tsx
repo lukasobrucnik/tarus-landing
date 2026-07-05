@@ -70,13 +70,13 @@ export function Navbar({ logoSrc }: { logoSrc?: string | null }) {
         <div className="flex items-center gap-2">
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <CtaButton className="!px-6 !py-3 !text-xs" />
+            <CtaButton className="!px-6 !py-3" />
           </div>
 
           {/* Mobile compact CTA — appears when scrolled past hero, hides when menu opens */}
           {scrolled && !mobileOpen && (
             <div className="md:hidden">
-              <CtaButton className="!px-4 !py-2 !text-xs" />
+              <CtaButton className="!px-4 !py-2" />
             </div>
           )}
 

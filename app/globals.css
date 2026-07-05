@@ -33,6 +33,12 @@
 
   --ease-tarus: cubic-bezier(0.22, 1, 0.36, 1);
 
+  /* UI label size — nav links, buttons, eyebrows. Previously undefined,
+     so `text-label-md` silently fell back to 16px; 13px is the intended
+     compact register for uppercase tracked labels. */
+  --text-label-md: 0.8125rem;
+  --text-label-md--line-height: 1.25rem;
+
   --container-max: 1440px;
 }
 
@@ -42,6 +48,11 @@ html {
 
 body {
   background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-brand);
   color: var(--color-ink);
 }
 

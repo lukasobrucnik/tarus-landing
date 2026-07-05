@@ -7,7 +7,7 @@ export function Brands({ images = [] }: { images?: string[] }) {
   return (
     <section className="overflow-hidden border-y border-slate/10 bg-paper py-8 md:py-10">
       <div
-        className="marquee-viewport overflow-hidden"
+        className="marquee-viewport overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
         role="region"
         aria-label="Zastupované značky"
       >
@@ -22,7 +22,7 @@ export function Brands({ images = [] }: { images?: string[] }) {
                   src={src}
                   alt={i < items.length ? "brand logo" : ""}
                   aria-hidden={i >= items.length ? "true" : undefined}
-                  className="h-[60px] w-auto max-w-[200px] object-contain"
+                  className="h-[60px] w-auto max-w-[200px] object-contain opacity-70 grayscale transition-[opacity,filter] duration-300 hover:opacity-100 hover:grayscale-0"
                   loading="lazy"
                 />
               ))

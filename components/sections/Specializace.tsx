@@ -15,13 +15,10 @@ export function Specializace({ images = [] }: { images?: string[] }) {
       className="overflow-hidden bg-ink px-5 py-24 text-paper md:px-16 md:py-32"
     >
       <div className="mx-auto max-w-[1440px]">
-        <div className="mb-16 flex items-end justify-between md:mb-24">
-          <div>
-            <h2 className="font-display-lg text-3xl font-extrabold md:text-5xl" style={{ textWrap: "balance" }}>
-              Materiály pro profesionální použití
-            </h2>
-          </div>
-          <div className="hidden h-1 w-32 bg-brand md:block" aria-hidden="true" />
+        <div className="mb-16 md:mb-24">
+          <h2 className="font-display-lg text-3xl font-extrabold md:text-5xl" style={{ textWrap: "balance" }}>
+            Materiály pro profesionální použití
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-24">

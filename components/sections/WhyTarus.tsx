@@ -43,18 +43,17 @@ export function WhyTarus({ wordmarkSrc }: { wordmarkSrc?: string | null }) {
           {whyTarusCards.map((card, i) => (
             <motion.div
               key={card.title}
-              initial={{ opacity: 0, x: -16 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{
                 duration: 0.45,
                 delay: i * 0.07,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="grid items-baseline gap-6 border-b border-slate/10 py-8 md:gap-12 md:py-10"
-              style={{ gridTemplateColumns: "auto 1fr" }}
+              className="group grid grid-cols-[7.5rem_1fr] items-baseline gap-6 border-b border-slate/10 py-8 md:grid-cols-[13rem_1fr] md:gap-12 md:py-10"
             >
-              <span className="font-display-lg text-5xl font-extrabold leading-none text-timber md:text-6xl">
+              <span className="whitespace-nowrap font-display-lg text-5xl font-extrabold leading-none tracking-tight text-timber transition-colors duration-300 group-hover:text-brand-deep md:text-6xl">
                 {card.value}
               </span>
               <div>
