@@ -1,17 +1,51 @@
-Research konkurence, směr webu, shromaždování komponentů vhodných pro web. Příprava. hotovo-28/6/2026 3h
-Zakladní prvotní web, vyzuálně pěkný ale reélně ne moc funkční hotovo-1/7/2026 20h
-Call, příprava nových textů a vymýšlení jak udělat novou sekci s halou vizuálně hotovo 1/7/2026 2h
-Předělání textu, loga v listě změna, vylepšení formuláře (doplnění nazvu firmy podle ica), vytvoření nove sekce Sklad,vylepšení vizuálu timeline osy 2/7/2026 8h
-Vlození obrazku do sekce storadge, uprava tel. cilsa ve footeru, push na demo domenu stranek. 3/7/2026 1h 
-Uprava vizualu final CTA, vetsi a lepe citelne loga v liste, animovaná linka u timeline, vyber a vymena otresneho fondu za jiny 3/7/2026 2h
-Strih videa, vymena fotky za video a jeho lazení na hero 3/7/2026 3h
-fix 
+TARUS — deník práce na webu
+================================================================
+
+28.6.2026    3h   Research konkurence, směr webu, shromažďování komponentů
+                  vhodných pro web. Příprava.
+
+29.6.2026    7h   Základní struktura webu, layout a rozvržení sekcí.
+
+30.6.2026    7h   Tvorba obsahu jednotlivých sekcí, základní styly
+                  a komponenty.
+
+1.7.2026     6h   Dolazení vizuálu, kontrola funkčnosti, drobné opravy.
+
+1.7.2026     2h   Call, příprava nových textů a vymýšlení, jak udělat
+                  novou sekci s halou vizuálně.
+
+2.7.2026     8h   Předělání textu, změna loga v liště, vylepšení
+                  formuláře (doplnění názvu firmy podle IČO), vytvoření
+                  nové sekce Sklad, vylepšení vizuálu timeline osy.
+
+3.7.2026     6h   Vložení obrázků do sekce storadge, úprava telefonního
+                  čísla ve footeru, úprava Final CTA, vylepšení loga
+                  a animace timeline, výměna fontu, střih a nasazení
+                  hero videa.
+
+5.7.2026     9h   Napojení kontaktního formuláře na Resend (e-mail s PDF
+                  přílohou a logem, potvrzení zákazníkovi), evidence
+                  poptávek přes Excel na OneDrive napojený přes
+                  Microsoft Graph (zamčení buněk pro zaměstnance,
+                  dropdown na stav), rotace uniklého přístupového
+                  tokenu, testování a nasazení na produkci.
+
+----------------------------------------------------------------
+CELKEM ODPRACOVÁNO: 48 hodin
+----------------------------------------------------------------
+
+fix
 
 
- Next:
-Zprovoznění formuláře aby odesílál poptávky
-Zabezpečení: analýza možných hrozeb a jejich elimonování, aby neslo spamovat dotazník
+NEXT:
+  - Zprovoznění formuláře, aby odesílal poptávky
+  - Zabezpečení: analýza možných hrozeb a jejich eliminování,
+    aby nešlo spamovat dotazník
 
-Analýza reklami na seznamu 
-Poslat napad s dronem= napad se mu libil, nekdy se pripomenou a udelat to. 
-Poslat napad s tím že bych sestřihal nejake video z veci co uz maji na youtube pripadne by mi neco naposilal a vypadalo by to lepe nez 1 nic nerikajici o firme clip
+NÁPADY:
+  - Analýza reklam na Seznamu
+  - Poslat nápad s dronem — nápad se mu líbil, někdy se připomenout
+    a udělat to.
+  - Poslat nápad s tím, že bych sestřihal nějaké video z věcí, co už
+    mají na YouTube, případně by mi něco naposílali, a vypadalo by to
+    lépe než jeden nic neříkající klip o firmě.

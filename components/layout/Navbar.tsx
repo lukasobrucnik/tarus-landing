@@ -73,13 +73,6 @@ export function Navbar({ logoSrc }: { logoSrc?: string | null }) {
             <CtaButton className="!px-6 !py-3" />
           </div>
 
-          {/* Mobile compact CTA — appears when scrolled past hero, hides when menu opens */}
-          {scrolled && !mobileOpen && (
-            <div className="md:hidden">
-              <CtaButton className="!px-4 !py-2" />
-            </div>
-          )}
-
           <button
             type="button"
             className="flex min-h-[44px] min-w-[44px] items-center justify-center text-paper md:hidden"
