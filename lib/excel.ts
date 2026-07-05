@@ -58,6 +58,43 @@ async function getAccessToken(): Promise<string> {
   return tokens.access_token as string;
 }
 
+const SHEET_NAME = "List 1";
+
+// Must match the options set up during initial sheet setup: employees can
+// filter/sort and edit the Stav column, nothing else. Re-applied after every
+// bot write since Excel Tables categorically reject row insertion via Graph
+// API while the sheet is protected — there is no permission combination that
+// lets a protected sheet accept API-driven table row adds, unlike Google
+// Sheets' protected-ranges model (which allowlists specific editors). The
+// only way for the bot to append is: unprotect, write, re-protect.
+const PROTECTION_OPTIONS = {
+  allowAutoFilter: true,
+  allowSort: true,
+  allowInsertRows: true,
+  allowFormatCells: false,
+  allowDeleteRows: false,
+  allowInsertColumns: false,
+  allowDeleteColumns: false,
+  allowFormatColumns: false,
+  allowFormatRows: false,
+  selectionMode: "Normal",
+};
+
+async function graphFetch(fileId: string, path: string, accessToken: string, opts: RequestInit = {}) {
+  const res = await fetch(
+    `https://graph.microsoft.com/v1.0/me/drive/items/${fileId}/workbook${path}`,
+    {
+      ...opts,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+        ...opts.headers,
+      },
+    }
+  );
+  return res;
+}
+
 /**
  * Appends one row to the "Table1" table in tarus-poptavky.xlsx (OneDrive).
  * Column order matches the sheet: ID | Datum | Firma | IČO | Kontaktní
@@ -75,15 +112,16 @@ export async function appendExcelRow(
   }
 
   const accessToken = await getAccessToken();
+  const encodedSheet = encodeURIComponent(SHEET_NAME);
+  const encodedTable = encodeURIComponent(tableName);
 
-  const res = await fetch(
-    `https://graph.microsoft.com/v1.0/me/drive/items/${fileId}/workbook/tables('${encodeURIComponent(tableName)}')/rows/add`,
-    {
+  await graphFetch(fileId, `/worksheets('${encodedSheet}')/protection/unprotect`, accessToken, {
+    method: "POST",
+  });
+
+  try {
+    const res = await graphFetch(fileId, `/tables('${encodedTable}')/rows/add`, accessToken, {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify({
         values: [
           [
@@ -99,11 +137,18 @@ export async function appendExcelRow(
           ],
         ],
       }),
-    }
-  );
+    });
 
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({}));
-    throw new Error(`MS_GRAPH_APPEND_FAILED: ${JSON.stringify(body)}`);
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      throw new Error(`MS_GRAPH_APPEND_FAILED: ${JSON.stringify(body)}`);
+    }
+  } finally {
+    // Always re-lock, even if the append itself failed — an unprotected
+    // sheet left behind after an error would defeat the whole point.
+    await graphFetch(fileId, `/worksheets('${encodedSheet}')/protection/protect`, accessToken, {
+      method: "POST",
+      body: JSON.stringify({ options: PROTECTION_OPTIONS }),
+    }).catch((err) => console.error("[excel] Failed to re-protect after append:", err));
   }
 }
