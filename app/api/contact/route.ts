@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendContactEmail } from "@/lib/email";
 import type { ContactPayload } from "@/lib/email";
+import { appendExcelRow } from "@/lib/excel";
 
 export const runtime = "nodejs";
 
@@ -15,6 +16,7 @@ export async function POST(req: NextRequest) {
   const ico = body.ico?.trim() ?? "";
   const firma = body.firma?.trim() ?? "";
   const kontaktOsoba = body.kontaktOsoba?.trim() ?? "";
+  const telefon = body.telefon?.trim() ?? "";
   const email = body.email?.trim() ?? "";
   const dotaz = body.dotaz?.trim() ?? "";
 
@@ -23,11 +25,31 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    await sendContactEmail({ ico, firma, kontaktOsoba, email, dotaz });
+    const { requestId, date } = await sendContactEmail({
+      ico,
+      firma,
+      kontaktOsoba,
+      telefon,
+      email,
+      dotaz,
+    });
+
+    // Best-effort logging — an Excel/OneDrive outage must not fail a
+    // submission that already succeeded (the email is the source of truth).
+    try {
+      await appendExcelRow(
+        { ico, firma, kontaktOsoba, telefon, email, dotaz },
+        requestId,
+        date
+      );
+    } catch (err) {
+      console.error("[contact] Excel logging failed (non-fatal):", err);
+    }
+
     return NextResponse.json({ ok: true });
   } catch (err) {
-    if (err instanceof Error && err.message === "SMTP_NOT_CONFIGURED") {
-      console.error("[contact] SMTP env vars not set");
+    if (err instanceof Error && err.message === "RESEND_NOT_CONFIGURED") {
+      console.error("[contact] RESEND_API_KEY not set");
       return NextResponse.json(
         {
           error: `Odesílání momentálně není dostupné. Zavolejte nám nebo napište na ${
