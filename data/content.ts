@@ -49,7 +49,7 @@ export const siteConfig = {
   name: "TARUS",
   tagline: "Český výrobce & distributor pro dřevostavby",
   description:
-    "TARUS je technický distributor tesařského kování, terasových a fasádních systémů pro dřevostavby, roubenky a šikmé střechy. Skladem, expedice do 24 hodin, technická podpora realizačním firmám.",
+    "TARUS je technický distributor tesařského kování, terasových a fasádních systémů pro dřevostavby, roubenky a šikmé střechy. Skladem, doručení do 24 hodin, technická podpora realizačním firmám.",
   url: "https://www.tarus.cz",
   phone: company.phone,
   phoneHref: company.phoneHref,

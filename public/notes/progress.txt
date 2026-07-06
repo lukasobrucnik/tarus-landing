@@ -1,39 +1,53 @@
 TARUS — deník práce na webu
 ================================================================
 
-28.6.2026    3h   Research konkurence, směr webu, shromažďování komponentů
-                  vhodných pro web. Příprava.
+28.6.2026    3 h   Research konkurence, hledání inspirace a stanovení směru
+                   webu. Výběr vhodných komponentů a příprava projektu.
 
-29.6.2026    7h   Základní struktura webu, layout a rozvržení sekcí.
+29.6.2026    7 h   Vytvoření základní struktury webu, rozvržení sekcí,
+                   návrh layoutu a celkové architektury stránky.
 
-30.6.2026    7h   Tvorba obsahu jednotlivých sekcí, základní styly
-                  a komponenty.
+30.6.2026    7 h   Tvorba obsahu jednotlivých sekcí, příprava základních
+                   komponent, stylů a responzivního rozložení.
 
-1.7.2026     6h   Dolazení vizuálu, kontrola funkčnosti, drobné opravy.
+1.7.2026     6 h   Doladění vizuální stránky webu, kontrola funkčnosti,
+                   oprava nalezených chyb a úpravy detailů.
 
-1.7.2026     2h   Příprava nových textů a vymýšlení, jak udělat
-                  novou sekci s halou vizuálně.
+1.7.2026     2 h   Příprava nových textů a návrh nové sekce se skladovou
+                   halou včetně hledání vhodného vizuálního řešení.
 
-2.7.2026     8h   Předělání textu, změna loga v liště, vylepšení
-                  formuláře (doplnění názvu firmy podle IČO), vytvoření
-                  nové sekce Sklad, vylepšení vizuálu timeline osy.
+2.7.2026     8 h   Přepracování textového obsahu, změna loga v navigaci,
+                   vylepšení kontaktního formuláře (automatické doplnění
+                   názvu firmy podle IČO), vytvoření nové sekce Sklad,
+                   úprava vzhledu a animace časové osy.
 
-3.7.2026     6h   Vložení obrázků do sekce storadge, úprava telefonního
-                  čísla ve footeru, úprava Final CTA, vylepšení loga
-                  a animace timeline, výměna fontu, střih a nasazení
-                  hero videa.
+3.7.2026     6 h   Doplnění fotografií do sekce Sklad, úprava telefonního
+                   čísla ve footeru, přepracování závěrečného CTA,
+                   vylepšení loga a animací, změna fontu, střih a
+                   nasazení hero videa.
 
-5.7.2026     9h   Napojení kontaktního formuláře na Resend (e-mail s PDF
-                  přílohou a logem, potvrzení zákazníkovi), evidence
-                  poptávek přes Excel na OneDrive napojený přes
-                  Microsoft Graph (zamčení buněk pro zaměstnance,
-                  dropdown na stav), rotace uniklého přístupového
-                  tokenu, testování a nasazení na produkci.
+5.7.2026     9 h   Napojení kontaktního formuláře na Resend (odesílání
+                   e-mailů s PDF přílohou a logem společnosti),
+                   automatické potvrzení zákazníkovi, vytvoření evidence
+                   poptávek v Excelu na OneDrive přes Microsoft Graph
+                   (zamčení buněk pro zaměstnance, dropdowny pro změnu
+                   stavu poptávky), bezpečnostní rotace uniklého
+                   přístupového tokenu, testování a nasazení na produkci.
 
-5.7.2026     3h   První optimalizace SEO a hledání keywords
+5.7.2026     3 h   První SEO optimalizace webu. Analýza klíčových slov,
+                   úprava základních SEO prvků a příprava webu pro lepší
+                   indexaci ve vyhledávačích.
+
+6.7.2026     3 h   Finální SEO optimalizace před nasazením. Kontrola a
+                   oprava nejdůležitějších SEO nedostatků (navigace,
+                   metadata, Open Graph, strukturovaná data, sitemap,
+                   titulky a alt texty), kontrola indexace a interního
+                   prolinkování, doplnění chybějících Schema.org dat,
+                   vytvoření vlastní 404 stránky a závěrečná kontrola
+                   připravenosti webu pro produkční nasazení.
 
 ----------------------------------------------------------------
-CELKEM ODPRACOVÁNO: 51 hodin
+CELKEM ODPRACOVÁNO: 54 hodin
 ----------------------------------------------------------------
 
 fix

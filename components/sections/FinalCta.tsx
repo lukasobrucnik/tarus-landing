@@ -36,7 +36,7 @@ export function FinalCta() {
           Potřebujete materiál na čas. My to zajistíme.
         </h2>
         <p className="mb-10 font-body-lg text-paper/60" style={{ textWrap: "pretty" }}>
-          Kompletní materiálový servis od statiky po poslední šroub, expedice
+          Kompletní materiálový servis od statiky po poslední šroub, doručení
           do 24 hodin, technická podpora od odborníků z terénu. Řekněte nám,
           co stavíte.
         </p>
