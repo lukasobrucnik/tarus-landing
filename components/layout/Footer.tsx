@@ -26,7 +26,7 @@ export function Footer({ logoSrc }: { logoSrc?: string | null }) {
             Odkazy
           </h4>
           {navLinks
-            .filter((l) => l.href !== "#kontakt")
+            .filter((l) => l.href !== "/#kontakt")
             .map((link) => (
               <a
                 key={link.href}

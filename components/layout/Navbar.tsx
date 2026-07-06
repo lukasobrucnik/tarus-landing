@@ -7,7 +7,17 @@ import { navLinks, siteConfig } from "@/data/content";
 import { CtaButton } from "@/components/CtaButton";
 import { cn } from "@/lib/utils";
 
-export function Navbar({ logoSrc }: { logoSrc?: string | null }) {
+export function Navbar({
+  logoSrc,
+  solid = false,
+}: {
+  logoSrc?: string | null;
+  // Homepage overlays the nav on a dark hero video, so it starts
+  // transparent with light text. Subpages have a light background — there
+  // the transparent state would render white-on-white, so they force the
+  // dark "scrolled" appearance from the start.
+  solid?: boolean;
+}) {
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -37,7 +47,7 @@ export function Navbar({ logoSrc }: { logoSrc?: string | null }) {
     <nav
       className={cn(
         "fixed top-0 z-50 w-full border-b border-slate/0 transition-all duration-300",
-        scrolled
+        scrolled || solid
           ? "border-slate/20 bg-ink/95 py-2 backdrop-blur-md"
           : "bg-transparent py-4"
       )}
@@ -48,7 +58,7 @@ export function Navbar({ logoSrc }: { logoSrc?: string | null }) {
           against elements outside nav, not this positioned child). */}
       <div className="relative z-50 mx-auto flex max-w-[1440px] items-center justify-between px-5 md:px-16">
         <a
-          href="#hero"
+          href="/"
           aria-label="TARUS — domů"
           className="flex items-center"
         >

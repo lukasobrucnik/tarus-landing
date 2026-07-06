@@ -11,9 +11,6 @@ const fadeUp = {
 };
 
 export function Hero({ images = [] }: { images?: string[] }) {
-  // images prop kept for API compatibility — video is now the background
-  void images;
-
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -38,6 +35,21 @@ export function Hero({ images = [] }: { images?: string[] }) {
     }
   }, [prefersReducedMotion]);
 
+  // VideoObject structured data — helps the hero video surface in Google's
+  // video search/rich results. uploadDate is the date this clip actually
+  // went live on the site (git history), not a fabricated recording date.
+  const videoStructuredData = images[0]
+    ? {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        name: `${siteConfig.name} — český distributor pro dřevostavby a šikmé střechy`,
+        description: siteConfig.description,
+        thumbnailUrl: [`${siteConfig.url}${images[0]}`],
+        uploadDate: "2026-07-03",
+        contentUrl: "https://mg49vxtan6zvbcsp.public.blob.vercel-storage.com/tarus-hero.mp4",
+      }
+    : null;
+
   return (
     <section
       id="hero"
@@ -45,6 +57,12 @@ export function Hero({ images = [] }: { images?: string[] }) {
       className="relative flex h-svh w-full flex-col justify-end overflow-hidden bg-ink"
       aria-label="Úvod"
     >
+      {videoStructuredData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(videoStructuredData) }}
+        />
+      )}
       {/*
         Top vignette — navbar readability over video.
         Sits at z-[1], above the parallax div (z-0) but below text (z-10).
@@ -64,6 +82,8 @@ export function Hero({ images = [] }: { images?: string[] }) {
           loop
           muted
           playsInline
+          preload="none"
+          poster={images[0]}
           className="absolute inset-0 h-full w-full object-cover"
           aria-hidden="true"
         >

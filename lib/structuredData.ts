@@ -1,12 +1,37 @@
 import { siteConfig, specializations } from "@/data/content";
 
+// Hosted on Vercel Blob because the logo files under /public have spaces and
+// diacritics in their filenames — this is the same clean URL the transactional
+// emails already use.
+const LOGO_URL =
+  "https://mg49vxtan6zvbcsp.public.blob.vercel-storage.com/tarus-logo-email.png";
+
+// Returned as an array — JSON-LD allows multiple top-level entities in one
+// <script> block, and Google parses each independently.
 export function getStructuredData() {
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: siteConfig.name,
+      url: siteConfig.url,
+      inLanguage: "cs",
+      publisher: { "@id": `${siteConfig.url}/#organization` },
+    },
+    getBusinessStructuredData(),
+  ];
+}
+
+function getBusinessStructuredData() {
   return {
     "@context": "https://schema.org",
     "@type": "HardwareStore",
+    "@id": `${siteConfig.url}/#organization`,
     name: siteConfig.name,
     description: siteConfig.description,
     url: siteConfig.url,
+    logo: LOGO_URL,
+    image: `${siteConfig.url}/og-image.png`,
     telephone: siteConfig.phone,
     email: siteConfig.email,
     address: {
@@ -50,6 +75,7 @@ export function getStructuredData() {
     // source of truth — data/content.ts).
     makesOffer: specializations.map((spec) => ({
       "@type": "Offer",
+      url: `${siteConfig.url}/${spec.id}`,
       itemOffered: {
         "@type": "Service",
         name: spec.label,

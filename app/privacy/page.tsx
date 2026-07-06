@@ -1,7 +1,9 @@
 import { company } from "@/data/content";
 
+// Root layout's title template appends "| TARUS" — no brand suffix here,
+// or it renders doubled ("… — TARUS | TARUS").
 export const metadata = {
-  title: "Ochrana soukromí — TARUS",
+  title: "Ochrana soukromí",
   description: "Zásady ochrany osobních údajů společnosti TARUS.",
 };
 

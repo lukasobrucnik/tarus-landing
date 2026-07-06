@@ -11,7 +11,7 @@ TARUS — deník práce na webu
 
 1.7.2026     6h   Dolazení vizuálu, kontrola funkčnosti, drobné opravy.
 
-1.7.2026     2h   Call, příprava nových textů a vymýšlení, jak udělat
+1.7.2026     2h   Příprava nových textů a vymýšlení, jak udělat
                   novou sekci s halou vizuálně.
 
 2.7.2026     8h   Předělání textu, změna loga v liště, vylepšení
@@ -30,8 +30,10 @@ TARUS — deník práce na webu
                   dropdown na stav), rotace uniklého přístupového
                   tokenu, testování a nasazení na produkci.
 
+5.7.2026     3h   První optimalizace SEO a hledání keywords
+
 ----------------------------------------------------------------
-CELKEM ODPRACOVÁNO: 48 hodin
+CELKEM ODPRACOVÁNO: 51 hodin
 ----------------------------------------------------------------
 
 fix

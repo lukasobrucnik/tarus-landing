@@ -1,5 +1,28 @@
 import { brands } from "@/data/content";
 
+// Filenames in /public/images/brands are too messy to derive readable brand
+// names from directly ("logomwk.png" is Milwaukee) — map filename fragments
+// to proper names so logo alt text carries the actual brand for image
+// search and screen readers.
+const BRAND_ALT: Record<string, string> = {
+  hikoki: "HiKOKI",
+  klimas: "Klimas Wkręt-met",
+  logomwk: "Milwaukee",
+  mafell: "Mafell",
+  reisser: "Reisser-Schraubentechnik",
+  schueller: "Schuller",
+  sihga: "SIHGA",
+  tajima: "Tajima Tool",
+  tarus: "TARUS",
+  wera: "Wera",
+};
+
+function brandAltFromSrc(src: string): string {
+  const base = decodeURIComponent(src.split("/").pop() ?? "").toLowerCase();
+  const match = Object.keys(BRAND_ALT).find((key) => base.includes(key));
+  return match ? `${BRAND_ALT[match]} — logo značky` : "Logo zastupované značky";
+}
+
 export function Brands({ images = [] }: { images?: string[] }) {
   // If logo images are provided, show them; otherwise fall back to text names.
   const items = images.length > 0 ? images : null;
@@ -20,7 +43,7 @@ export function Brands({ images = [] }: { images?: string[] }) {
                 <img
                   key={`${src}-${i}`}
                   src={src}
-                  alt={i < items.length ? "brand logo" : ""}
+                  alt={i < items.length ? brandAltFromSrc(src) : ""}
                   aria-hidden={i >= items.length ? "true" : undefined}
                   className="h-[60px] w-auto max-w-[200px] object-contain opacity-70 grayscale transition-[opacity,filter] duration-300 hover:opacity-100 hover:grayscale-0"
                   loading="lazy"

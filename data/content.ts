@@ -58,13 +58,16 @@ export const siteConfig = {
   shopUrl: "https://eshop.tarus.cz/",
 };
 
+// Root-relative anchors ("/#x", not "#x") — the nav renders on the
+// specialization subpages too, where a bare "#x" would resolve against the
+// current path (/tesarske-kovani#x) and silently do nothing.
 export const navLinks = [
-  { label: "Specializace", href: "#specializace" },
-  { label: "Proč my", href: "#proc-my" },
-  { label: "Sklad", href: "#sklad" },
-  { label: "Naše cesta", href: "#nase-cesta" },
-  { label: "O nás", href: "#o-nas" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Specializace", href: "/#specializace" },
+  { label: "Proč my", href: "/#proc-my" },
+  { label: "Sklad", href: "/#sklad" },
+  { label: "Naše cesta", href: "/#nase-cesta" },
+  { label: "O nás", href: "/#o-nas" },
+  { label: "Kontakt", href: "/#kontakt" },
 ];
 
 export const whyTarusCards = [
@@ -96,6 +99,10 @@ export type Specialization = {
   description: string;
   imageAlt: string;
   variant: 1 | 2 | 3;
+  // Real sub-category terms carried on the e-shop (eshop.tarus.cz) — used on
+  // each specialization's dedicated landing page for depth/long-tail SEO,
+  // never invented, always traceable to what's actually sold.
+  subcategories: string[];
 };
 
 export const specializations: Specialization[] = [
@@ -106,6 +113,13 @@ export const specializations: Specialization[] = [
       "Konstrukční a spojovací kování pro dřevěné skelety, krovy a dřevostavby. Certifikované prvky předních světových výrobců.",
     imageAlt: "Tesařské kování — konstrukční a spojovací prvky pro krovy a dřevostavby",
     variant: 1,
+    subcategories: [
+      "Tesařské kování pro dřevokonstrukce",
+      "Úhelníky",
+      "Kování typu T",
+      "Vruty pro tesařské kování",
+      "Kotevní prvky pro dřevostavby",
+    ],
   },
   {
     id: "terasove-systemy",
@@ -114,6 +128,13 @@ export const specializations: Specialization[] = [
       "Kompletní systémy pro venkovní terasy — rošty, podkladové profily, spojovací materiál a povrchové úpravy pro maximální životnost.",
     imageAlt: "Terasový systém — rošty a spojovací materiál pro venkovní terasy",
     variant: 2,
+    subcategories: [
+      "Terasová prkna",
+      "Terasové profily",
+      "Terasová dlažba",
+      "Rektifikační terče pod terasu i dlažbu",
+      "Ukončovací lišty na terasu",
+    ],
   },
   {
     id: "fasadni-systemy",
@@ -122,6 +143,13 @@ export const specializations: Specialization[] = [
       "Materiály a kování pro provětrávanou i kontaktní fasádu. Kompletní sortiment od kotev po povrchové prvky.",
     imageAlt: "Fasádní systém — kotvy a profily pro provětrávanou fasádu",
     variant: 3,
+    subcategories: [
+      "Provětrávané fasádní systémy",
+      "Hliníkové fasádní systémy",
+      "Závěsné fasádní systémy",
+      "Fasádní omítky",
+      "Fasádní barvy",
+    ],
   },
   {
     id: "nerez",
@@ -130,6 +158,12 @@ export const specializations: Specialization[] = [
       "Nerezové spojovací prvky a kování pro náročné exteriérové a průmyslové aplikace s nejvyšší odolností vůči korozi.",
     imageAlt: "Nerezové spojovací prvky pro exteriérové a průmyslové aplikace",
     variant: 1,
+    subcategories: [
+      "Nerezové spojovací prvky",
+      "Nerezové kování",
+      "Nerezové vruty a šrouby",
+      "Nerezové kotevní prvky",
+    ],
   },
 ];
 
