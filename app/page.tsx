@@ -6,7 +6,6 @@ import { Specializace } from "@/components/sections/Specializace";
 import { CentralniSklad } from "@/components/sections/CentralniSklad";
 import { OFirme } from "@/components/sections/OFirme";
 import { NaseCesta } from "@/components/sections/NaseCesta";
-import { Brands } from "@/components/sections/Brands";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { ContactModalProvider } from "@/components/ContactModal";
 import { getSectionImages } from "@/lib/getSectionImages";
@@ -19,7 +18,6 @@ export default function Home() {
   // Note: folder is intentionally named "storadge" (matches public/images/storadge/ on disk).
   // If renamed to "storage", update both the folder name and this string together.
   const skladImages = getSectionImages("storadge");
-  const brandImages = getSectionImages("brands");
   const specializaceImages = getSectionImages("specializace");
   const tarusImages = getSectionImages("tarus");
   const navLogoSrc = tarusImages.find((f) => f.includes("bile")) ?? null;
@@ -36,7 +34,6 @@ export default function Home() {
         <CentralniSklad images={skladImages} />
         <OFirme images={aboutImages} />
         <NaseCesta />
-        <Brands images={brandImages} />
         <FinalCta />
       </main>
       <Footer logoSrc={footerLogoSrc} />

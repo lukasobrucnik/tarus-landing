@@ -100,33 +100,6 @@ body {
   pointer-events: none;
 }
 
-/* ============================================================
-   Marquee (Značky) — constant speed, pause on hover/focus,
-   stops entirely under reduced motion.
-   Pause-on-hover is desktop-only (real pointer devices) — on
-   touchscreens, tapping/scrolling near the strip must never freeze it.
-   ============================================================ */
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.marquee-track {
-  animation: marquee-scroll 32s linear infinite;
-}
-.marquee-viewport:focus-within .marquee-track {
-  animation-play-state: paused;
-}
-@media (hover: hover) and (pointer: fine) {
-  .marquee-viewport:hover .marquee-track {
-    animation-play-state: paused;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
-}
-
 /* Utility: visually-hidden but accessible to assistive tech */
 .sr-only-focusable {
   position: absolute;

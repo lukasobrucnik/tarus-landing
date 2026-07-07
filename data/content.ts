@@ -87,9 +87,14 @@ export const whyTarusCards = [
     text: "Více než 20 ověřených světových značek pod jednou střechou. Stabilní ceny bez nepříjemných překvapení.",
   },
   {
-    value: "5+",
+    value: "17+",
     title: "Let praxe v oboru",
     text: "Technická podpora od lidí z praxe. Pomůžeme vám s technickými detaily i výběrem správného materiálového řešení.",
+  },
+  {
+    value: "5+",
+    title: "Let vlastní značka",
+    text: "Vedle distribuce více než 5 let vyvíjíme a vyrábíme vlastní značku TARUS — spojujeme zkušenost z oboru s vlastním vývojem produktů.",
   },
 ] as const;
 
@@ -263,22 +268,6 @@ export const milestones: Milestone[] = [
     text: "Pracujeme na tom každý den. Díky vám.",
     highlighted: true,
   },
-];
-
-export const brands = [
-  "TARUS",
-  "MILWAUKEE",
-  "TAJIMA TOOL",
-  "Pitzl Connectors",
-  "REISSER-Schraubentechnik",
-  "HECO-SCHRAUBEN",
-  "SIHGA",
-  "HIKOKI",
-  "ZERO barvy pro profesionály",
-  "BAUDER",
-  "ALPEN",
-  "Wera",
-  "ČERVA",
 ];
 
 export const aboutParagraphs = [

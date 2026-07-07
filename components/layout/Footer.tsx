@@ -3,7 +3,7 @@ import { company, navLinks, siteConfig } from "@/data/content";
 export function Footer({ logoSrc }: { logoSrc?: string | null }) {
   return (
     <footer id="kontakt" className="bg-ink text-paper">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-5 py-20 md:grid-cols-3 md:px-16">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-5 py-20 md:grid-cols-[1.6fr_1fr_1fr] md:gap-12 md:px-16">
         <div>
           {logoSrc ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -15,9 +15,18 @@ export function Footer({ logoSrc }: { logoSrc?: string | null }) {
           ) : (
             <h3 className="mb-4 font-display-lg text-xl font-bold">TARUS</h3>
           )}
-          <p className="max-w-xs font-body-md text-paper/60">
-            Technický distributor pro dřevostavby a šikmé střechy. Váš
-            partner od statiky po detail.
+          <p className="max-w-md font-body-md text-paper/60">
+            Jsme technickým partnerem realizačních firem. Dodáváme kompletní
+            materiál od konstrukčního kování a spojovací techniky až po
+            fasádní, terasové a nerezové systémy. Vše pořídíte na jednom
+            místě bez zbytečného hledání dalších dodavatelů.
+          </p>
+          <p className="mt-4 max-w-md font-body-md text-paper/60">
+            Díky vysoké skladové dostupnosti, logistice a zkušenému týmu z
+            praxe doručujeme kompletní objednávky přímo na stavbu do 24
+            hodin. Pomůžeme s výběrem správného řešení, technickými detaily
+            i materiálovou skladbou, aby vaše stavba probíhala plynule, bez
+            prostojů a zbytečných komplikací.
           </p>
         </div>
 
