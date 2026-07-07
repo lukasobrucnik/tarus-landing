@@ -54,7 +54,7 @@ export function Hero({ images = [] }: { images?: string[] }) {
     <section
       id="hero"
       ref={ref}
-      className="relative flex h-svh w-full flex-col justify-end overflow-hidden bg-ink"
+      className="relative flex min-h-svh w-full flex-col justify-end overflow-hidden bg-ink"
       aria-label="Úvod"
     >
       {videoStructuredData && (
@@ -96,7 +96,12 @@ export function Hero({ images = [] }: { images?: string[] }) {
 
       {/* Text + CTAs */}
       <motion.div
-        className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pb-24 md:px-16"
+        // pt-28 is a guaranteed clearance under the fixed navbar — without
+        // it, this gap is just leftover flex space from justify-end on the
+        // section, which shrinks to zero (and the heading renders behind
+        // the navbar) once the text is tall enough to fill the viewport,
+        // e.g. on phones with a larger system font size.
+        className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pb-24 pt-28 md:px-16"
         initial="hidden"
         animate="show"
         transition={{ staggerChildren: 0.12, delayChildren: 0.15 }}
