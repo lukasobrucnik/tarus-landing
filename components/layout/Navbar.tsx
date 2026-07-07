@@ -44,6 +44,7 @@ export function Navbar({
   }, [mobileOpen]);
 
   return (
+    <>
     <nav
       className={cn(
         "fixed top-0 z-50 w-full border-b border-slate/0 transition-all duration-300",
@@ -112,43 +113,50 @@ export function Navbar({
           </button>
         </div>
       </div>
-
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            // Fixed to the full viewport (not just content height) so page
-            // content behind it can never peek through underneath, and its
-            // own overflow-y-auto lets it scroll independently of the
-            // (now scroll-locked) page behind.
-            className="fixed inset-0 top-0 z-40 flex flex-col gap-1 overflow-y-auto border-t border-slate/20 bg-ink px-5 pb-8 pt-20 md:hidden"
-          >
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="py-3 font-label-md text-sm uppercase tracking-wider text-paper/80 transition-colors hover:text-paper"
-              >
-                {link.label}
-              </a>
-            ))}
-            <a
-              href={siteConfig.shopUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="py-3 font-label-md text-sm uppercase tracking-wider text-paper/50 hover:text-paper/80"
-            >
-              E-shop <span aria-hidden="true">↗</span>
-            </a>
-            <CtaButton className="mt-3 w-full justify-center" />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </nav>
+
+    {/* Rendered as a sibling of <nav>, not a child — <nav> gets
+        `backdrop-blur-md` once scrolled, and `backdrop-filter` establishes a
+        new containing block for fixed-position descendants. That silently
+        shrank this panel's `fixed inset-0` down to nav's own content box
+        (~60px) instead of the full viewport whenever the menu was opened
+        after scrolling, leaving only the first link visible. */}
+    <AnimatePresence>
+      {mobileOpen && (
+        <motion.div
+          id="mobile-menu"
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          // Fixed to the full viewport (not just content height) so page
+          // content behind it can never peek through underneath, and its
+          // own overflow-y-auto lets it scroll independently of the
+          // (now scroll-locked) page behind.
+          className="fixed inset-0 top-0 z-40 flex flex-col gap-1 overflow-y-auto border-t border-slate/20 bg-ink px-5 pb-8 pt-20 md:hidden"
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setMobileOpen(false)}
+              className="py-3 font-label-md text-sm uppercase tracking-wider text-paper/80 transition-colors hover:text-paper"
+            >
+              {link.label}
+            </a>
+          ))}
+          <a
+            href={siteConfig.shopUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-3 font-label-md text-sm uppercase tracking-wider text-paper/50 hover:text-paper/80"
+          >
+            E-shop <span aria-hidden="true">↗</span>
+          </a>
+          <CtaButton className="mt-3 w-full justify-center" />
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }
