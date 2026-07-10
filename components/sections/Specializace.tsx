@@ -97,17 +97,6 @@ export function Specializace({ images = [] }: { images?: string[] }) {
                     </p>
                   </div>
                 </button>
-                {/* Separate sibling, not nested in the button — an <a> inside
-                    a <button> is invalid HTML. Only shown for the active
-                    item, links to its dedicated SEO landing page. */}
-                {isActive && (
-                  <a
-                    href={`/${spec.id}`}
-                    className="-mt-1 inline-flex items-center gap-1 self-start font-label-md text-xs uppercase tracking-wider text-paper/50 transition-colors hover:text-brand lg:-mt-2"
-                  >
-                    Zjistit více <span aria-hidden="true">→</span>
-                  </a>
-                )}
                 </React.Fragment>
               );
             })}

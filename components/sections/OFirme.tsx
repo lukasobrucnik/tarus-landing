@@ -21,7 +21,7 @@ export function OFirme({ images = [] }: { images?: string[] }) {
             className="mb-6 font-display-lg text-3xl font-extrabold leading-tight md:text-5xl"
             style={{ textWrap: "balance" }}
           >
-            Odbornost postavená na reálných základech
+            Neustále se vzděláváme
           </h2>
           <div className="space-y-5 font-body-lg text-slate" style={{ textWrap: "pretty" }}>
             {aboutParagraphs.map((p, i) => (

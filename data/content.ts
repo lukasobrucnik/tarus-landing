@@ -271,7 +271,8 @@ export const milestones: Milestone[] = [
 ];
 
 export const aboutParagraphs = [
-  "Začali jsme jako malá rodinná firma s vášní pro dřevo. Dnes jsme jedním z nejvýznamnějších distributorů materiálů pro dřevostavby v regionu, ale naše hodnoty zůstávají stejné.",
-  "Naším cílem není jen prodat materiál. Chceme být partnerem, který vám pomůže vyřešit technické detaily, navrhne optimální skladbu a postará se o to, aby vaše stavba probíhala bez zbytečných zádrhelů.",
-  "Díky vlastní logistické flotile a rozsáhlým skladovým plochám jsme schopni reagovat s přesností, kterou moderní stavebnictví vyžaduje.",
+  "Začali jsme jako malá rodinná firma s vášní pro dřevo. Dnes jsme jedním z nejvýznamnějších distributorů materiálů pro dřevostavby.",
+  "Neustále se vzděláváme a sledujeme, kam se obor posouvá. Přinášíme na český trh novinky, které sami představujeme na konferencích a odborných fórech, abychom je mohli předat dál i vám.",
+  "Díky tomu dnes dodáváme komplexní systémová řešení, například v akustice dřevostaveb, a pomáháme řešit technické detaily, které jiní distributoři často přehlížejí.",
+  "Vlastní logistická flotila a rozsáhlé skladové plochy nám zároveň umožňují reagovat s rychlostí, kterou moderní stavebnictví vyžaduje.",
 ];
