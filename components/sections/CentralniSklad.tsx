@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { Check } from "lucide-react";
 import { Placeholder } from "@/components/ui/Placeholder";
@@ -163,46 +163,123 @@ const OLOMOUC = { x: 579, y: 258 };
 const KRNOV = { x: 630, y: 170 };
 
 // Zones under the HTML labels + markers — dots there are removed entirely
-// (a partially covered dot looks worse than no dot at all)
-/* Dot rows sit at y = 7.5 + 15k. Each label is vertically centered on
-   the dot grid (see the top offsets on the label spans) so the gap above
-   and below the text stays identical. Olomouc (larger text) clears two
-   rows; Krnov (smaller text) sits exactly on one row and clears only
-   that one — its dots therefore hug the text noticeably tighter. */
-const CLEAR_RECTS = [
-  { x1: 330, y1: 240, x2: 571, y2: 270 }, // „Centrální sklad · Olomouc“ (rows 247.5 + 262.5)
-  { x1: 496, y1: 168, x2: 624, y2: 177 }, // „Pobočka · Krnov“ (row 172.5 only)
+// (a partially covered dot looks worse than no dot at all).
+//
+// The labels/markers are HTML, sized in fixed CSS pixels, laid over an SVG
+// that scales fluidly with the container's width. A fixed-px label covers
+// *more* viewBox units on a narrow phone than on a wide desktop column, so
+// a clearance hardcoded in viewBox units (tuned for one screen size) drifts
+// out of sync on every other size — dots start poking out from under the
+// text. Instead these are measured live from the actual rendered DOM boxes
+// (see `useLabelClearance` below) and recomputed on resize, so the cleared
+// area always matches the real text/marker footprint at any viewport width.
+type ClearRect = { x1: number; y1: number; x2: number; y2: number };
+type ClearCircle = { x: number; y: number; r: number };
+
+// Desktop-tuned fallback, used for the very first paint before the
+// ResizeObserver measurement lands — avoids a flash of misaligned dots.
+const DEFAULT_CLEAR_RECTS: ClearRect[] = [
+  { x1: 330, y1: 240, x2: 571, y2: 270 }, // „Centrální sklad · Olomouc“
+  { x1: 496, y1: 168, x2: 624, y2: 177 }, // „Pobočka · Krnov“
 ];
-const CLEAR_CIRCLES = [
+const DEFAULT_CLEAR_CIRCLES: ClearCircle[] = [
   { x: OLOMOUC.x, y: OLOMOUC.y, r: 15 },
   { x: KRNOV.x, y: KRNOV.y, r: 9 },
 ];
 
-function isCleared(x: number, y: number) {
-  for (const r of CLEAR_RECTS) {
+function isCleared(x: number, y: number, rects: ClearRect[], circles: ClearCircle[]) {
+  for (const r of rects) {
     if (x > r.x1 && x < r.x2 && y > r.y1 && y < r.y2) return true;
   }
-  for (const c of CLEAR_CIRCLES) {
+  for (const c of circles) {
     if (Math.hypot(x - c.x, y - c.y) < c.r + DOT_R) return true;
   }
   return false;
 }
 
-const DOTS: { x: number; y: number }[] = (() => {
+// Geometrically valid dot positions — independent of label clearance, so
+// this only needs to run once. Label clearance is applied per-render via
+// `isCleared` using the live-measured rects/circles above.
+const CANDIDATE_DOTS: { x: number; y: number }[] = (() => {
   const pts: { x: number; y: number }[] = [];
   for (let y = DOT_SPACING / 2; y < 440; y += DOT_SPACING) {
     for (let x = DOT_SPACING / 2; x < 760; x += DOT_SPACING) {
-      if (
-        pointInPolygon(x, y, CZ_DETAILED) &&
-        minBorderDist(x, y, CZ_DETAILED) > BORDER_MARGIN &&
-        !isCleared(x, y)
-      ) {
+      if (pointInPolygon(x, y, CZ_DETAILED) && minBorderDist(x, y, CZ_DETAILED) > BORDER_MARGIN) {
         pts.push({ x, y });
       }
     }
   }
   return pts;
 })();
+
+// Measures the real rendered size of the label/marker DOM nodes and
+// converts them into SVG viewBox-unit clear zones, in sync with however
+// large the SVG is actually rendering at the current viewport.
+function useLabelClearance(
+  svgRef: React.RefObject<SVGSVGElement | null>,
+  olomoucLabelRef: React.RefObject<HTMLSpanElement | null>,
+  olomoucMarkerRef: React.RefObject<HTMLSpanElement | null>,
+  krnovLabelRef: React.RefObject<HTMLSpanElement | null>,
+  krnovMarkerRef: React.RefObject<HTMLSpanElement | null>
+) {
+  const [clearRects, setClearRects] = useState<ClearRect[]>(DEFAULT_CLEAR_RECTS);
+  const [clearCircles, setClearCircles] = useState<ClearCircle[]>(DEFAULT_CLEAR_CIRCLES);
+
+  useEffect(() => {
+    function rectFor(el: HTMLElement | null, svgBox: DOMRect, scale: number, pad: number): ClearRect | null {
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      if (r.width === 0 || r.height === 0) return null;
+      const cx = ((r.left + r.right) / 2 - svgBox.left) * scale;
+      const cy = ((r.top + r.bottom) / 2 - svgBox.top) * scale;
+      const w = r.width * scale;
+      const h = r.height * scale;
+      return { x1: cx - w / 2 - pad, y1: cy - h / 2 - pad, x2: cx + w / 2 + pad, y2: cy + h / 2 + pad };
+    }
+
+    function circleFor(el: HTMLElement | null, svgBox: DOMRect, scale: number, pad: number): ClearCircle | null {
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      if (r.width === 0 || r.height === 0) return null;
+      const cx = ((r.left + r.right) / 2 - svgBox.left) * scale;
+      const cy = ((r.top + r.bottom) / 2 - svgBox.top) * scale;
+      const radius = (Math.max(r.width, r.height) / 2) * scale + pad;
+      return { x: cx, y: cy, r: radius };
+    }
+
+    function recompute() {
+      const svgEl = svgRef.current;
+      if (!svgEl) return;
+      const svgBox = svgEl.getBoundingClientRect();
+      if (svgBox.width === 0) return;
+      const scale = 760 / svgBox.width; // viewBox units per rendered CSS px
+
+      const rects = [
+        rectFor(olomoucLabelRef.current, svgBox, scale, 4),
+        rectFor(krnovLabelRef.current, svgBox, scale, 4),
+      ].filter((r): r is ClearRect => r !== null);
+      if (rects.length) setClearRects(rects);
+
+      const circles = [
+        circleFor(olomoucMarkerRef.current, svgBox, scale, 3),
+        circleFor(krnovMarkerRef.current, svgBox, scale, 3),
+      ].filter((c): c is ClearCircle => c !== null);
+      if (circles.length) setClearCircles(circles);
+    }
+
+    recompute();
+    const ro = new ResizeObserver(recompute);
+    if (svgRef.current) ro.observe(svgRef.current);
+    window.addEventListener("orientationchange", recompute);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("orientationchange", recompute);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return { clearRects, clearCircles };
+}
 
 // Farthest border point from Olomouc is the western tip (~590 units)
 const FULL_R = 640;
@@ -215,7 +292,24 @@ const WAVE_CYCLE = 3;
 function CoverageMap() {
   const prefersReducedMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const olomoucLabelRef = useRef<HTMLSpanElement>(null);
+  const olomoucMarkerRef = useRef<HTMLSpanElement>(null);
+  const krnovLabelRef = useRef<HTMLSpanElement>(null);
+  const krnovMarkerRef = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const { clearRects, clearCircles } = useLabelClearance(
+    svgRef,
+    olomoucLabelRef,
+    olomoucMarkerRef,
+    krnovLabelRef,
+    krnovMarkerRef
+  );
+  const dots = useMemo(
+    () => CANDIDATE_DOTS.filter((d) => !isCleared(d.x, d.y, clearRects, clearCircles)),
+    [clearRects, clearCircles]
+  );
 
   const waveOn = inView && !prefersReducedMotion;
   // Reduced motion (or SSR-safe fallback): country rendered fully covered
@@ -224,6 +318,7 @@ function CoverageMap() {
   return (
     <div ref={ref} className="relative">
       <svg
+        ref={svgRef}
         viewBox="0 0 760 440"
         className="h-auto w-full"
         role="img"
@@ -259,14 +354,14 @@ function CoverageMap() {
 
         {/* Base layer — quiet slate dots, individually placed (never clipped) */}
         <g className="fill-slate/30">
-          {DOTS.map((d) => (
+          {dots.map((d) => (
             <circle key={`b-${d.x}-${d.y}`} cx={d.x} cy={d.y} r={DOT_R} />
           ))}
         </g>
 
         {/* Brand layer — same dots, revealed by the expanding wave from Olomouc */}
         <g clipPath="url(#cz-wave-clip)" className="fill-brand" opacity={0.85}>
-          {DOTS.map((d) => (
+          {dots.map((d) => (
             <circle key={`w-${d.x}-${d.y}`} cx={d.x} cy={d.y} r={DOT_R} />
           ))}
         </g>
@@ -299,7 +394,9 @@ function CoverageMap() {
         )}
       </svg>
 
-      {/* ── Markers (HTML overlay — labels stay crisp at every size) ── */}
+      {/* ── Markers (HTML overlay — labels stay crisp at every size; their
+          real rendered size/position is measured by useLabelClearance so
+          the dot-grid gap always matches, on phones too) ── */}
 
       {/* Olomouc — central warehouse */}
       <motion.div
@@ -313,7 +410,7 @@ function CoverageMap() {
         }}
         aria-hidden="true"
       >
-        <span className="relative flex h-3.5 w-3.5">
+        <span ref={olomoucMarkerRef} className="relative flex h-3.5 w-3.5">
           {/* Ping = the wave's local echo: identical cycle, delay, easing
               AND pacing (travels for the same 90% of the cycle as the map
               wave). Both launch in the exact same frame and move together. */}
@@ -333,9 +430,10 @@ function CoverageMap() {
           {/* Glowing orb — same treatment as the timeline spine orb */}
           <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-brand shadow-[0_0_18px_9px_rgba(0,167,231,0.36),0_0_5px_2px_rgba(0,167,231,0.82)]" />
         </span>
-        {/* top offset centers the label between two dot rows (grid at 7.5+15k),
-            so the cleared gap above and below the text is symmetric */}
-        <span className="absolute right-full top-[calc(50%-3px)] mr-2.5 -translate-y-1/2 whitespace-nowrap px-1.5 py-0.5 font-label-md text-[14px] font-semibold uppercase tracking-wider text-ink">
+        <span
+          ref={olomoucLabelRef}
+          className="absolute right-full top-[calc(50%-3px)] mr-2.5 -translate-y-1/2 whitespace-nowrap px-1.5 py-0.5 font-label-md text-[14px] font-semibold uppercase tracking-wider text-ink"
+        >
           Centrální sklad · Olomouc
         </span>
       </motion.div>
@@ -356,10 +454,14 @@ function CoverageMap() {
         }}
         aria-hidden="true"
       >
-        <span className="block h-2.5 w-2.5 rounded-full bg-brand/70 shadow-[0_0_8px_3px_rgba(0,167,231,0.25)]" />
-        {/* centered exactly on dot row 172.5 — only that row is cleared,
-            so the surrounding dots sit tight against the smaller label */}
-        <span className="absolute right-full top-[calc(50%+2.5px)] mr-2 -translate-y-1/2 whitespace-nowrap px-1.5 py-0.5 font-label-md text-[11px] uppercase tracking-wider text-slate">
+        <span
+          ref={krnovMarkerRef}
+          className="block h-2.5 w-2.5 rounded-full bg-brand/70 shadow-[0_0_8px_3px_rgba(0,167,231,0.25)]"
+        />
+        <span
+          ref={krnovLabelRef}
+          className="absolute right-full top-[calc(50%+2.5px)] mr-2 -translate-y-1/2 whitespace-nowrap px-1.5 py-0.5 font-label-md text-[11px] uppercase tracking-wider text-slate"
+        >
           Pobočka · Krnov
         </span>
       </motion.div>

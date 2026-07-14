@@ -44,19 +44,28 @@ TARUS — deník práce na webu
                    titulky a alt texty), kontrola indexace a interního
                    prolinkování, doplnění chybějících Schema.org dat,
                    vytvoření vlastní 404 stránky a závěrečná kontrola
-                   připravenosti webu pro produkční nasazení.
+                   připravenosti webu pro produkční nasazení. 
+
+10.7.2026     2 h   Změna textů, nharání nových fotek do specializací.
+                    optimalizace velikosti fotek a jejich komprimování.
+
+
+14.7.2026     4 h   Strih první verze videa pro hero, optimalizace webu.
+                    Oprava bugů a chyb na webu.
+        
+
 
 ----------------------------------------------------------------
-CELKEM ODPRACOVÁNO: 54 hodin
+CELKEM ODPRACOVÁNO: 60 hodin
 ----------------------------------------------------------------
-
-fix
 
 
 NEXT:
-  - Zprovoznění formuláře, aby odesílal poptávky
-  - Zabezpečení: analýza možných hrozeb a jejich eliminování,
-    aby nešlo spamovat dotazník
+Doladění videa na hero
+Předání a přesměrování mailů a excel evidence
+Nasazení webu na hosting a doménu
+
+
 
 NÁPADY:
   - Analýza reklam na Seznamu
