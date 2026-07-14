@@ -1,4 +1,4 @@
-import { siteConfig, specializations } from "@/data/content";
+import { siteConfig, specializations, branches } from "@/data/content";
 
 // Hosted on Vercel Blob because the logo files under /public have spaces and
 // diacritics in their filenames — this is the same clean URL the transactional
@@ -58,6 +58,23 @@ function getBusinessStructuredData() {
     // connect the two properties instead of treating eshop.tarus.cz as
     // unrelated.
     sameAs: [siteConfig.shopUrl],
+    // Second physical branch (Krnov) — surfaced as a department of the same
+    // organization so search engines can resolve local intent for both
+    // locations instead of only the Olomouc HQ.
+    department: branches
+      .filter((b) => b.id !== "olomouc")
+      .map((b) => ({
+        "@type": "HardwareStore",
+        name: b.name,
+        telephone: b.phone,
+        ...(b.email ? { email: b.email } : {}),
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: b.address.split(",")[0]?.trim(),
+          addressLocality: b.address.split(",").slice(1).join(",").trim(),
+          addressCountry: "CZ",
+        },
+      })),
     // Topical relevance signal: the exact categories of material/hardware
     // this distributor is knowledgeable about and sells.
     knowsAbout: [
