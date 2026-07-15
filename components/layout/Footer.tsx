@@ -89,6 +89,16 @@ export function Footer({ logoSrc }: { logoSrc?: string | null }) {
           </a>
         </div>
       </div>
+
+      {/* Quiet personal credit — intentionally near-invisible at rest
+          (low opacity, no border, blends into the footer bg) so it never
+          competes with the brand, but readable and legible for anyone who
+          looks closely or wants to reference who built the site. */}
+      <div className="mx-auto max-w-[1440px] px-5 pb-6 text-center md:px-16">
+        <span className="text-[10px] font-body-md tracking-wide text-paper/20 transition-colors duration-300 hover:text-paper/50">
+          Created by Lukáš Obručník
+        </span>
+      </div>
     </footer>
   );
 }

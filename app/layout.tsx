@@ -4,7 +4,9 @@ import { Barlow } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/data/content";
 import { getStructuredData } from "@/lib/structuredData";
+import { getSectionImages } from "@/lib/getSectionImages";
 import { MotionProvider } from "./MotionProvider";
+import { LoadingScreen } from "@/components/LoadingScreen";
 
 const bricolage = localFont({
   variable: "--font-bricolage",
@@ -197,6 +199,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const structuredData = getStructuredData();
+  // Same "bile" (white) logo file the Navbar uses on the dark hero — reused
+  // here so the loading screen shows the identical mark, not a substitute.
+  const logoSrc = getSectionImages("tarus").find((f) => f.includes("bile")) ?? null;
 
   return (
     <html lang="cs" className={`${bricolage.variable} ${barlow.variable}`}>
@@ -208,6 +213,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         <MotionProvider>
+          <LoadingScreen logoSrc={logoSrc} />
           <a href="#main" className="sr-only-focusable">
             Přeskočit na hlavní obsah
           </a>
