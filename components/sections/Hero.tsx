@@ -46,7 +46,7 @@ export function Hero({ images = [] }: { images?: string[] }) {
         description: siteConfig.description,
         thumbnailUrl: [`${siteConfig.url}${images[0]}`],
         uploadDate: "2026-07-03",
-        contentUrl: "https://mg49vxtan6zvbcsp.public.blob.vercel-storage.com/Tarus%20Hero%20v1.mp4",
+        contentUrl: "https://mg49vxtan6zvbcsp.public.blob.vercel-storage.com/Tarus%20Hero%20v1%20compressed.mp4",
       }
     : null;
 
@@ -87,7 +87,7 @@ export function Hero({ images = [] }: { images?: string[] }) {
           className="absolute inset-0 h-full w-full object-cover"
           aria-hidden="true"
         >
-          <source src="https://mg49vxtan6zvbcsp.public.blob.vercel-storage.com/Tarus%20Hero%20v1.mp4" type="video/mp4" />
+          <source src="https://mg49vxtan6zvbcsp.public.blob.vercel-storage.com/Tarus%20Hero%20v1%20compressed.mp4" type="video/mp4" />
         </video>
 
         {/* Bottom gradient overlay — identical to the image version */}
