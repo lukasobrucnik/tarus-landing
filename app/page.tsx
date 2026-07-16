@@ -19,6 +19,9 @@ export default function Home() {
   // If renamed to "storage", update both the folder name and this string together.
   const skladImages = getSectionImages("storadge");
   const specializaceImages = getSectionImages("specializace");
+  // Swap photos for "Terasové systémy" (index 1) and "Fasádní systémy" (index 2) —
+  // the two photo files were assigned to the wrong category.
+  [specializaceImages[1], specializaceImages[2]] = [specializaceImages[2], specializaceImages[1]];
   const tarusImages = getSectionImages("tarus");
   const navLogoSrc = tarusImages.find((f) => f.includes("bile")) ?? null;
   const wordmarkSrc = tarusImages.find((f) => f.includes("bez domecku")) ?? null;

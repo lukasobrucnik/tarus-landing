@@ -36,9 +36,10 @@ export function FinalCta() {
           Potřebujete materiál na čas. My to zajistíme.
         </h2>
         <p className="mb-10 font-body-lg text-paper/60" style={{ textWrap: "pretty" }}>
-          Kompletní materiálový servis od spojovacích prvků po stavební
-          chemii, doručení do 24 hodin, technická podpora od odborníků z
-          terénu. Řekněte nám, co stavíte.
+          Kompletní materiálový servis od spojovacích prvků, funkčních
+          membrán až po certifikovaná systémová řešení. Doručení do 24
+          hodin, technická podpora od odborníků z terénu a v neposlední
+          řadě stabilní cenová politika. Řekněte nám, co stavíte.
         </p>
         {/* Primary + secondary CTA: row on desktop, column on mobile */}
         <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">

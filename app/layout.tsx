@@ -191,6 +191,10 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#10171b",
+  // Site has no dark theme — without this, some Android browsers (Chrome's
+  // "Tmavá témata webu" / force-dark) auto-invert the page, breaking
+  // contrast on white-background sections and the white-on-transparent logo.
+  colorScheme: "light",
 };
 
 export default function RootLayout({
