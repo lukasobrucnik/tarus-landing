@@ -100,6 +100,38 @@ body {
   pointer-events: none;
 }
 
+/* ============================================================
+   Scrollbar — the native OS scrollbar is hidden on desktop and
+   replaced by <ScrollProgress> (components/ScrollProgress.tsx): a
+   slim brand-blue rail fixed to the right edge that tracks scroll
+   position and fades out when idle. Mobile keeps the native
+   (already auto-hiding, overlay) scrollbar untouched — the hiding
+   below only bites on pointer-fine desktops via JS toggling
+   `data-native-scrollbar` off; see that component for the guard.
+   ============================================================ */
+html:not([data-native-scrollbar]) {
+  scrollbar-width: none;
+}
+html:not([data-native-scrollbar])::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* ============================================================
+   Shake — brief validation-error feedback. Kept short/low-amplitude;
+   respects prefers-reduced-motion via the global override above.
+   ============================================================ */
+@keyframes tarus-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(2px); }
+}
+.animate-shake {
+  animation: tarus-shake 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 /* Utility: visually-hidden but accessible to assistive tech */
 .sr-only-focusable {
   position: absolute;

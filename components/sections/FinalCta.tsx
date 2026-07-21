@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { CtaButton } from "@/components/CtaButton";
+import { MagneticCta } from "@/components/MagneticCta";
 import { siteConfig } from "@/data/content";
 
 export function FinalCta() {
@@ -43,7 +44,9 @@ export function FinalCta() {
         </p>
         {/* Primary + secondary CTA: row on desktop, column on mobile */}
         <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-          <CtaButton className="!px-12 !py-5" />
+          <MagneticCta>
+            <CtaButton className="!px-12 !py-5" />
+          </MagneticCta>
           <a
             href={siteConfig.shopUrl}
             target="_blank"

@@ -1,10 +1,14 @@
 "use client";
 
 import * as React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Dialog } from "@/components/ui/Dialog";
 import { Input, Textarea } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { ShakeField } from "@/components/ui/ShakeField";
 import { company, siteConfig } from "@/data/content";
+
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 // ── Validation ────────────────────────────────────────────────────────────────
 
@@ -269,34 +273,71 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
           </p>
         </div>
 
-        {/* Success */}
+        {/* Success / Form — AnimatePresence swaps between the two, form exits
+            with a quick fade so the success state doesn't just pop in over it. */}
+        <AnimatePresence mode="wait" initial={false}>
         {formStatus === "success" ? (
-          <div className="flex flex-col items-center gap-4 py-8 text-center" role="status" aria-live="polite">
-            <div className="flex h-12 w-12 items-center justify-center border border-brand/30 bg-brand/10">
+          <motion.div
+            key="success"
+            className="flex flex-col items-center gap-4 py-8 text-center"
+            role="status"
+            aria-live="polite"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, ease: EASE }}
+          >
+            <motion.div
+              className="flex h-12 w-12 items-center justify-center border border-brand/30 bg-brand/10"
+              initial={{ scale: 0.7, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.35, ease: EASE, delay: 0.05 }}
+            >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <path d="M4 10l4.5 4.5L16 6" stroke="currentColor" strokeWidth="2"
-                  strokeLinecap="round" strokeLinejoin="round" className="stroke-brand" />
+                <motion.path
+                  d="M4 10l4.5 4.5L16 6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="stroke-brand"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.35, ease: EASE, delay: 0.25 }}
+                />
               </svg>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
+            >
               <p className="font-bold text-paper">Poptávka odeslána</p>
               <p className="mt-1 text-sm text-paper/60">Děkujeme. Ozveme se vám co nejdříve.</p>
-            </div>
+            </motion.div>
             <button type="button" onClick={handleClose}
               className="mt-2 text-sm text-paper/50 underline-offset-2 hover:text-paper/80 hover:underline">
               Zavřít okno
             </button>
-          </div>
+          </motion.div>
         ) : (
 
           /* Form */
-          <form onSubmit={handleSubmit} className="space-y-3" noValidate aria-label="Kontaktní formulář">
+          <motion.form
+            key="form"
+            onSubmit={handleSubmit}
+            className="space-y-3"
+            noValidate
+            aria-label="Kontaktní formulář"
+            initial={false}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
 
             {/* Row 1: IČO + Firma */}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-[1fr_2fr]">
 
               {/* IČO */}
-              <div>
+              <ShakeField error={icoError}>
                 <label className="sr-only" htmlFor="cf-ico">IČO</label>
                 <Input
                   id="cf-ico"
@@ -314,10 +355,10 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                   aria-describedby={icoError ? "cf-ico-error" : undefined}
                 />
                 {icoError && <FieldError id="cf-ico-error" message={icoError} />}
-              </div>
+              </ShakeField>
 
               {/* Firma — auto-filled + locked by ARES, manual otherwise */}
-              <div>
+              <ShakeField error={firmaError}>
                 <label className="sr-only" htmlFor="cf-firma">Název firmy</label>
                 <Input
                   id="cf-firma"
@@ -354,11 +395,11 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                       : "ARES nedostupný — doplňte ručně."}
                   </p>
                 )}
-              </div>
+              </ShakeField>
             </div>
 
             {/* Kontaktní osoba */}
-            <div>
+            <ShakeField error={kontaktOsobaError}>
               <label className="sr-only" htmlFor="cf-kontaktOsoba">Kontaktní osoba</label>
               <Input
                 id="cf-kontaktOsoba"
@@ -374,11 +415,11 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                 aria-describedby={kontaktOsobaError ? "cf-kontaktOsoba-error" : undefined}
               />
               {kontaktOsobaError && <FieldError id="cf-kontaktOsoba-error" message={kontaktOsobaError} />}
-            </div>
+            </ShakeField>
 
             {/* Telefon + E-mail — stačí jedno */}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <div>
+              <ShakeField error={telefonError}>
                 <label className="sr-only" htmlFor="cf-telefon">Telefon</label>
                 <Input
                   id="cf-telefon"
@@ -394,8 +435,8 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                   aria-describedby={telefonError ? "cf-telefon-error" : undefined}
                 />
                 {telefonError && <FieldError id="cf-telefon-error" message={telefonError} />}
-              </div>
-              <div>
+              </ShakeField>
+              <ShakeField error={emailError}>
                 <label className="sr-only" htmlFor="cf-email">E-mail</label>
                 <Input
                   id="cf-email"
@@ -411,11 +452,11 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                   aria-describedby={emailError ? "cf-email-error" : undefined}
                 />
                 {emailError && <FieldError id="cf-email-error" message={emailError} />}
-              </div>
+              </ShakeField>
             </div>
 
             {/* Dotaz */}
-            <div>
+            <ShakeField error={dotazError}>
               <label className="sr-only" htmlFor="cf-dotaz">Dotaz</label>
               <Textarea
                 id="cf-dotaz"
@@ -446,7 +487,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                   </p>
                 )}
               </div>
-            </div>
+            </ShakeField>
 
             {/* Submit */}
             <Button type="submit" className="w-full justify-center" disabled={isSubmitting}>
@@ -459,8 +500,9 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
             {serverError && (
               <p role="alert" aria-live="assertive" className="text-xs text-danger">{serverError}</p>
             )}
-          </form>
+          </motion.form>
         )}
+        </AnimatePresence>
 
         {/* Secondary strip: email + e-shop side by side (stacks on mobile) */}
         <div className="mt-6 border-t border-white/10 pt-5">

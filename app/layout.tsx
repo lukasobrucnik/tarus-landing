@@ -7,6 +7,8 @@ import { getStructuredData } from "@/lib/structuredData";
 import { getSectionImages } from "@/lib/getSectionImages";
 import { MotionProvider } from "./MotionProvider";
 import { LoadingScreen } from "@/components/LoadingScreen";
+import { CookieBanner } from "@/components/CookieBanner";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 const bricolage = localFont({
   variable: "--font-bricolage",
@@ -218,10 +220,12 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <MotionProvider>
           <LoadingScreen logoSrc={logoSrc} />
+          <ScrollProgress />
           <a href="#main" className="sr-only-focusable">
             Přeskočit na hlavní obsah
           </a>
           {children}
+          <CookieBanner />
         </MotionProvider>
       </body>
     </html>

@@ -4,6 +4,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useRef, useEffect } from "react";
 import { siteConfig } from "@/data/content";
 import { CtaButton } from "@/components/CtaButton";
+import { MagneticCta } from "@/components/MagneticCta";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -144,7 +145,9 @@ export function Hero({ images = [] }: { images?: string[] }) {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col items-start gap-3 sm:flex-row sm:items-center"
         >
-          <CtaButton />
+          <MagneticCta>
+            <CtaButton />
+          </MagneticCta>
           <a
             href={siteConfig.shopUrl}
             target="_blank"

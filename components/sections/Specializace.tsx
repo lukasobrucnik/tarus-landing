@@ -16,13 +16,25 @@ export function Specializace({ images = [] }: { images?: string[] }) {
       className="overflow-hidden bg-ink px-5 py-24 text-paper md:px-16 md:py-32"
     >
       <div className="mx-auto max-w-[1440px]">
-        <div className="mb-16 md:mb-24">
+        <motion.div
+          className="mb-16 md:mb-24"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
           <h2 className="font-display-lg text-3xl font-extrabold md:text-5xl" style={{ textWrap: "balance" }}>
             Materiály pro profesionální použití
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-24">
+        <motion.div
+          className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-24"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+        >
           {/* Labels — also the interactive control: hover (desktop) or
               click/tap/keyboard (everywhere) switches the active image.
               order-2/lg:order-1: on mobile the image leads (above), labels follow.
@@ -136,7 +148,7 @@ export function Specializace({ images = [] }: { images?: string[] }) {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
