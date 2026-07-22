@@ -156,7 +156,7 @@ function buildInternalEmail(data: ContactPayload, requestId: string, date: strin
     </tr>
     <tr>
       <td>
-        ${button(`mailto:${data.email}?subject=${encodeURIComponent(`Re: Poptávka #${requestId}`)}`, "Odpovědět zákazníkovi ↗")}
+        ${button(`mailto:${escapeHtml(data.email)}?subject=${encodeURIComponent(`Re: Poptávka #${requestId}`)}`, "Odpovědět zákazníkovi ↗")}
       </td>
     </tr>
   `;

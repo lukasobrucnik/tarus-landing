@@ -24,6 +24,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Chybí povinná pole." }, { status: 400 });
   }
 
+  if (!/^[^\s@"'<>]+@[^\s@"'<>]+\.[^\s@"'<>]+$/.test(email)) {
+    return NextResponse.json({ error: "Neplatný e-mail." }, { status: 400 });
+  }
+
   try {
     const { requestId, date } = await sendContactEmail({
       ico,
