@@ -83,7 +83,7 @@ export function Hero({ images = [] }: { images?: string[] }) {
           loop
           muted
           playsInline
-          preload="none"
+          preload="metadata"
           poster={images[0]}
           className="absolute inset-0 h-full w-full object-cover"
           aria-hidden="true"

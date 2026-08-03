@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Check } from "lucide-react";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { CtaButton } from "@/components/CtaButton";
-import { cn } from "@/lib/utils";
+import { cn, IMAGE_BLUR_DATA_URL } from "@/lib/utils";
 
 const benefits = [
   "Doručení na stavbu do 24 hodin",
@@ -512,6 +512,8 @@ export function CentralniSklad({ images = [] }: { images?: string[] }) {
                       fill
                       className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
                       sizes="(max-width: 1024px) 50vw, 29vw"
+                      placeholder="blur"
+                      blurDataURL={IMAGE_BLUR_DATA_URL}
                     />
                   ) : (
                     <Placeholder

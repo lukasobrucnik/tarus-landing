@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { specializations } from "@/data/content";
 import { Placeholder } from "@/components/ui/Placeholder";
-import { cn } from "@/lib/utils";
+import { cn, IMAGE_BLUR_DATA_URL } from "@/lib/utils";
 
 export function Specializace({ images = [] }: { images?: string[] }) {
   const [active, setActive] = React.useState(0);
@@ -137,6 +137,8 @@ export function Specializace({ images = [] }: { images?: string[] }) {
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
+                    placeholder="blur"
+                    blurDataURL={IMAGE_BLUR_DATA_URL}
                   />
                 ) : (
                   <Placeholder

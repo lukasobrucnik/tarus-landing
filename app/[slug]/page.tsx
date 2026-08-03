@@ -8,6 +8,7 @@ import { CtaButton } from "@/components/CtaButton";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { specializations, siteConfig } from "@/data/content";
 import { getSectionImages } from "@/lib/getSectionImages";
+import { IMAGE_BLUR_DATA_URL } from "@/lib/utils";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -106,6 +107,8 @@ export default async function SpecializacePage({ params }: Props) {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 900px"
+                placeholder="blur"
+                blurDataURL={IMAGE_BLUR_DATA_URL}
               />
             ) : (
               <Placeholder alt={spec.imageAlt} variant={spec.variant} className="h-full w-full" />

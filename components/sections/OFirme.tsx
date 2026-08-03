@@ -5,6 +5,7 @@ import Image from "next/image";
 import { aboutParagraphs } from "@/data/content";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { CtaButton } from "@/components/CtaButton";
+import { IMAGE_BLUR_DATA_URL } from "@/lib/utils";
 
 export function OFirme({ images = [] }: { images?: string[] }) {
   return (
@@ -47,6 +48,8 @@ export function OFirme({ images = [] }: { images?: string[] }) {
               fill
               className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
               sizes="(max-width: 768px) 100vw, 50vw"
+              placeholder="blur"
+              blurDataURL={IMAGE_BLUR_DATA_URL}
             />
           ) : (
             <Placeholder alt="tým TARUS na stavbě — placeholder" variant={2} className="h-full w-full" />
