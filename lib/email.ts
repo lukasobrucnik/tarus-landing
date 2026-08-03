@@ -218,7 +218,10 @@ export async function sendContactEmail(
 ): Promise<{ requestId: string; date: string }> {
   const resend = getResendClient();
   const from = process.env.CONTACT_FROM ?? "TARUS Web <onboarding@resend.dev>";
-  const to = process.env.CONTACT_TO ?? "obchod@tarus.cz";
+  const to = (process.env.CONTACT_TO ?? "obchod@tarus.cz")
+    .split(",")
+    .map((email) => email.trim())
+    .filter(Boolean);
   const requestId = generateRequestId();
   const date = new Date().toLocaleString("cs-CZ", {
     timeZone: "Europe/Prague",
