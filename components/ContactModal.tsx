@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { sendGAEvent } from "@next/third-parties/google";
 import { Dialog } from "@/components/ui/Dialog";
 import { Input, Textarea } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
@@ -249,6 +250,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
         setFormStatus("error");
       } else {
         setFormStatus("success");
+        sendGAEvent("event", "generate_lead", { form: "contact_modal" });
       }
     } catch {
       setServerError("Připojení se nezdařilo. Zkontrolujte internet a zkuste to znovu.");

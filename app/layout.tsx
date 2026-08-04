@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Barlow } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { siteConfig } from "@/data/content";
 import { getStructuredData } from "@/lib/structuredData";
@@ -227,6 +228,9 @@ export default function RootLayout({
           {children}
           <CookieBanner />
         </MotionProvider>
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
     </html>
   );
