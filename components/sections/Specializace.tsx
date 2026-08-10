@@ -3,6 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronRight } from "lucide-react";
 import { specializations } from "@/data/content";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { cn, IMAGE_BLUR_DATA_URL } from "@/lib/utils";
@@ -57,10 +58,20 @@ export function Specializace({ images = [] }: { images?: string[] }) {
                 >
                   <h3
                     className={cn(
-                      "font-display-lg text-2xl font-extrabold transition-colors duration-300 sm:text-3xl lg:text-6xl",
+                      "flex items-center gap-1.5 font-display-lg text-2xl font-extrabold transition-colors duration-300 sm:text-3xl lg:gap-3 lg:text-6xl",
                       isActive ? "text-brand" : "text-paper/60"
                     )}
                   >
+                    {/* Chevron signals the label is clickable — rotates to
+                        "open" when active, mimicking a familiar accordion
+                        affordance so it reads the same on touch and desktop. */}
+                    <ChevronRight
+                      aria-hidden="true"
+                      className={cn(
+                        "h-4 w-4 shrink-0 transition-transform duration-300 sm:h-5 sm:w-5 lg:h-9 lg:w-9",
+                        isActive ? "rotate-90 opacity-100" : "opacity-40"
+                      )}
+                    />
                     {spec.label}
                   </h3>
                   {/* Underline: full brand on active, dim hint on inactive to signal tappability */}
