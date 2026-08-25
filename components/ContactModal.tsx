@@ -73,6 +73,9 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
   const [telefon, setTelefon] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [dotaz, setDotaz] = React.useState("");
+  // Honeypot — stays empty for real users; bots that auto-fill every field
+  // populate it, so the API silently drops the submission when it's set.
+  const [website, setWebsite] = React.useState("");
 
   // ARES state
   const [aresStatus, setAresStatus] = React.useState<AresStatus>("idle");
@@ -103,6 +106,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
       setTelefon("");
       setEmail("");
       setDotaz("");
+      setWebsite("");
       setAresStatus("idle");
       setAresName("");
       setTouched(new Set());
@@ -242,6 +246,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
           telefon: telefon.trim(),
           email: email.trim(),
           dotaz: dotaz.trim(),
+          website,
         }),
       });
       const data: { ok?: boolean; error?: string } = await res.json();
@@ -334,6 +339,21 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
+
+            {/* Honeypot — hidden from sighted users and screen readers alike;
+                left for bots that blindly fill every field on the form. */}
+            <div className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
+              <label htmlFor="cf-website">Web</label>
+              <input
+                id="cf-website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+              />
+            </div>
 
             {/* Row 1: IČO + Firma */}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-[1fr_2fr]">
