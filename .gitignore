@@ -4,6 +4,9 @@ dist
 build
 .env
 .env.local
+next-env.d.ts
+tsconfig.tsbuildinfo
+.impeccable/hook.cache.json
 
 # Large binary assets — host on Vercel Blob or CDN instead
 *.mp4
