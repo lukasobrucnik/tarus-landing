@@ -39,12 +39,13 @@ export function OFirme({ images = [] }: { images?: string[] }) {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative h-[420px] overflow-hidden md:h-[600px]"
+          className="relative overflow-hidden"
+          style={{ aspectRatio: "1496 / 1197" }}
         >
           {images[0] ? (
             <Image
               src={images[0]}
-              alt="Tým TARUS na stavbě"
+              alt="Tým TARUS před sídlem firmy"
               fill
               className="object-cover transition-transform duration-700 ease-out hover:scale-[1.03]"
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -52,7 +53,7 @@ export function OFirme({ images = [] }: { images?: string[] }) {
               blurDataURL={IMAGE_BLUR_DATA_URL}
             />
           ) : (
-            <Placeholder alt="tým TARUS na stavbě — placeholder" variant={2} className="h-full w-full" />
+            <Placeholder alt="tým TARUS — placeholder" variant={2} className="h-full w-full" />
           )}
         </motion.div>
       </div>
