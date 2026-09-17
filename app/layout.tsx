@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
-import { Barlow } from "next/font/google";
+import { Barlow, Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -13,14 +12,15 @@ import { LoadingScreen } from "@/components/LoadingScreen";
 import { CookieBanner } from "@/components/CookieBanner";
 import { ScrollProgress } from "@/components/ScrollProgress";
 
-const bricolage = localFont({
-  variable: "--font-bricolage",
-  src: [
-    { path: "./fonts/bricolage-500.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/bricolage-600.woff2", weight: "600", style: "normal" },
-    { path: "./fonts/bricolage-700.woff2", weight: "700", style: "normal" },
-    { path: "./fonts/bricolage-800.woff2", weight: "800", style: "normal" },
-  ],
+// Inter pro nadpisy i body text.
+// Puvodni lokalni bricolage-*.woff2 byly jen latin-ext rez z Google Fonts
+// (160 znaku: diakritika a meny, zadne zakladni a-z/0-9), registrovany bez
+// unicode-range jako by slo o kompletni font. Bezne znaky propadaly do
+// fallbacku a na nekterych zarizenich se text rozsypal na nahodne glyfy.
+// next/font/google generuje korektni rezy s unicode-range a self-hostuje je.
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin", "latin-ext"],
   display: "swap",
 });
 
@@ -213,7 +213,7 @@ export default function RootLayout({
   const logoSrc = getSectionImages("tarus").find((f) => f.includes("bile")) ?? null;
 
   return (
-    <html lang="cs" className={`${bricolage.variable} ${barlow.variable}`}>
+    <html lang="cs" className={`${inter.variable} ${barlow.variable}`}>
       <head>
         <script
           type="application/ld+json"

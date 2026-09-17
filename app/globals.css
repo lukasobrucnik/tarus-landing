@@ -18,15 +18,15 @@
 
   /* Single-family strategy: Bricolage Grotesque for all text.
      Weight contrast (800 display / 500 body) carries hierarchy. */
-  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  --font-display-lg: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
-  --font-headline-lg: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
-  --font-headline-md: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
-  --font-headline-sm: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
-  --font-body-lg: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
-  --font-body-md: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-display-lg: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-headline-lg: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-headline-md: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-headline-sm: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-body-lg: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-body-md: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   /* Barlow for all UI labels — uniform Czech capitals, no optical-size quirks */
   --font-label-md: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
   --font-caption: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
