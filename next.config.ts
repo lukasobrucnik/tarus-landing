@@ -46,6 +46,58 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      // Technical-sheet PDFs from the old site. The e-shop hosts the same
+      // files but under new product IDs, so map the known ones explicitly.
+      {
+        source: "/uploads/product/29/doc/tarus-tape-extreme-white.pdf",
+        destination: "https://eshop.tarus.cz/uploads/product/372/doc/tarus-tape-extreme-white.pdf",
+        permanent: true,
+      },
+      {
+        source: "/uploads/product/33/doc/tarus-tape-thermo.pdf",
+        destination: "https://eshop.tarus.cz/uploads/product/173/doc/tarus-tape-thermo.pdf",
+        permanent: true,
+      },
+      {
+        source: "/uploads/product/17/doc/tarus-fassade-50-2sk.pdf",
+        destination: "https://eshop.tarus.cz/katalog/membrany/16",
+        permanent: true,
+      },
+      {
+        source: "/uploads/:path*",
+        destination: "https://eshop.tarus.cz/katalog",
+        permanent: true,
+      },
+      {
+        source: "/kategorie/terasove-a-fasadni-systemy",
+        destination: "https://eshop.tarus.cz/katalog/terasove-a-fasadni-systemy/19",
+        permanent: true,
+      },
+      {
+        source: "/kategorie/:path*",
+        destination: "https://eshop.tarus.cz/katalog",
+        permanent: true,
+      },
+      {
+        source: "/produkty/:path*",
+        destination: "https://eshop.tarus.cz/katalog",
+        permanent: true,
+      },
+      {
+        source: "/kontakt",
+        destination: "https://eshop.tarus.cz/kontakty",
+        permanent: true,
+      },
+      {
+        source: "/novinky/:path*",
+        destination: "https://eshop.tarus.cz/blog",
+        permanent: true,
+      },
+      {
+        source: "/english",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 };
