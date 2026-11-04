@@ -1,5 +1,26 @@
 import { company, navLinks, siteConfig } from "@/data/content";
 
+const linkCls =
+  "text-paper/60 transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-deep";
+
+function FacebookIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8.5A.5.5 0 0 1 14 8Z" />
+    </svg>
+  );
+}
+
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 export function Footer({ logoSrc }: { logoSrc?: string | null }) {
   return (
     <footer id="kontakt" className="bg-ink text-paper">
@@ -70,6 +91,26 @@ export function Footer({ logoSrc }: { logoSrc?: string | null }) {
           >
             {siteConfig.email}
           </a>
+          <div className="mt-2 flex items-center gap-1">
+            <a
+              href={siteConfig.social.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TARUS na Facebooku"
+              className={`inline-flex h-11 w-11 items-center justify-center ${linkCls}`}
+            >
+              <FacebookIcon />
+            </a>
+            <a
+              href={siteConfig.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TARUS na Instagramu"
+              className={`inline-flex h-11 w-11 items-center justify-center ${linkCls}`}
+            >
+              <InstagramIcon />
+            </a>
+          </div>
         </div>
       </div>
 

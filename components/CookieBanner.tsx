@@ -20,6 +20,7 @@ export function CookieBanner() {
 
   function decide(value: "accepted" | "rejected") {
     window.localStorage.setItem(STORAGE_KEY, value);
+    window.dispatchEvent(new Event("tarus-consent"));
     setVisible(false);
   }
 
@@ -37,8 +38,8 @@ export function CookieBanner() {
         >
           <div className="flex w-full max-w-sm flex-col gap-3 border border-white/10 bg-ink px-5 py-4 text-paper shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
             <p className="text-sm leading-relaxed text-paper/70">
-              Používáme pouze technické cookies nezbytné pro chod webu. Žádná
-              data nesdílíme s třetími stranami.{" "}
+              Používáme nezbytné technické úložiště. S vaším souhlasem také
+              analytické cookies (Google Analytics) pro měření návštěvnosti.{" "}
               <Link href="/privacy" className="text-paper/90 underline underline-offset-2 hover:text-brand">
                 Více informací
               </Link>
@@ -50,7 +51,7 @@ export function CookieBanner() {
                 onClick={() => decide("accepted")}
                 className="min-h-[36px] flex-1 bg-brand px-4 text-sm font-medium text-ink transition-colors hover:bg-brand-deep"
               >
-                Rozumím
+                Souhlasím
               </button>
               <button
                 type="button"

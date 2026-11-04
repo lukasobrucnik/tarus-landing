@@ -57,7 +57,11 @@ function getBusinessStructuredData() {
     // Links the e-shop as the same business entity — helps search engines
     // connect the two properties instead of treating eshop.tarus.cz as
     // unrelated.
-    sameAs: [siteConfig.shopUrl],
+    sameAs: [
+      siteConfig.shopUrl,
+      siteConfig.social.facebook,
+      siteConfig.social.instagram,
+    ],
     // Topical relevance signal: the exact categories of material/hardware
     // this distributor is knowledgeable about and sells.
     knowsAbout: [

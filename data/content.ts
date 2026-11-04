@@ -56,6 +56,10 @@ export const siteConfig = {
   email: company.email,
   address: company.address,
   shopUrl: "https://eshop.tarus.cz/",
+  social: {
+    facebook: "https://www.facebook.com/StavebniMaterialy/",
+    instagram: "https://www.instagram.com/tarus_cz/",
+  },
 };
 
 // Root-relative anchors ("/#x", not "#x") — the nav renders on the
