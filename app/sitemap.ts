@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig, specializations } from "@/data/content";
+import { articles } from "@/data/poradna";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -15,6 +16,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
+    {
+      url: `${siteConfig.url}/poradna`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    },
+    // Concept articles are noindex — keep them out of the sitemap too.
+    ...articles
+      .filter((a) => a.status === "publikovano")
+      .map((a) => ({
+        url: `${siteConfig.url}/poradna/${a.slug}`,
+        lastModified: new Date(a.updated ?? a.published),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      })),
     {
       url: `${siteConfig.url}/privacy`,
       lastModified: new Date(),

@@ -70,6 +70,7 @@ export const navLinks = [
   { label: "Proč my", href: "/#proc-my" },
   { label: "Sklad", href: "/#sklad" },
   { label: "Naše cesta", href: "/#nase-cesta" },
+  { label: "Poradna", href: "/poradna" },
   { label: "O nás", href: "/#o-nas" },
   { label: "Kontakt", href: "/#kontakt" },
 ];

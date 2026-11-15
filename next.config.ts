@@ -89,8 +89,10 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        // Old news section. Used to point at eshop.tarus.cz/blog, which is
+        // empty — the Poradna on this site replaces it.
         source: "/novinky/:path*",
-        destination: "https://eshop.tarus.cz/blog",
+        destination: "/poradna",
         permanent: true,
       },
       {

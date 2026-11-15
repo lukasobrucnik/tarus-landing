@@ -75,12 +75,12 @@ export function Navbar({
           )}
         </a>
 
-        <div className="hidden items-center gap-12 md:flex">
+        <div className="hidden items-center gap-8 xl:flex 2xl:gap-12">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="font-label-md text-label-md uppercase tracking-wider text-paper/80 transition-colors hover:text-paper"
+              className="whitespace-nowrap font-label-md text-label-md uppercase tracking-wider text-paper/80 transition-colors hover:text-paper"
             >
               {link.label}
             </a>
@@ -89,7 +89,7 @@ export function Navbar({
             href={siteConfig.shopUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-label-md text-label-md uppercase tracking-wider text-paper/50 transition-colors hover:text-paper/80"
+            className="whitespace-nowrap font-label-md text-label-md uppercase tracking-wider text-paper/50 transition-colors hover:text-paper/80"
           >
             E-shop <span aria-hidden="true">↗</span>
           </a>
@@ -97,13 +97,13 @@ export function Navbar({
 
         <div className="flex items-center gap-2">
           {/* Desktop CTA */}
-          <div className="hidden md:block">
+          <div className="hidden xl:block">
             <CtaButton className="!px-6 !py-3" />
           </div>
 
           <button
             type="button"
-            className="flex min-h-[44px] min-w-[44px] items-center justify-center text-paper md:hidden"
+            className="flex min-h-[44px] min-w-[44px] items-center justify-center text-paper xl:hidden"
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
             aria-label={mobileOpen ? "Zavřít menu" : "Otevřít menu"}
@@ -133,7 +133,7 @@ export function Navbar({
           // content behind it can never peek through underneath, and its
           // own overflow-y-auto lets it scroll independently of the
           // (now scroll-locked) page behind.
-          className="fixed inset-0 top-0 z-40 flex flex-col gap-1 overflow-y-auto border-t border-slate/20 bg-ink px-5 pb-8 pt-20 md:hidden"
+          className="fixed inset-0 top-0 z-40 flex flex-col gap-1 overflow-y-auto border-t border-slate/20 bg-ink px-5 pb-8 pt-20 xl:hidden"
         >
           {navLinks.map((link) => (
             <a

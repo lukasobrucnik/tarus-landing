@@ -273,3 +273,43 @@ export async function sendContactEmail(
 
   return { requestId, date };
 }
+
+/**
+ * Newsletter signup from the Poradna section. There is no mailing-list tool
+ * connected yet, so each signup is delivered as a plain notification to the
+ * same inbox as contact requests (CONTACT_TO). Swap this for a list API
+ * (Ecomail, Mailchimp, Resend Audiences…) once one is chosen.
+ */
+export async function sendNewsletterSignup(email: string, source: string): Promise<void> {
+  const resend = getResendClient();
+  const from = process.env.CONTACT_FROM ?? "TARUS Web <onboarding@resend.dev>";
+  const to = (process.env.CONTACT_TO ?? "obchod@tarus.cz")
+    .split(",")
+    .map((e) => e.trim())
+    .filter(Boolean);
+  const date = new Date().toLocaleString("cs-CZ", {
+    timeZone: "Europe/Prague",
+    dateStyle: "long",
+    timeStyle: "short",
+  });
+
+  const { error } = await resend.emails.send({
+    from,
+    to,
+    replyTo: email,
+    subject: `Nový odběratel Poradny: ${email}`,
+    text: `Nový odběratel novinek z Poradny.\n\nE-mail: ${email}\nZdroj: ${source}\nDatum: ${date}\n\nSouhlas se zasíláním novinek udělen odesláním formuláře na tarus.cz.`,
+    html: emailShell(
+      `<p style="margin:0 0 12px;font-size:16px;color:#10171b;"><strong>Nový odběratel novinek z Poradny</strong></p>
+       <p style="margin:0 0 4px;color:#495856;">E-mail: <strong>${escapeHtml(email)}</strong></p>
+       <p style="margin:0 0 4px;color:#495856;">Zdroj: ${escapeHtml(source)}</p>
+       <p style="margin:0 0 16px;color:#495856;">Datum: ${escapeHtml(date)}</p>
+       <p style="margin:0;font-size:13px;color:#495856;">Souhlas se zasíláním novinek udělen odesláním formuláře na tarus.cz.</p>`
+    ),
+  });
+
+  if (error) {
+    console.error("[email] Newsletter signup notification failed:", error);
+    throw new Error(error.message ?? "RESEND_SEND_FAILED");
+  }
+}
