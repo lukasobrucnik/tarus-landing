@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ContactModalProvider } from "@/components/ContactModal";
@@ -8,6 +7,7 @@ import { CtaButton } from "@/components/CtaButton";
 import { ArticleBody } from "@/components/mediazona/ArticleBody";
 import { ArticleCard } from "@/components/mediazona/ArticleCard";
 import { NewsletterForm } from "@/components/mediazona/NewsletterForm";
+import { BackLink } from "@/components/mediazona/BackLink";
 import {
   articles,
   formatDate,
@@ -126,17 +126,13 @@ export default async function ArticlePage({ params }: Props) {
       <Navbar logoSrc={navLogoSrc} solid />
       <main id="main" className="bg-paper px-5 pb-24 pt-28 md:px-16 md:pb-32 md:pt-36">
         <article className="mx-auto max-w-[760px]">
+          <BackLink mode="list">Zpět do Mediazóny</BackLink>
+
           {article.status === "koncept" && (
             <p className="mb-8 border border-timber/40 bg-timber/5 px-4 py-3 text-sm text-timber">
               Ukázkový článek — obsah čeká na doplnění a schválení. Stránka se zatím neindexuje.
             </p>
           )}
-
-          <nav aria-label="Drobečková navigace" className="mb-8 font-label-md text-label-md uppercase tracking-wider text-slate">
-            <Link href="/" className="hover:text-ink">TARUS</Link>
-            <span className="mx-2 text-slate/40" aria-hidden="true">/</span>
-            <Link href="/mediazona" className="hover:text-ink">Mediazóna</Link>
-          </nav>
 
           <div className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-1 font-label-md text-xs uppercase tracking-[0.14em]">
             <span className="text-brand-deep">{kindLabels[article.kind]}</span>

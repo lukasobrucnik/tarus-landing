@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ContactModalProvider } from "@/components/ContactModal";
 import { CtaButton } from "@/components/CtaButton";
 import { ArticleList } from "@/components/mediazona/ArticleList";
+import { BackLink } from "@/components/mediazona/BackLink";
 import { NewsletterForm } from "@/components/mediazona/NewsletterForm";
 import { getArticles, mediazonaConfig } from "@/data/mediazona";
 import { siteConfig } from "@/data/content";
@@ -52,6 +53,8 @@ export default function MediazonaPage() {
       <Navbar logoSrc={navLogoSrc} solid />
       <main id="main" className="bg-paper px-5 pb-24 pt-32 md:px-16 md:pb-32 md:pt-40">
         <div className="mx-auto max-w-[1100px]">
+          <BackLink mode="home">Zpět na hlavní stránku</BackLink>
+
           <header className="mb-10 md:mb-12">
             <h1 className="mb-4 font-display-lg text-4xl font-extrabold leading-[1.08] tracking-tight text-ink md:text-6xl">
               Mediazóna

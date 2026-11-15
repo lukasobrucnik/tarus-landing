@@ -4,6 +4,17 @@ import * as React from "react";
 import { ArticleCard } from "@/components/mediazona/ArticleCard";
 import { type Article, type ArticleKind, kindFilterLabels } from "@/data/mediazona";
 import { cn } from "@/lib/utils";
+import { LIST_URL_KEY } from "@/components/mediazona/BackLink";
+
+// Remembers the list URL (incl. ?stitek=) so "Zpět do Mediazóny" on an
+// article returns to the same filtered view.
+function rememberListUrl() {
+  try {
+    sessionStorage.setItem(LIST_URL_KEY, window.location.pathname + window.location.search);
+  } catch {
+    // storage blocked — back link falls back to /mediazona
+  }
+}
 
 const KINDS = Object.keys(kindFilterLabels) as ArticleKind[];
 
@@ -17,6 +28,7 @@ export function ArticleList({ articles }: { articles: Article[] }) {
     const tag = new URLSearchParams(window.location.search).get("stitek");
     // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time sync from URL on mount
     if (tag && (KINDS as string[]).includes(tag)) setActive(tag as ArticleKind);
+    rememberListUrl();
   }, []);
 
   function select(kind: ArticleKind | null) {
@@ -25,6 +37,7 @@ export function ArticleList({ articles }: { articles: Article[] }) {
     if (kind) url.searchParams.set("stitek", kind);
     else url.searchParams.delete("stitek");
     window.history.replaceState(null, "", url);
+    rememberListUrl();
   }
 
   const visible = active ? articles.filter((a) => a.kind === active) : articles;
