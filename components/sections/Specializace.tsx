@@ -141,29 +141,7 @@ export function Specializace({ images = [] }: { images?: string[] }) {
                   zIndex: i === active ? 10 : 0,
                 }}
               >
-                {images[i] && spec.imageFit === "contain" ? (
-                  // Photo with a different aspect ratio / lower resolution
-                  // than the panel: show it whole and sharp, framed by a
-                  // blurred, darkened cover copy of itself instead of
-                  // cropping and upscaling it.
-                  <>
-                    <Image
-                      src={images[i]}
-                      alt=""
-                      aria-hidden="true"
-                      fill
-                      className="scale-110 object-cover blur-2xl brightness-75"
-                      sizes="(max-width: 1024px) 50vw, 25vw"
-                    />
-                    <Image
-                      src={images[i]}
-                      alt={spec.imageAlt}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  </>
-                ) : images[i] ? (
+                {images[i] ? (
                   <Image
                     src={images[i]}
                     alt={spec.imageAlt}

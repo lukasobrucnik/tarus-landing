@@ -113,9 +113,6 @@ export type Specialization = {
   // each specialization's dedicated landing page for depth/long-tail SEO,
   // never invented, always traceable to what's actually sold.
   subcategories: string[];
-  // "contain" = photo shown whole over a blurred backdrop of itself, for
-  // images whose aspect ratio or resolution doesn't suit a cover crop.
-  imageFit?: "cover" | "contain";
 };
 
 export const specializations: Specialization[] = [
@@ -171,7 +168,6 @@ export const specializations: Specialization[] = [
       "Nerezové spojovací prvky a kování pro náročné exteriérové a průmyslové aplikace s nejvyšší odolností vůči korozi.",
     imageAlt: "Nerezové spojovací prvky pro exteriérové a průmyslové aplikace",
     variant: 1,
-    imageFit: "contain",
     subcategories: [
       "Nerezové spojovací prvky",
       "Nerezové kování",

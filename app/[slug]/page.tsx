@@ -100,26 +100,7 @@ export default async function SpecializacePage({ params }: Props) {
           </p>
 
           <div className="relative mb-10 h-[280px] w-full overflow-hidden md:h-[420px]">
-            {images[specIndex] && spec.imageFit === "contain" ? (
-              // See Specializace.tsx: whole photo over a blurred copy.
-              <>
-                <Image
-                  src={images[specIndex]}
-                  alt=""
-                  aria-hidden="true"
-                  fill
-                  className="scale-110 object-cover blur-2xl brightness-75"
-                  sizes="450px"
-                />
-                <Image
-                  src={images[specIndex]}
-                  alt={spec.imageAlt}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 100vw, 900px"
-                />
-              </>
-            ) : images[specIndex] ? (
+            {images[specIndex] ? (
               <Image
                 src={images[specIndex]}
                 alt={spec.imageAlt}
