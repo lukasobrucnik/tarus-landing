@@ -5,18 +5,18 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ContactModalProvider } from "@/components/ContactModal";
 import { CtaButton } from "@/components/CtaButton";
-import { ArticleBody } from "@/components/poradna/ArticleBody";
-import { ArticleCard } from "@/components/poradna/ArticleCard";
-import { NewsletterForm } from "@/components/poradna/NewsletterForm";
+import { ArticleBody } from "@/components/mediazona/ArticleBody";
+import { ArticleCard } from "@/components/mediazona/ArticleCard";
+import { NewsletterForm } from "@/components/mediazona/NewsletterForm";
 import {
   articles,
   formatDate,
   getArticle,
   getArticles,
   kindLabels,
-  poradnaConfig,
+  mediazonaConfig,
   readingMinutes,
-} from "@/data/poradna";
+} from "@/data/mediazona";
 import { siteConfig, specializations } from "@/data/content";
 import { getSectionImages } from "@/lib/getSectionImages";
 
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticle(slug);
   if (!article) return {};
-  const url = `${siteConfig.url}/poradna/${article.slug}`;
+  const url = `${siteConfig.url}/mediazona/${article.slug}`;
   const image = article.cover?.src ?? "/og-image.png";
 
   return {
@@ -63,11 +63,11 @@ export default async function ArticlePage({ params }: Props) {
   const navLogoSrc = tarusImages.find((f) => f.includes("bile")) ?? null;
   const footerLogoSrc = tarusImages.find((f) => f.includes("kompletní")) ?? null;
 
-  const url = `${siteConfig.url}/poradna/${article.slug}`;
+  const url = `${siteConfig.url}/mediazona/${article.slug}`;
   const toc = article.body.filter((b) => b.type === "h2");
   const related = getArticles()
     .filter((a) => a.slug !== article.slug)
-    .slice(0, 2);
+    .slice(0, 3);
   const spec = specializations.find((s) => s.id === article.specializationId);
   const videos = article.body.filter((b) => b.type === "video" && b.youtubeId);
 
@@ -91,7 +91,7 @@ export default async function ArticlePage({ params }: Props) {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "TARUS", item: siteConfig.url },
-        { "@type": "ListItem", position: 2, name: poradnaConfig.name, item: `${siteConfig.url}/poradna` },
+        { "@type": "ListItem", position: 2, name: mediazonaConfig.name, item: `${siteConfig.url}/mediazona` },
         { "@type": "ListItem", position: 3, name: article.title, item: url },
       ],
     },
@@ -135,7 +135,7 @@ export default async function ArticlePage({ params }: Props) {
           <nav aria-label="Drobečková navigace" className="mb-8 font-label-md text-label-md uppercase tracking-wider text-slate">
             <Link href="/" className="hover:text-ink">TARUS</Link>
             <span className="mx-2 text-slate/40" aria-hidden="true">/</span>
-            <Link href="/poradna" className="hover:text-ink">Poradna</Link>
+            <Link href="/mediazona" className="hover:text-ink">Mediazóna</Link>
           </nav>
 
           <div className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-1 font-label-md text-xs uppercase tracking-[0.14em]">
@@ -235,9 +235,9 @@ export default async function ArticlePage({ params }: Props) {
           {related.length > 0 && (
             <section className="mb-16" aria-labelledby="related">
               <h2 id="related" className="mb-6 font-display-lg text-2xl font-bold text-ink">
-                Další z Poradny
+                Další z Mediazóny
               </h2>
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 md:grid-cols-3">
                 {related.map((a) => (
                   <ArticleCard key={a.slug} article={a} />
                 ))}

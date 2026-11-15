@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig, specializations } from "@/data/content";
-import { articles } from "@/data/poradna";
+import { articles } from "@/data/mediazona";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -17,7 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     })),
     {
-      url: `${siteConfig.url}/poradna`,
+      url: `${siteConfig.url}/mediazona`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.8,
@@ -26,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...articles
       .filter((a) => a.status === "publikovano")
       .map((a) => ({
-        url: `${siteConfig.url}/poradna/${a.slug}`,
+        url: `${siteConfig.url}/mediazona/${a.slug}`,
         lastModified: new Date(a.updated ?? a.published),
         changeFrequency: "monthly" as const,
         priority: 0.7,

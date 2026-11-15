@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { type ArticleBlock, type ProductRef, withUtm } from "@/data/poradna";
-import { YouTubeEmbed } from "@/components/poradna/YouTubeEmbed";
+import { type ArticleBlock, type ProductRef, withUtm } from "@/data/mediazona";
+import { YouTubeEmbed } from "@/components/mediazona/YouTubeEmbed";
 import { IMAGE_BLUR_DATA_URL } from "@/lib/utils";
 
 function ProductCard({ product, slug }: { product: ProductRef; slug: string }) {

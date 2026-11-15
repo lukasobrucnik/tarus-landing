@@ -1,5 +1,5 @@
 import { siteConfig, specializations } from "@/data/content";
-import { articles, poradnaConfig } from "@/data/poradna";
+import { articles, mediazonaConfig } from "@/data/mediazona";
 
 // /llms.txt — plain-text map of the site for AI assistants and crawlers
 // (llmstxt.org convention). Cheap to serve, regenerated on each build.
@@ -18,9 +18,9 @@ export function GET() {
     "## Specializace",
     ...specializations.map((s) => `- [${s.label}](${siteConfig.url}/${s.id}): ${s.description}`),
     "",
-    `## ${poradnaConfig.name}`,
-    `- [Přehled článků](${siteConfig.url}/poradna): ${poradnaConfig.description}`,
-    ...published.map((a) => `- [${a.title}](${siteConfig.url}/poradna/${a.slug}): ${a.answer}`),
+    `## ${mediazonaConfig.name}`,
+    `- [Přehled článků](${siteConfig.url}/mediazona): ${mediazonaConfig.description}`,
+    ...published.map((a) => `- [${a.title}](${siteConfig.url}/mediazona/${a.slug}): ${a.answer}`),
     "",
   ];
   return new Response(lines.join("\n"), {

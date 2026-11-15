@@ -1,5 +1,5 @@
 // ============================================================
-// TARUS Poradna — články (recenze, porovnání, návody).
+// TARUS Mediazóna — články: novinky, návody, recenze a porovnání.
 //
 // Jak přidat článek: zkopíruj existující objekt v `articles`, změň `slug`
 // a obsah. Žádná databáze ani CMS — článek je hotový po commitu a nasazení.
@@ -43,12 +43,20 @@ export type ArticleBlock =
       rows: string[][];
     };
 
-export type ArticleKind = "porovnani" | "recenze" | "navod";
+// Tři štítky — zobrazují se na kartičkách a slouží jako filtr v přehledu.
+export type ArticleKind = "novinka" | "navod" | "recenze";
 
 export const kindLabels: Record<ArticleKind, string> = {
-  porovnani: "Porovnání",
-  recenze: "Recenze",
+  novinka: "Novinka",
   navod: "Návod",
+  recenze: "Recenze a porovnání",
+};
+
+// Množné číslo pro filtr v přehledu.
+export const kindFilterLabels: Record<ArticleKind, string> = {
+  novinka: "Novinky",
+  navod: "Návody",
+  recenze: "Recenze a porovnání",
 };
 
 export type Article = {
@@ -71,15 +79,15 @@ export type Article = {
   status: "publikovano" | "koncept";
 };
 
-export const poradnaConfig = {
-  name: "Poradna",
-  title: "Poradna TARUS — porovnání, recenze a návody z praxe",
+export const mediazonaConfig = {
+  name: "Mediazóna",
+  title: "Mediazóna TARUS — novinky, návody, recenze a porovnání",
   description:
-    "Porovnání materiálů, recenze produktů a návody na montáž od lidí, kteří materiál pro dřevostavby denně prodávají a řeší na stavbách.",
+    "Novinky z TARUS, návody na montáž, recenze a porovnání materiálů pro dřevostavby od lidí, kteří je denně prodávají a řeší na stavbách.",
   // UTM parametry na odkazech do e-shopu — v analytice e-shopu je pak vidět,
-  // kolik objednávek přivedla Poradna a který článek.
+  // kolik objednávek přivedla Mediazóna a který článek.
   utm: (slug: string) =>
-    `utm_source=tarus.cz&utm_medium=poradna&utm_campaign=${encodeURIComponent(slug)}`,
+    `utm_source=tarus.cz&utm_medium=mediazona&utm_campaign=${encodeURIComponent(slug)}`,
 };
 
 const robert = { name: "Robert Tatai", role: "jednatel TARUS" };
@@ -87,14 +95,14 @@ const robert = { name: "Robert Tatai", role: "jednatel TARUS" };
 export const articles: Article[] = [
   {
     slug: "parozabrana-parobrzda-difuzni-folie-rozdil",
-    kind: "porovnani",
+    kind: "recenze",
     title: "Parozábrana, parobrzda, nebo difuzní fólie? Jak vybrat správnou membránu",
     description:
       "Rozdíl mezi parozábranou, parobrzdou a difuzní fólií, kam která patří ve skladbě dřevostavby a jak vybrat konkrétní membránu.",
     answer:
       "Parozábrana a parobrzda patří na vnitřní (teplou) stranu tepelné izolace a brání vlhkosti z interiéru dostat se do konstrukce. Parozábrana páru téměř nepropustí, parobrzda ji propustí řízeně a umožní konstrukci vysychat dovnitř. Difuzní fólie patří na vnější stranu izolace: chrání před větrem a vodou a zároveň pouští vlhkost ven.",
     author: robert,
-    published: "2026-11-15",
+    published: "2026-11-12",
     body: [
       { type: "h2", id: "kam-patri", text: "Kam která membrána patří ve skladbě?" },
       {
@@ -248,6 +256,158 @@ export const articles: Article[] = [
     ],
     status: "koncept",
   },
+  {
+    slug: "spoustime-mediazonu",
+    kind: "novinka",
+    title: "Spouštíme Mediazónu: rady z praxe, návody a novinky na jednom místě",
+    description:
+      "Nová sekce webu TARUS: porovnání materiálů, návody na montáž, recenze produktů a novinky z firmy. Krátce, s videem a odkazem na produkt.",
+    answer:
+      "Mediazóna je nová sekce webu TARUS. Najdete v ní porovnání materiálů, návody na montáž, recenze produktů a novinky z firmy. Články píšeme z otázek, které nám zákazníci denně kladou na prodejně a na stavbách.",
+    author: robert,
+    published: "2026-11-15",
+    body: [
+      { type: "h2", id: "co-najdete", text: "Co v Mediazóně najdete?" },
+      {
+        type: "list",
+        items: [
+          "Návody: jak materiál správně namontovat, aby vydržel a prošel kontrolou.",
+          "Recenze a porovnání: čím se liší podobné produkty a kdy se vyplatí který.",
+          "Novinky: nové produkty skladem, akce a novinky z TARUS.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Každý článek začíná krátkou odpovědí, takže víte, na čem jste, i když nemáte čas číst celý text. U doporučených produktů najdete odkaz přímo do e-shopu.",
+      },
+      { type: "h2", id: "dotaz", text: "Máte téma, které bychom měli rozebrat?" },
+      {
+        type: "p",
+        text: "Napište nám. Z nejčastějších dotazů děláme další články a videa.",
+      },
+    ],
+    status: "koncept",
+  },
+  {
+    slug: "centralni-sklad-olomouc-expedice-24-hodin",
+    kind: "novinka",
+    title: "Centrální sklad v Olomouci: jak zvládáme expedici do 24 hodin",
+    description:
+      "Jak funguje centrální sklad TARUS v Olomouci a proč dodáváme kompletní objednávky na stavbu do 24 hodin.",
+    answer:
+      "Materiál pro dřevostavby a šikmé střechy držíme skladem v centrálním skladu v Olomouci. Objednávku připravíme jako jednu kompletní zásilku a na stavbu ji doručíme do 24 hodin, takže stavba nečeká na dodávky od více dodavatelů.",
+    author: robert,
+    published: "2026-11-05",
+    body: [
+      { type: "h2", id: "proc-jeden-sklad", text: "Proč jeden centrální sklad?" },
+      {
+        type: "p",
+        text: "Když materiál leží na jednom místě, dá se objednávka vychystat najednou a odjet jako jedna zásilka. Pro realizační firmu to znamená jedno převzetí na stavbě místo několika dodávek v různých dnech.",
+      },
+      { type: "video", title: "Prohlídka centrálního skladu TARUS", duration: "2 min" },
+      {
+        type: "tip",
+        title: "Jak objednat, aby to dorazilo včas",
+        text: "Pošlete objednávku co nejdřív a uveďte přesnou adresu stavby, kontakt na přebírajícího a omezení příjezdu (šířka cesty, nosnost, čas). Ušetří to telefonování a zdržení.",
+      },
+    ],
+    status: "koncept",
+  },
+  {
+    slug: "kotevni-patka-sloupu-jak-ukotvit",
+    kind: "navod",
+    title: "Jak ukotvit dřevěný sloup: kotevní patka krok za krokem",
+    description:
+      "Jak vybrat kotevní patku pro dřevěný sloup pergoly nebo přístřešku a jak ji správně osadit, aby sloup nehnil.",
+    answer:
+      "Dřevěný sloup nikdy nebetonujte přímo do země. Použijte pozinkovanou kotevní patku, která drží sloup nad terénem, aby voda odtékala a dřevo mohlo vysychat. Velikost patky vybírejte podle průřezu sloupu a kotvení podle podkladu.",
+    author: robert,
+    published: "2026-10-28",
+    specializationId: "tesarske-kovani",
+    body: [
+      { type: "h2", id: "proc-patka", text: "Proč sloup nekotvit přímo do betonu?" },
+      {
+        type: "p",
+        text: "Pata sloupu zalitá v betonu nebo zapuštěná v zemi zůstává trvale vlhká a během pár let začne hnít. Kotevní patka drží dřevo nad podkladem, takže spodní hrana sloupu oschne po každém dešti.",
+      },
+      { type: "h2", id: "postup", text: "Jak patku osadit?" },
+      {
+        type: "list",
+        ordered: true,
+        items: [
+          "Vyberte patku podle průřezu sloupu (např. 100 × 100 mm).",
+          "Na betonový základ patku přikotvěte kotvou určenou pro beton, nebo ji zabetonujte podle typu patky.",
+          "Zkontrolujte svislost a výšku patek mezi sebou ještě před vložením sloupů.",
+          "Sloup přišroubujte do patky vruty nebo svorníky podle pokynů výrobce.",
+        ],
+      },
+      {
+        type: "products",
+        title: "Kotevní patky skladem",
+        items: [
+          {
+            name: "BOVA Patka kotevní BV/P 100 × 100 mm, tvar U",
+            url: "https://eshop.tarus.cz/bova-patka-kotevni-bv-p-100-x-100-mm-zn-tvar-u-14-02-100x100",
+          },
+          {
+            name: "BOVA Patka kotevní BV/P 120 × 100 mm, tvar U",
+            url: "https://eshop.tarus.cz/bova-patka-kotevni-bv-p-120-x-100-mm-zn-tvar-u-14-02-120x100",
+          },
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Jak vysoko nad terénem má být spodek sloupu?",
+        a: "Tak, aby na něj nestříkala voda z terénu a nestál v louži. Přesnou výšku volte podle typu patky a místa.",
+      },
+    ],
+    status: "koncept",
+  },
+  {
+    slug: "vruty-nebo-hrebiky-do-tesarskeho-kovani",
+    kind: "recenze",
+    title: "Vruty, nebo kotevní hřebíky do tesařského kování?",
+    description:
+      "Čím připevnit úhelníky, trámové botky a spojovací desky: kotevní hřebíky, nebo vruty do tesařského kování? Rozdíly a kdy použít co.",
+    answer:
+      "Do tesařského kování používejte jen spojovací prostředky, které pro daný spoj uvádí výrobce kování a statik. Kotevní hřebíky jsou rychlé a levné při větším množství, vruty do kování se snáz montují ručně a dají se povolit. Běžné vruty do dřeva ani stavební hřebíky do kování nepatří.",
+    author: robert,
+    published: "2026-10-20",
+    specializationId: "tesarske-kovani",
+    body: [
+      {
+        type: "table",
+        caption: "Kotevní hřebíky vs. vruty do kování",
+        head: ["", "Kotevní hřebíky", "Vruty do kování"],
+        rows: [
+          ["Montáž", "Rychlá, ideálně hřebíkovačkou", "Aku šroubovák, i v těsném místě"],
+          ["Demontáž", "Obtížná", "Snadná"],
+          ["Cena za kus", "Nižší", "Vyšší"],
+          ["Vhodné pro", "Opakované spoje ve velkém", "Menší akce, opravy, těžko přístupná místa"],
+        ],
+      },
+      { type: "h2", id: "co-nepouzivat", text: "Co do kování nepatří?" },
+      {
+        type: "p",
+        text: "Obyčejné vruty do dřeva mají jiný průřez pod hlavou a nedosednou do otvorů kování tak, jak počítá statický výpočet. Spoj pak nemusí přenést zatížení, se kterým projekt počítá.",
+      },
+      {
+        type: "products",
+        items: [
+          {
+            name: "Tesařské kování a skryté spoje — celá kategorie",
+            url: "https://eshop.tarus.cz/katalog/tesarske-kovani-a-skryte-spoje/18",
+          },
+          {
+            name: "Spojovací materiál — vruty do tesařského kování",
+            url: "https://eshop.tarus.cz/katalog/spojovaci-material/1",
+          },
+        ],
+      },
+    ],
+    status: "koncept",
+  },
 ];
 
 export function getArticle(slug: string) {
@@ -260,7 +420,7 @@ export function getArticles() {
 }
 
 export function withUtm(url: string, slug: string) {
-  return `${url}${url.includes("?") ? "&" : "?"}${poradnaConfig.utm(slug)}`;
+  return `${url}${url.includes("?") ? "&" : "?"}${mediazonaConfig.utm(slug)}`;
 }
 
 // ~200 slov za minutu (český odborný text).

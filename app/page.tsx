@@ -6,7 +6,7 @@ import { Specializace } from "@/components/sections/Specializace";
 import { CentralniSklad } from "@/components/sections/CentralniSklad";
 import { OFirme } from "@/components/sections/OFirme";
 import { NaseCesta } from "@/components/sections/NaseCesta";
-import { PoradnaTeaser } from "@/components/sections/PoradnaTeaser";
+import { MediazonaTeaser } from "@/components/sections/MediazonaTeaser";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { ContactModalProvider } from "@/components/ContactModal";
 import { getSectionImages } from "@/lib/getSectionImages";
@@ -37,7 +37,7 @@ export default function Home() {
         <Specializace images={specializaceImages} />
         <CentralniSklad images={skladImages} />
         <OFirme images={aboutImages} />
-        <PoradnaTeaser />
+        <MediazonaTeaser />
         <NaseCesta />
         <FinalCta />
       </main>

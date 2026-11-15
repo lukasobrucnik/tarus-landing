@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { type Article, formatDate, kindLabels, readingMinutes } from "@/data/poradna";
+import { type Article, formatDate, kindLabels, readingMinutes } from "@/data/mediazona";
 import { cn } from "@/lib/utils";
 
 // Text-first card: most articles won't have a cover photo at launch, and a
@@ -15,7 +15,7 @@ export function ArticleCard({
   const dark = tone === "dark";
   return (
     <Link
-      href={`/poradna/${article.slug}`}
+      href={`/mediazona/${article.slug}`}
       className={cn(
         "group flex h-full flex-col border p-6 transition-colors md:p-8",
         dark

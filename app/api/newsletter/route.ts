@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
   if (body.website) return NextResponse.json({ ok: true });
 
   const email = (body.email?.trim() ?? "").slice(0, 200);
-  const source = (body.source?.trim() ?? "poradna").slice(0, 200);
+  const source = (body.source?.trim() ?? "mediazona").slice(0, 200);
   if (!/^[^\s@"'<>]+@[^\s@"'<>]+\.[^\s@"'<>]+$/.test(email)) {
     return NextResponse.json({ error: "Zadejte platný e-mail." }, { status: 400 });
   }

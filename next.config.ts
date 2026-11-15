@@ -90,9 +90,9 @@ const nextConfig: NextConfig = {
       },
       {
         // Old news section. Used to point at eshop.tarus.cz/blog, which is
-        // empty — the Poradna on this site replaces it.
+        // empty — the Mediazóna on this site replaces it.
         source: "/novinky/:path*",
-        destination: "/poradna",
+        destination: "/mediazona",
         permanent: true,
       },
       {
